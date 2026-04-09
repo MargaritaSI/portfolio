@@ -26,7 +26,7 @@ export default function Portfolio() {
   const data = {
     en: {
       nav: ['Services', 'Projects', 'Process', 'Articles', 'Contact'],
-      hero: ['Creating\ndigital solutions\nwith intelligence', 'Combining creativity with data-driven approach to build products that deliver measurable results.', 'Start Project'],
+      hero: ['Creating\\ndigital solutions\\nwith intelligence', 'Combining creativity with data-driven approach to build products that deliver measurable results.', 'Start Project'],
       labels: ['Services', 'Projects', 'Work Steps', 'FAQ', 'Ready to Start?', 'Get in touch to discuss your project', 'Expert Articles', 'Read article', 'Close', '© 2026 It healthy coder. All rights reserved.', 'Based in Amsterdam - Working remotely worldwide'],
       footer: {
         privacy: 'Privacy Policy',
@@ -36,15 +36,15 @@ export default function Portfolio() {
       legal: {
         privacy: {
           title: 'Privacy Policy',
-          content: 'This Privacy Policy describes how we collect, use, and protect your personal information when you use our services.\n\nInformation We Collect:\n- Contact information (name, email, phone)\n- Usage data and analytics\n- Cookies and tracking technologies\n\nHow We Use Your Information:\n- To provide and improve our services\n- To communicate with you about projects\n- To analyze and optimize our website\n\nData Protection:\nWe implement appropriate security measures to protect your personal information. Your data is never sold to third parties.\n\nYour Rights:\nYou have the right to access, correct, or delete your personal information at any time.\n\nContact us at your.email@example.com for any privacy-related questions.'
+          content: 'This Privacy Policy describes how we collect, use, and protect your personal information when you use our services.\\n\\nInformation We Collect:\\n- Contact information (name, email, phone)\\n- Usage data and analytics\\n- Cookies and tracking technologies\\n\\nHow We Use Your Information:\\n- To provide and improve our services\\n- To communicate with you about projects\\n- To analyze and optimize our website\\n\\nData Protection:\\nWe implement appropriate security measures to protect your personal information. Your data is never sold to third parties.\\n\\nYour Rights:\\nYou have the right to access, correct, or delete your personal information at any time.\\n\\nContact us at your.email@example.com for any privacy-related questions.'
         },
         cookies: {
           title: 'Cookie Policy',
-          content: 'We use cookies to enhance your browsing experience and analyze website traffic.\n\nWhat Are Cookies:\nCookies are small text files stored on your device when you visit our website.\n\nTypes of Cookies We Use:\n- Essential cookies: Required for website functionality\n- Analytics cookies: Help us understand how visitors use our site\n- Preference cookies: Remember your settings and preferences\n\nManaging Cookies:\nYou can control cookies through your browser settings. Note that disabling certain cookies may affect website functionality.\n\nThird-Party Cookies:\nWe may use third-party services like Google Analytics that set their own cookies.\n\nBy continuing to use our website, you consent to our use of cookies as described in this policy.'
+          content: 'We use cookies to enhance your browsing experience and analyze website traffic.\\n\\nWhat Are Cookies:\\nCookies are small text files stored on your device when you visit our website.\\n\\nTypes of Cookies We Use:\\n- Essential cookies: Required for website functionality\\n- Analytics cookies: Help us understand how visitors use our site\\n- Preference cookies: Remember your settings and preferences\\n\\nManaging Cookies:\\nYou can control cookies through your browser settings. Note that disabling certain cookies may affect website functionality.\\n\\nThird-Party Cookies:\\nWe may use third-party services like Google Analytics that set their own cookies.\\n\\nBy continuing to use our website, you consent to our use of cookies as described in this policy.'
         },
         terms: {
           title: 'Terms of Use',
-          content: 'Please read these Terms of Use carefully before using our services.\n\nAcceptance of Terms:\nBy accessing and using this website, you accept and agree to be bound by these terms.\n\nServices:\nWe provide UI/UX design, AI solutions, marketing, and consulting services. Specific terms are defined in individual project agreements.\n\nIntellectual Property:\nAll content, designs, and materials created by us remain our intellectual property until full payment is received.\n\nLimitation of Liability:\nWe are not liable for any indirect, incidental, or consequential damages arising from the use of our services.\n\nTermination:\nWe reserve the right to terminate or suspend access to our services at our discretion.\n\nGoverning Law:\nThese terms are governed by the laws of the Netherlands.\n\nContact:\nFor questions about these terms, contact us at your.email@example.com'
+          content: 'Please read these Terms of Use carefully before using our services.\\n\\nAcceptance of Terms:\\nBy accessing and using this website, you accept and agree to be bound by these terms.\\n\\nServices:\\nWe provide UI/UX design, AI solutions, marketing, and consulting services. Specific terms are defined in individual project agreements.\\n\\nIntellectual Property:\\nAll content, designs, and materials created by us remain our intellectual property until full payment is received.\\n\\nLimitation of Liability:\\nWe are not liable for any indirect, incidental, or consequential damages arising from the use of our services.\\n\\nTermination:\\nWe reserve the right to terminate or suspend access to our services at our discretion.\\n\\nGoverning Law:\\nThese terms are governed by the laws of the Netherlands.\\n\\nContact:\\nFor questions about these terms, contact us at your.email@example.com'
         }
       },
       services: [
@@ -62,10 +62,10 @@ export default function Portfolio() {
         ['Business Meetings Platform', 'UI/UX & Product', 'MVP design for organizing meetings with activities system', 'Full cycle: concept to prototype']
       ],
       process: [
-        ['01', 'Immersion', 'Business, audience, and competitor analysis'],
-        ['02', 'Prototyping', 'Rapid MVP creation for hypothesis testing'],
-        ['03', 'Development', 'Iterative implementation with regular demos'],
-        ['04', 'Optimization', 'Metrics analysis, A/B tests, scaling']
+        ['01', 'Погружение', 'Анализ бизнеса, аудитории, конкурентов'],
+        ['02', 'Прототипирование', 'Создание MVP для тестирования'],
+        ['03', 'Разработка', 'Итеративная реализация'],
+        ['04', 'Оптимизация', 'Анализ метрик, масштабирование']
       ],
       faq: [
         ['What problems do you solve?', 'I specialize in creating digital products with measurable results: conversion growth, automation, UX improvement.'],
@@ -78,14 +78,14 @@ export default function Portfolio() {
         ['Do you work with B2B?', 'Yes, experience in enterprise projects: digital transformation, process automation, integration.']
       ],
       articles: [
-        ['Building Natural Link Profile in 2026', 'Dec 29, 2025', '5 min', 'SEO', 'Modern link building approaches', 'In 2026, the approach to building a link profile has changed dramatically. Search engines have become much smarter at recognizing artificial links.\n\nKey principles of natural link building:\n\n1. Quality Content as Foundation\nCreate materials worth sharing. Research, infographics, case studies with real numbers - this is what attracts organic links.\n\n2. Digital PR Instead of Buying Links\nWork with journalists, participate in expert comments, publish guest articles on authoritative resources in your niche.\n\n3. Source Diversity\nDo not focus on one type of platform. Combine: industry media, niche blogs, social platforms, educational resources.\n\n4. Natural Anchor List\nAvoid over-optimization. Use branded anchors (company name), naked URLs, generic phrases like read more, and only a small percentage of commercial anchors.\n\n5. Gradual Growth\nA sudden spike in links looks suspicious. Aim for smooth, steady growth.\n\nMonitoring Tools:\n- Ahrefs for competitor analysis\n- Majestic for link quality assessment\n- Google Search Console for tracking incoming links\n\nRemember: one quality backlink from an authoritative resource is worth more than hundreds of links from questionable sites.'],
-        ['UX Trends 2026', 'Dec 15, 2025', '9 min', 'UI/UX', 'How minimalism is changing digital products', 'UX design is undergoing a philosophical shift. In 2026, the industry is moving from a race for features to creating meaningful user experiences.\n\nKey trends:\n\n1. Minimalism with Emotional Intelligence\nInterfaces are becoming simpler, but not colder. Micro-animations, subtle transitions, and thoughtful typography create an emotional connection without visual noise.\n\n2. Ethical Design\nAbandoning dark patterns, transparency in data usage, respecting user time. Companies are realizing that long-term loyalty is more important than short-term engagement metrics.\n\n3. Personalization Without Intrusiveness\nAI allows adapting the interface to each user, but it is important not to cross the line. Users should feel in control.\n\n4. Accessibility as Standard\nWCAG 2.2 is becoming the norm, not the exception. Design for everyone is not just social responsibility, but also audience expansion.\n\n5. Voice and Multimodal Interfaces\nCombination of voice, gestures, and traditional controls creates more natural interaction.\n\n6. Sustainable Design\nOptimization for low power consumption, support for older devices, fast loading - caring for the environment through design.\n\nPractical recommendations:\n- Conduct usability tests not only for functionality, but also for emotional response\n- Include an ethical design specialist on your team\n- Optimize not just for Desktop First or Mobile First, but for Context First\n\nThe future of UX is a balance between technological capabilities and humanity.'],
-        ['SEO for Small Business', 'Dec 04, 2025', '8 min', 'SEO', 'Practical SEO guide', 'SEO in 2026 is no longer about keyword density, but about understanding user intent and creating expert content.\n\nSEO promotion stages:\n\n1. Keyword Analysis and Selection\n- Use Google Keyword Planner, Ahrefs, SEMrush\n- Focus on long-tail queries (3-5 words)\n- Analyze SERP: what does Google show for your queries?\n- Consider search intent: informational, navigational, transactional\n\n2. Technical Optimization\n- Loading speed (use PageSpeed Insights)\n- Mobile-first indexing - mobile version must be perfect\n- URL structure: short, clear, with keywords\n- Fix all 404 errors and set up proper redirects\n\n3. On-page Optimization\n- Title (50-60 characters) with keyword at the beginning\n- Meta description (150-160 characters) with call to action\n- H1-H6 headings in logical hierarchy\n- Alt tags for all images\n- Internal linking (3-5 relevant links per page)\n\n4. Content Strategy\n- Create content clusters: main article + supporting materials\n- Update old content with current information\n- Use various formats: articles, videos, infographics\n- Answer user questions (People Also Ask)\n\nRemember: SEO is a marathon, not a sprint. First results will appear in 3-6 months of regular work.']
+        ['Building Natural Link Profile in 2026', 'Dec 29, 2025', '5 min', 'SEO', 'Modern link building approaches', 'In 2026, the approach to building a link profile has changed dramatically. Search engines have become much smarter at recognizing artificial links.\\n\\nKey principles of natural link building:\\n\\n1. Quality Content as Foundation\\nCreate materials worth sharing. Research, infographics, case studies with real numbers - this is what attracts organic links.\\n\\n2. Digital PR Instead of Buying Links\\nWork with journalists, participate in expert comments, publish guest articles on authoritative resources in your niche.\\n\\n3. Source Diversity\\nDo not focus on one type of platform. Combine: industry media, niche blogs, social platforms, educational resources.\\n\\n4. Natural Anchor List\\nAvoid over-optimization. Use branded anchors (company name), naked URLs, generic phrases like read more, and only a small percentage of commercial anchors.\\n\\n5. Gradual Growth\\nA sudden spike in links looks suspicious. Aim for smooth, steady growth.\\n\\nMonitoring Tools:\\n- Ahrefs for competitor analysis\\n- Majestic for link quality assessment\\n- Google Search Console for tracking incoming links\\n\\nRemember: one quality backlink from an authoritative resource is worth more than hundreds of links from questionable sites.'],
+        ['UX Trends 2026', 'Dec 15, 2025', '9 min', 'UI/UX', 'How minimalism is changing digital products', 'UX design is undergoing a philosophical shift. In 2026, the industry is moving from a race for features to creating meaningful user experiences.\\n\\nKey trends:\\n\\n1. Minimalism with Emotional Intelligence\\nInterfaces are becoming simpler, but not colder. Micro-animations, subtle transitions, and thoughtful typography create an emotional connection without visual noise.\\n\\n2. Ethical Design\\nAbandoning dark patterns, transparency in data usage, respecting user time. Companies are realizing that long-term loyalty is more important than short-term engagement metrics.\\n\\n3. Personalization Without Intrusiveness\\nAI allows adapting the interface to each user, but it is important not to cross the line. Users should feel in control.\\n\\n4. Accessibility as Standard\\nWCAG 2.2 is becoming the norm, not the exception. Design for everyone is not just social responsibility, but also audience expansion.\\n\\n5. Voice and Multimodal Interfaces\\nCombination of voice, gestures, and traditional controls creates more natural interaction.\\n\\n6. Sustainable Design\\nOptimization for low power consumption, support for older devices, fast loading - caring for the environment through design.\\n\\nPractical recommendations:\\n- Conduct usability tests not only for functionality, but also for emotional response\\n- Include an ethical design specialist on your team\\n- Optimize not just for Desktop First or Mobile First, but for Context First\\n\\nThe future of UX is a balance between technological capabilities and humanity.'],
+        ['SEO for Small Business', 'Dec 04, 2025', '8 min', 'SEO', 'Practical SEO guide', 'SEO in 2026 is no longer about keyword density, but about understanding user intent and creating expert content.\\n\\nSEO promotion stages:\\n\\n1. Keyword Analysis and Selection\\n- Use Google Keyword Planner, Ahrefs, SEMrush\\n- Focus on long-tail queries (3-5 words)\\n- Analyze SERP: what does Google show for your queries?\\n- Consider search intent: informational, navigational, transactional\\n\\n2. Technical Optimization\\n- Loading speed (use PageSpeed Insights)\\n- Mobile-first indexing - mobile version must be perfect\\n- URL structure: short, clear, with keywords\\n- Fix all 404 errors and set up proper redirects\\n\\n3. On-page Optimization\\n- Title (50-60 characters) with keyword at the beginning\\n- Meta description (150-160 characters) with call to action\\n- H1-H6 headings in logical hierarchy\\n- Alt tags for all images\\n- Internal linking (3-5 relevant links per page)\\n\\n4. Content Strategy\\n- Create content clusters: main article + supporting materials\\n- Update old content with current information\\n- Use various formats: articles, videos, infographics\\n- Answer user questions (People Also Ask)\\n\\nRemember: SEO is a marathon, not a sprint. First results will appear in 3-6 months of regular work.']
       ]
     },
     ru: {
       nav: ['Услуги', 'Проекты', 'Процесс', 'Статьи', 'Контакт'],
-      hero: ['Создаю\nцифровые решения\nс умом', 'Объединяю креативность с data-driven подходом для создания продуктов, которые приносят измеримые результаты.', 'Начать проект'],
+      hero: ['Создаю\\nцифровые решения\\nс умом', 'Объединяю креативность с data-driven подходом для создания продуктов, которые приносят измеримые результаты.', 'Начать проект'],
       services: [
         ['UI/UX Дизайн', 'Проектирование интерфейсов с фокусом на конверсию', ['Анализ целевой аудитории и паттернов', 'Прототипирование и создание макетов', 'Дизайн-системы для масштабируемости', 'A/B тестирование на основе данных']],
         ['AI-решения и автоматизация', 'Внедрение AI для оптимизации процессов', ['Чат-боты для снятия нагрузки', 'Автоматизация маркетинга через AI', 'Кастомные решения под задачи']],
@@ -117,7 +117,7 @@ export default function Portfolio() {
         ['Работаете с B2B?', 'Да, опыт в корпоративных проектах: трансформация, автоматизация.']
       ],
       articles: [
-        ['Естественный профиль сайта 2026', '29.12.2025', '5 мин', 'SEO', 'Линкбилдинг без санкций', 'В 2026 году подход к построению ссылочного профиля кардинально изменился. Поисковые системы стали намного умнее в распознавании искусственных ссылок.
+        ['Естественный профиль сайта 2026', '29.12.2025', '5 мин', 'SEO', 'Линкбилдинг без санкций', `В 2026 году подход к построению ссылочного профиля кардинально изменился. Поисковые системы стали намного умнее в распознавании искусственных ссылок.
 
 Основные принципы естественного линкбилдинга:
 
@@ -141,8 +141,8 @@ export default function Portfolio() {
 - Majestic для оценки качества ссылок
 - Google Search Console для отслеживания входящих ссылок
 
-Помните: один качественный бэклинк с авторитетного ресурса ценнее сотен ссылок с сомнительных площадок.'],
-        ['Тренды UX 2026', '15.12.2025', '9 мин', 'UI/UX', 'Минимализм в цифровых продуктах', 'UX-дизайн переживает философский сдвиг. В 2026 году индустрия движется от гонки за функциями к созданию осмысленного пользовательского опыта.
+Помните: один качественный бэклинк с авторитетного ресурса ценнее сотен ссылок с сомнительных площадок.`],
+        ['Тренды UX 2026', '15.12.2025', '9 мин', 'UI/UX', 'Минимализм в цифровых продуктах', `UX-дизайн переживает философский сдвиг. В 2026 году индустрия движется от гонки за функциями к созданию осмысленного пользовательского опыта.
 
 Ключевые тренды:
 
@@ -169,8 +169,8 @@ WCAG 2.2 становится нормой, а не исключением. Ди
 - Включайте в команду специалиста по этичному дизайну
 - Оптимизируйте не только под Desktop First или Mobile First, а под Context First
 
-Будущее UX — это баланс между технологическими возможностями и человечностью.'],
-        ['SEO для малого бизнеса', '04.12.2025', '8 мин', 'SEO', 'Практическое руководство', 'SEO в 2026 году — это уже не о плотности ключевых слов, а о понимании намерений пользователей и создании экспертного контента.
+Будущее UX — это баланс между технологическими возможностями и человечностью.`],
+        ['SEO для малого бизнеса', '04.12.2025', '8 мин', 'SEO', 'Практическое руководство', `SEO в 2026 году — это уже не о плотности ключевых слов, а о понимании намерений пользователей и создании экспертного контента.
 
 Этапы SEO-продвижения:
 
@@ -199,7 +199,7 @@ WCAG 2.2 становится нормой, а не исключением. Ди
 - Используйте различные форматы: статьи, видео, инфографика
 - Отвечайте на вопросы пользователей (People Also Ask)
 
-Помните: SEO — это марафон, а не спринт. Первые результаты появятся через 3-6 месяцев регулярной работы.']
+Помните: SEO — это марафон, а не спринт. Первые результаты появятся через 3-6 месяцев регулярной работы.`]
       ]
     }
   };
