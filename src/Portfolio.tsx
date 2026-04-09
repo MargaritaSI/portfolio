@@ -26,7 +26,9 @@ export default function Portfolio() {
   const data = {
     en: {
       nav: ['Services', 'Projects', 'Process', 'Articles', 'Contact'],
-      hero: ['Creating\\ndigital solutions\\nwith intelligence', 'Combining creativity with data-driven approach to build products that deliver measurable results.', 'Start Project'],
+      hero: [`Creating
+digital solutions
+with intelligence`, 'Combining creativity with data-driven approach to build products that deliver measurable results.', 'Start Project'],
       labels: ['Services', 'Projects', 'Work Steps', 'FAQ', 'Ready to Start?', 'Get in touch to discuss your project', 'Expert Articles', 'Read article', 'Close', '© 2026 It healthy coder. All rights reserved.', 'Based in Amsterdam - Working remotely worldwide'],
       footer: {
         privacy: 'Privacy Policy',
@@ -85,7 +87,9 @@ export default function Portfolio() {
     },
     ru: {
       nav: ['Услуги', 'Проекты', 'Процесс', 'Статьи', 'Контакт'],
-      hero: ['Создаю\\nцифровые решения\\nс умом', 'Объединяю креативность с data-driven подходом для создания продуктов, которые приносят измеримые результаты.', 'Начать проект'],
+      hero: [`Создаю
+цифровые решения
+с умом`, 'Объединяю креативность с data-driven подходом для создания продуктов, которые приносят измеримые результаты.', 'Начать проект'],
       services: [
         ['UI/UX Дизайн', 'Проектирование интерфейсов с фокусом на конверсию', ['Анализ целевой аудитории и паттернов', 'Прототипирование и создание макетов', 'Дизайн-системы для масштабируемости', 'A/B тестирование на основе данных']],
         ['AI-решения и автоматизация', 'Внедрение AI для оптимизации процессов', ['Чат-боты для снятия нагрузки', 'Автоматизация маркетинга через AI', 'Кастомные решения под задачи']],
