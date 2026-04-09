@@ -1,4 +1,4 @@
-# Anna Portfolio — Vite + GitHub Pages
+# Portfolio — Vite + GitHub Pages
 
 This project is prepared for deployment to GitHub Pages using GitHub Actions.
 
