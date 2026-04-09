@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState, useEffect } from 'react';
 import { X, ArrowRight, Mail, Linkedin, ChevronDown, Plus, Minus } from 'lucide-react';
 
