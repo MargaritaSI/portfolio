@@ -1,5 +1,21 @@
 import React, { useState } from 'react';
-import { X, ArrowRight, Mail, Linkedin, ChevronDown, Plus, ArrowLeft } from 'lucide-react';
+import { X, ArrowRight, Mail, Linkedin, ChevronDown, Plus, ArrowLeft, ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
+import adhdImage0 from '../adhd.png';
+import adhdImage1 from '../adhd1.png';
+import adhdImage2 from '../adhd2.png';
+import adhdImage3 from '../adhd3.png';
+import dogImage0 from '../dog.png';
+import dogImage1 from '../dog1.png';
+import dutchImage0 from '../dutch1.png';
+import dutchImage1 from '../dutch2.png';
+import dutchImage2 from '../dutch3.png';
+import massageImage0 from '../massage1.png';
+import massageImage1 from '../massage2.png';
+import massageImage2 from '../massage3.png';
+import dailyPracticesImage0 from '../Daily Practices1.png';
+import dailyPracticesImage1 from '../Daily Practices2.png';
+import dailyPracticesImage2 from '../Daily Practices3.png';
+import dailyPracticesImage3 from '../Daily Practices4.png';
 
 type RichSection = {
   title: string;
@@ -25,6 +41,15 @@ type Article = {
 type LegalEntry = {
   title: string;
   content: RichContent;
+};
+
+type Project = {
+  title: string;
+  category: string;
+  description: string;
+  summary: string;
+  images: string[];
+  url?: string;
 };
 
 type LocaleData = {
@@ -55,7 +80,7 @@ type LocaleData = {
     terms: LegalEntry;
   };
   services: [string, string, string[]][];
-  projects: [string, string, string, string][];
+  projects: Project[];
   process: [string, string, string][];
   articles: Article[];
 };
@@ -96,6 +121,14 @@ const renderRichContent = (content: RichContent) => (
     ))}
   </div>
 );
+
+const projectImages = {
+  dutch: [dutchImage0, dutchImage1, dutchImage2],
+  dog: [dogImage0, dogImage1],
+  massage: [massageImage0, massageImage1, massageImage2],
+  adhd: [adhdImage0, adhdImage1, adhdImage2, adhdImage3],
+  dailyPractices: [dailyPracticesImage0, dailyPracticesImage1, dailyPracticesImage2, dailyPracticesImage3]
+};
 
 const data: Record<string, LocaleData> = {
   en: {
@@ -354,10 +387,45 @@ with intelligence`,
       ['Enterprise Solutions (B2B)', 'Digital transformation and scalable solutions', ['Digital transformation strategy and roadmap', 'Enterprise platforms and system integrations', 'Business process automation', 'AI implementation for operations optimization']]
     ],
     projects: [
-      ['AI Chatbot for Customer Support', 'AI & Automation', 'Telegram bot for automating 70% of support requests', '70% automation, 24/7 availability'],
-      ['Wellness Platform Design', 'UI/UX', 'Reimagining user experience for health service', 'Minimalist interface, wellness focus'],
-      ['Creative Campaign for Coffee Shop', 'Marketing & Creative', '3D visualization and content strategy for local business', 'Brand awareness growth'],
-      ['Business Meetings Platform', 'UI/UX & Product', 'MVP design for organizing meetings with activities system', 'Full cycle: concept to prototype']
+      {
+        title: 'Netherlands Harmony Guide',
+        category: 'UI/UX & Content',
+        description: 'A visual guide website about the Netherlands with a calm editorial structure, clear navigation, and immersive location storytelling.',
+        summary: 'Travel guide concept with atmospheric content presentation',
+        images: projectImages.dutch
+      },
+      {
+        title: 'Walk the Dog',
+        category: 'Pet Care & Local Service',
+        description: 'A compact service website for dog walking with clear offer blocks, trust-focused messaging, and a friendly local brand feel.',
+        summary: 'Service landing page focused on clarity and bookings',
+        images: projectImages.dog,
+        url: 'https://wukkishim.wixsite.com/walkthedog'
+      },
+      {
+        title: 'Smart Massage',
+        category: 'Wellness & Booking',
+        description: 'A massage studio website with gentle visual rhythm, service highlights, and a stronger path from discovery to appointment booking.',
+        summary: 'Wellness website designed for calm browsing and conversion',
+        images: projectImages.massage,
+        url: 'https://wukkishim.wixstudio.com/smartmassage'
+      },
+      {
+        title: 'Focus Meetings Platform',
+        category: 'UI/UX & Product',
+        description: 'MVP design for organizing meetings with activities system for users who benefit from more focused and supportive planning flows.',
+        summary: 'Product concept with structured meeting planning experience',
+        images: projectImages.adhd,
+        url: 'https://adhd-harmony-guide.lovable.app'
+      },
+      {
+        title: 'Daily Practices',
+        category: 'Mental Health & Habit Support',
+        description: 'A mental health product concept centered on gentle daily rituals, structured reflection, and supportive self-regulation flows.',
+        summary: 'Wellbeing experience built around calm routines and emotional balance',
+        images: projectImages.dailyPractices,
+        url: 'https://body-mind-harmony-guide.lovable.app'
+      }
     ],
     process: [
       ['01', 'Immersion', 'Business, audience, and competitor analysis'],
@@ -751,10 +819,45 @@ with intelligence`,
       ['Корпоративные решения (B2B)', 'Цифровая трансформация и масштабируемые решения', ['Стратегия цифровой трансформации и roadmap', 'Корпоративные платформы и системные интеграции', 'Автоматизация бизнес-процессов', 'Внедрение ИИ для оптимизации операций']]
     ],
     projects: [
-      ['Чат-бот на основе ИИ для поддержки клиентов', 'ИИ и автоматизация', 'Бот в Telegram для автоматизации 70% запросов в службу поддержки', '70% автоматизации, круглосуточная доступность'],
-      ['Дизайн платформы для здоровья и благополучия', 'UI/UX', 'Переосмысление пользовательского опыта для медицинских услуг', 'Минималистичный интерфейс, акцент на здоровье и благополучие'],
-      ['Креативная кампания для кофейни', 'Маркетинг и креатив', '3D-визуализация и контент-стратегия для местного бизнеса', 'Повышение узнаваемости бренда'],
-      ['Платформа для деловых встреч', 'UI/UX и продукт', 'Дизайн MVP для организации встреч с системой активностей', 'Полный цикл: от концепции до прототипа']
+      {
+        title: 'Гид по Нидерландам',
+        category: 'UI/UX и контент',
+        description: 'Визуальный сайт-гид о Нидерландах со спокойной редакционной структурой, понятной навигацией и атмосферной подачей локаций.',
+        summary: 'Концепт travel-guide с выразительной подачей контента',
+        images: projectImages.dutch
+      },
+      {
+        title: 'Walk the Dog',
+        category: 'Pet Care и локальный сервис',
+        description: 'Компактный сайт услуги по выгулу собак с понятными блоками предложения, сообщениями про доверие и дружелюбным локальным характером.',
+        summary: 'Лендинг сервиса с фокусом на ясность и заявки',
+        images: projectImages.dog,
+        url: 'https://wukkishim.wixsite.com/walkthedog'
+      },
+      {
+        title: 'Smart Massage',
+        category: 'Wellness и запись',
+        description: 'Сайт массажной студии с мягким визуальным ритмом, акцентом на услугах и более понятным переходом от знакомства к записи.',
+        summary: 'Wellness-сайт для спокойного просмотра и конверсии',
+        images: projectImages.massage,
+        url: 'https://wukkishim.wixstudio.com/smartmassage'
+      },
+      {
+        title: 'Focus Meetings Platform',
+        category: 'UI/UX и продукт',
+        description: 'MVP-дизайн платформы для организации встреч с системой активностей для пользователей, которым важны более сфокусированные и поддерживающие сценарии планирования.',
+        summary: 'Продуктовый концепт со структурированным опытом планирования встреч',
+        images: projectImages.adhd,
+        url: 'https://adhd-harmony-guide.lovable.app'
+      },
+      {
+        title: 'Daily Practices',
+        category: 'Mental Health и привычки',
+        description: 'Концепт ментал-хелс продукта, построенный вокруг мягких ежедневных практик, структурированной рефлексии и поддерживающих сценариев саморегуляции.',
+        summary: 'Wellbeing-опыт вокруг спокойных рутин и эмоционального баланса',
+        images: projectImages.dailyPractices,
+        url: 'https://body-mind-harmony-guide.lovable.app'
+      }
     ],
     process: [
       ['01', 'Погружение', 'Анализ бизнеса, аудитории, конкурентов'],
@@ -1148,10 +1251,45 @@ met intelligentie`,
       ['Enterprise-oplossingen (B2B)', 'Digitale transformatie en schaalbare oplossingen', ['Strategie voor digitale transformatie en roadmap', 'Enterprise-platformen en systeemintegraties', 'Automatisering van bedrijfsprocessen', 'AI-implementatie voor operationele optimalisatie']]
     ],
     projects: [
-      ['AI-chatbot voor klantenservice', 'AI & Automatisering', 'Telegram-bot die 70% van supportverzoeken automatiseert', '70% automatisering, 24/7 beschikbaarheid'],
-      ['Design voor wellnessplatform', 'UI/UX', 'Herontwerp van de gebruikerservaring voor een gezondheidsdienst', 'Minimalistische interface, focus op welzijn'],
-      ['Creatieve campagne voor koffiebar', 'Marketing & Creatief', '3D-visualisatie en contentstrategie voor een lokaal bedrijf', 'Grotere merkbekendheid'],
-      ['Platform voor zakelijke afspraken', 'UI/UX & Product', 'MVP-ontwerp voor het organiseren van afspraken met een activiteitensysteem', 'Volledige cyclus: van concept tot prototype']
+      {
+        title: 'Nederland Gids',
+        category: 'UI/UX & Content',
+        description: 'Een visuele gidswebsite over Nederland met een rustige editorial structuur, heldere navigatie en sfeervolle presentatie van locaties.',
+        summary: 'Travel-guide concept met atmosferische contentpresentatie',
+        images: projectImages.dutch
+      },
+      {
+        title: 'Walk the Dog',
+        category: 'Pet Care & Lokale service',
+        description: 'Een compacte website voor hondenuitlaatservice met heldere aanbodblokken, vertrouwenwekkende copy en een vriendelijke lokale uitstraling.',
+        summary: 'Service landing page met focus op duidelijkheid en boekingen',
+        images: projectImages.dog,
+        url: 'https://wukkishim.wixsite.com/walkthedog'
+      },
+      {
+        title: 'Smart Massage',
+        category: 'Wellness & Boekingen',
+        description: 'Een website voor een massagestudio met een zachte visuele cadans, sterke serviceblokken en een duidelijker pad naar een afspraak.',
+        summary: 'Wellness-website ontworpen voor rust en conversie',
+        images: projectImages.massage,
+        url: 'https://wukkishim.wixstudio.com/smartmassage'
+      },
+      {
+        title: 'Focus Meetings Platform',
+        category: 'UI/UX & Product',
+        description: 'MVP-ontwerp voor het organiseren van afspraken met een activiteitensysteem voor gebruikers die baat hebben bij meer focus en ondersteunende planningsflows.',
+        summary: 'Productconcept met gestructureerde meeting planning',
+        images: projectImages.adhd,
+        url: 'https://adhd-harmony-guide.lovable.app'
+      },
+      {
+        title: 'Daily Practices',
+        category: 'Mental Health & Gewoontevorming',
+        description: 'Een mental-health productconcept rond zachte dagelijkse rituelen, gestructureerde reflectie en ondersteunende flows voor zelfregulatie.',
+        summary: 'Wellbeing-ervaring gebouwd rond rustige routines en emotionele balans',
+        images: projectImages.dailyPractices,
+        url: 'https://body-mind-harmony-guide.lovable.app'
+      }
     ],
     process: [
       ['01', 'Verdieping', 'Analyse van business, doelgroep en concurrenten'],
@@ -1298,11 +1436,17 @@ export default function Portfolio() {
   const [activeArticle, setActiveArticle] = useState<number | null>(null);
   const [showLegalModal, setShowLegalModal] = useState<'privacy' | 'cookies' | 'terms' | null>(null);
   const [language, setLanguage] = useState<'en' | 'ru' | 'nl'>('en');
+  const [projectSlides, setProjectSlides] = useState<Record<number, number>>({});
+  const [lightboxImage, setLightboxImage] = useState<{ src: string; title: string } | null>(null);
 
   const scroll = (e: React.MouseEvent, id: string) => {
     e.preventDefault();
     const el = document.getElementById(id);
     if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - 80, behavior: 'smooth' });
+  };
+
+  const setProjectSlide = (projectIndex: number, nextIndex: number) => {
+    setProjectSlides((current) => ({ ...current, [projectIndex]: nextIndex }));
   };
 
   const t = data[language];
@@ -1325,6 +1469,18 @@ export default function Portfolio() {
             <h2 className="text-3xl md:text-4xl font-light mb-6 tracking-tight">{t.legal[showLegalModal].title}</h2>
             <div className="w-12 h-px bg-stone-900 mb-10" />
             {renderRichContent(t.legal[showLegalModal].content)}
+          </div>
+        </div>
+      )}
+
+      {lightboxImage && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-stone-950/90 p-4" onClick={() => setLightboxImage(null)}>
+          <button onClick={() => setLightboxImage(null)} className="absolute top-6 right-6 inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-stone-300 hover:text-white transition-colors">
+            {t.ui.close}
+            <X size={18} />
+          </button>
+          <div className="max-w-6xl w-full" onClick={(e) => e.stopPropagation()}>
+            <img src={lightboxImage.src} alt={lightboxImage.title} className="w-full max-h-[82vh] object-contain shadow-2xl" />
           </div>
         </div>
       )}
@@ -1394,16 +1550,70 @@ export default function Portfolio() {
             <h2 className="text-sm font-bold uppercase tracking-[0.3em] mb-16 text-stone-500">{t.ui.projects}</h2>
             <div className="grid md:grid-cols-2 gap-12">
               {t.projects.map((project, index) => (
-                <div key={index} className="group cursor-pointer">
+                <div key={index} className="group">
                   <div className="aspect-[16/10] bg-stone-800 mb-8 overflow-hidden relative shadow-2xl">
-                    <div className="absolute inset-0 flex items-center justify-center text-stone-700 font-black text-6xl opacity-20 group-hover:scale-110 transition-transform duration-700 uppercase">
+                    <button
+                      type="button"
+                      className="absolute inset-0"
+                      onClick={() => setLightboxImage({ src: project.images[projectSlides[index] ?? 0], title: project.title })}
+                      aria-label={project.title}
+                    >
+                      <img
+                        src={project.images[projectSlides[index] ?? 0]}
+                        alt={project.title}
+                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                      />
+                    </button>
+                    <div className="absolute inset-0 bg-gradient-to-t from-stone-950/60 via-transparent to-transparent pointer-events-none" />
+                    <div className="absolute inset-0 flex items-center justify-center text-stone-50/10 font-black text-6xl opacity-20 transition-transform duration-700 uppercase pointer-events-none">
                       {t.ui.projectWord}
                     </div>
-                    <div className="absolute top-6 right-6 text-xs font-bold uppercase tracking-widest bg-stone-50 text-stone-900 px-3 py-1">{project[1]}</div>
+                    <div className="absolute top-6 right-6 text-xs font-bold uppercase tracking-widest bg-stone-50 text-stone-900 px-3 py-1">{project.category}</div>
+                    {project.images.length > 1 && (
+                      <>
+                        <button
+                          type="button"
+                          className="absolute left-4 top-1/2 -translate-y-1/2 h-11 w-11 rounded-full border border-white/25 bg-stone-900/60 text-white backdrop-blur hover:bg-stone-50 hover:text-stone-900 transition-colors"
+                          onClick={() => setProjectSlide(index, ((projectSlides[index] ?? 0) - 1 + project.images.length) % project.images.length)}
+                          aria-label="Previous image"
+                        >
+                          <ChevronLeft className="mx-auto" size={18} />
+                        </button>
+                        <button
+                          type="button"
+                          className="absolute right-4 top-1/2 -translate-y-1/2 h-11 w-11 rounded-full border border-white/25 bg-stone-900/60 text-white backdrop-blur hover:bg-stone-50 hover:text-stone-900 transition-colors"
+                          onClick={() => setProjectSlide(index, ((projectSlides[index] ?? 0) + 1) % project.images.length)}
+                          aria-label="Next image"
+                        >
+                          <ChevronRight className="mx-auto" size={18} />
+                        </button>
+                        <div className="absolute left-6 bottom-5 flex items-center gap-2">
+                          {project.images.map((_, imageIndex) => (
+                            <button
+                              key={imageIndex}
+                              type="button"
+                              onClick={() => setProjectSlide(index, imageIndex)}
+                              className={`h-2 rounded-full transition-all ${imageIndex === (projectSlides[index] ?? 0) ? 'w-8 bg-white' : 'w-2 bg-white/45 hover:bg-white/70'}`}
+                              aria-label={`Go to image ${imageIndex + 1}`}
+                            />
+                          ))}
+                        </div>
+                      </>
+                    )}
                   </div>
-                  <h3 className="text-3xl font-light mb-4">{project[0]}</h3>
-                  <p className="text-stone-400 font-light leading-relaxed mb-6">{project[2]}</p>
-                  <div className="text-stone-500 italic font-light">{project[3]}</div>
+                  <div className="space-y-4">
+                    {project.url ? (
+                      <a href={project.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-3xl font-light hover:text-stone-300 transition-colors">
+                        {project.title}
+                        <ExternalLink size={18} />
+                      </a>
+                    ) : (
+                      <h3 className="text-3xl font-light">{project.title}</h3>
+                    )}
+                    <div className="text-xs font-bold uppercase tracking-[0.3em] text-stone-500">{project.category}</div>
+                    <p className="text-stone-300 font-light leading-relaxed">{project.description}</p>
+                    <div className="text-stone-500 italic font-light">{project.summary}</div>
+                  </div>
                 </div>
               ))}
             </div>
