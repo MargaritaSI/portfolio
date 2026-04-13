@@ -12,10 +12,19 @@ import dutchImage2 from '../dutch3.png';
 import massageImage0 from '../massage1.png';
 import massageImage1 from '../massage2.png';
 import massageImage2 from '../massage3.png';
-import dailyPracticesImage0 from '../Daily Practices1.png';
-import dailyPracticesImage1 from '../Daily Practices2.png';
-import dailyPracticesImage2 from '../Daily Practices3.png';
-import dailyPracticesImage3 from '../Daily Practices4.png';
+import dailyPracticesImage0 from '../Daily Practices1.jpg';
+import dailyPracticesImage1 from '../Daily Practices2.jpg';
+import dailyPracticesImage2 from '../Daily Practices3.jpg';
+import dailyPracticesImage3 from '../Daily Practices4.jpg';
+import achievematerImage0 from '../achive mate.jpg';
+import achievematerImage1 from '../achive mate2.jpg';
+import achievematerImage2 from '../achive mate3.jpg';
+import achievematerImage3 from '../achive mate4.jpg';
+import stretchingImage0 from '../STRETCHING1.jpg';
+import stretchingImage1 from '../STRETCHING2.jpg';
+import qaImage0 from '../qa.jpg';
+import qaImage1 from '../qa1.jpg';
+import qaImage2 from '../qa2.jpg';
 
 type RichSection = {
   title: string;
@@ -127,7 +136,10 @@ const projectImages = {
   dog: [dogImage0, dogImage1],
   massage: [massageImage0, massageImage1, massageImage2],
   adhd: [adhdImage0, adhdImage1, adhdImage2, adhdImage3],
-  dailyPractices: [dailyPracticesImage0, dailyPracticesImage1, dailyPracticesImage2, dailyPracticesImage3]
+  dailyPractices: [dailyPracticesImage0, dailyPracticesImage1, dailyPracticesImage2, dailyPracticesImage3],
+  achievemater: [achievematerImage0, achievematerImage1, achievematerImage2, achievematerImage3],
+  stretching: [stretchingImage0, stretchingImage1],
+  qa: [qaImage0, qaImage1, qaImage2]
 };
 
 const data: Record<string, LocaleData> = {
@@ -425,6 +437,29 @@ with intelligence`,
         summary: 'Wellbeing experience built around calm routines and emotional balance',
         images: projectImages.dailyPractices,
         url: 'https://body-mind-harmony-guide.lovable.app'
+      },
+      {
+        title: 'Achievemater',
+        category: 'Community & Productivity',
+        description: 'A collaborative group workspace where people can work side by side toward different goals with structure, accountability, and shared momentum.',
+        summary: 'Group productivity concept for focus, support, and progress',
+        images: projectImages.achievemater,
+        url: 'https://wukkishim.wixstudio.com/achievemater'
+      },
+      {
+        title: 'Stretching & Workout',
+        category: 'Fitness & Coaching',
+        description: 'A training website for stretching and workout coaching with a clear service structure, approachable guidance, and a stronger conversion path.',
+        summary: 'Coach website focused on movement practice and sign-ups',
+        images: projectImages.stretching,
+        url: 'https://wukkishim.wixstudio.com/ithealthyback'
+      },
+      {
+        title: 'QA Testing Blog',
+        category: 'Content & Knowledge',
+        description: 'A QA blog with curated testing materials, practical notes, and resources that feel genuinely useful for learning and day-to-day work.',
+        summary: 'Editorial knowledge hub for testing insights and resources',
+        images: projectImages.qa
       }
     ],
     process: [
@@ -857,6 +892,29 @@ with intelligence`,
         summary: 'Wellbeing-опыт вокруг спокойных рутин и эмоционального баланса',
         images: projectImages.dailyPractices,
         url: 'https://body-mind-harmony-guide.lovable.app'
+      },
+      {
+        title: 'Achievemater',
+        category: 'Комьюнити и продуктивность',
+        description: 'Совместное групповое пространство, где люди могут работать рядом над разными целями с опорой на структуру, accountability и общий ритм.',
+        summary: 'Концепт групповой продуктивности для фокуса, поддержки и прогресса',
+        images: projectImages.achievemater,
+        url: 'https://wukkishim.wixstudio.com/achievemater'
+      },
+      {
+        title: 'Stretching & Workout',
+        category: 'Фитнес и коучинг',
+        description: 'Сайт для тренировок по стретчингу и воркауту с понятной структурой услуг, дружелюбной подачей и более ясным путём к записи.',
+        summary: 'Сайт тренера с фокусом на практику движения и заявки',
+        images: projectImages.stretching,
+        url: 'https://wukkishim.wixstudio.com/ithealthyback'
+      },
+      {
+        title: 'QA Testing Blog',
+        category: 'Контент и знания',
+        description: 'QA-блог с полезными и интересными материалами по тестированию, практическими заметками и подборками ресурсов для работы и обучения.',
+        summary: 'Редакционный хаб со знаниями и материалами по тестированию',
+        images: projectImages.qa
       }
     ],
     process: [
@@ -1289,6 +1347,29 @@ met intelligentie`,
         summary: 'Wellbeing-ervaring gebouwd rond rustige routines en emotionele balans',
         images: projectImages.dailyPractices,
         url: 'https://body-mind-harmony-guide.lovable.app'
+      },
+      {
+        title: 'Achievemater',
+        category: 'Community & Productiviteit',
+        description: 'Een gezamenlijke groepsruimte waar mensen naast elkaar aan verschillende doelen kunnen werken met structuur, accountability en gedeelde energie.',
+        summary: 'Groepsproductiviteitsconcept voor focus, steun en voortgang',
+        images: projectImages.achievemater,
+        url: 'https://wukkishim.wixstudio.com/achievemater'
+      },
+      {
+        title: 'Stretching & Workout',
+        category: 'Fitness & Coaching',
+        description: 'Een trainingswebsite voor stretching- en workoutcoaching met een heldere dienstenstructuur, toegankelijke begeleiding en een sterker pad naar aanmelding.',
+        summary: 'Coachwebsite gericht op bewegingstraining en conversie',
+        images: projectImages.stretching,
+        url: 'https://wukkishim.wixstudio.com/ithealthyback'
+      },
+      {
+        title: 'QA Testing Blog',
+        category: 'Content & Kennis',
+        description: 'Een QA-blog met nuttige testmaterialen, praktische notities en bronnen die echt bruikbaar zijn voor leren en dagelijks werk.',
+        summary: 'Redactionele kennisplek voor testinginzichten en resources',
+        images: projectImages.qa
       }
     ],
     process: [
@@ -1564,11 +1645,6 @@ export default function Portfolio() {
                         className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                       />
                     </button>
-                    <div className="absolute inset-0 bg-gradient-to-t from-stone-950/60 via-transparent to-transparent pointer-events-none" />
-                    <div className="absolute inset-0 flex items-center justify-center text-stone-50/10 font-black text-6xl opacity-20 transition-transform duration-700 uppercase pointer-events-none">
-                      {t.ui.projectWord}
-                    </div>
-                    <div className="absolute top-6 right-6 text-xs font-bold uppercase tracking-widest bg-stone-50 text-stone-900 px-3 py-1">{project.category}</div>
                     {project.images.length > 1 && (
                       <>
                         <button
