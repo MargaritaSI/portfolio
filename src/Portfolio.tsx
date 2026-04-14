@@ -182,7 +182,7 @@ with intelligence`,
           sections: [
             {
               title: 'Data Controller',
-              paragraphs: ['Based in Amsterdam, Netherlands', 'Contact: your.email@example.com']
+              paragraphs: ['Based in Amsterdam, Netherlands', 'Contact: itmadge@gmail.com']
             },
             {
               title: 'Information We Collect',
@@ -245,7 +245,7 @@ with intelligence`,
             }
           ],
           outro: [
-            'To exercise your rights or ask privacy-related questions, contact your.email@example.com. Requests are answered within 30 days where required.'
+            'To exercise your rights or ask privacy-related questions, contact itmadge@gmail.com. Requests are answered within 30 days where required.'
           ]
         }
       },
@@ -314,7 +314,7 @@ with intelligence`,
               ]
             }
           ],
-          outro: ['If you have questions about cookies, contact your.email@example.com.']
+          outro: ['If you have questions about cookies, contact itmadge@gmail.com.']
         }
       },
       terms: {
@@ -386,7 +386,7 @@ with intelligence`,
               paragraphs: ['These terms are governed by the laws of the Netherlands. Disputes are subject to Dutch jurisdiction.']
             }
           ],
-          outro: ['Questions about these terms can be sent to your.email@example.com.']
+          outro: ['Questions about these terms can be sent to itmadge@gmail.com.']
         }
       }
     },
@@ -639,7 +639,7 @@ with intelligence`,
           sections: [
             {
               title: 'Контроллер данных',
-              paragraphs: ['Базируется в Амстердаме, Нидерланды', 'Контакт: your.email@example.com']
+              paragraphs: ['Базируется в Амстердаме, Нидерланды', 'Контакт: itmadge@gmail.com']
             },
             {
               title: 'Какие данные собираются',
@@ -701,7 +701,7 @@ with intelligence`,
               ]
             }
           ],
-          outro: ['По вопросам конфиденциальности или для реализации ваших прав напишите на your.email@example.com. Ответ предоставляется в течение 30 дней, если это требуется законом.']
+          outro: ['По вопросам конфиденциальности или для реализации ваших прав напишите на itmadge@gmail.com. Ответ предоставляется в течение 30 дней, если это требуется законом.']
         }
       },
       cookies: {
@@ -769,7 +769,7 @@ with intelligence`,
               ]
             }
           ],
-          outro: ['Если у вас есть вопросы по cookies, напишите на your.email@example.com.']
+          outro: ['Если у вас есть вопросы по cookies, напишите на itmadge@gmail.com.']
         }
       },
       terms: {
@@ -841,7 +841,7 @@ with intelligence`,
               paragraphs: ['Эти условия регулируются законодательством Нидерландов. Споры рассматриваются в голландской юрисдикции.']
             }
           ],
-          outro: ['Вопросы по этим условиям можно направить на your.email@example.com.']
+          outro: ['Вопросы по этим условиям можно направить на itmadge@gmail.com.']
         }
       }
     },
@@ -1094,7 +1094,7 @@ met intelligentie`,
           sections: [
             {
               title: 'Verwerkingsverantwoordelijke',
-              paragraphs: ['Gevestigd in Amsterdam, Nederland', 'Contact: your.email@example.com']
+              paragraphs: ['Gevestigd in Amsterdam, Nederland', 'Contact: itmadge@gmail.com']
             },
             {
               title: 'Welke gegevens worden verzameld',
@@ -1156,7 +1156,7 @@ met intelligentie`,
               ]
             }
           ],
-          outro: ['Voor privacyvragen of het uitoefenen van je rechten kun je mailen naar your.email@example.com. Verzoeken worden waar nodig binnen 30 dagen beantwoord.']
+          outro: ['Voor privacyvragen of het uitoefenen van je rechten kun je mailen naar itmadge@gmail.com. Verzoeken worden waar nodig binnen 30 dagen beantwoord.']
         }
       },
       cookies: {
@@ -1224,7 +1224,7 @@ met intelligentie`,
               ]
             }
           ],
-          outro: ['Vragen over cookies kun je sturen naar your.email@example.com.']
+          outro: ['Vragen over cookies kun je sturen naar itmadge@gmail.com.']
         }
       },
       terms: {
@@ -1296,7 +1296,7 @@ met intelligentie`,
               paragraphs: ['Op deze voorwaarden is Nederlands recht van toepassing. Geschillen vallen onder Nederlandse jurisdictie.']
             }
           ],
-          outro: ['Vragen over deze voorwaarden kun je sturen naar your.email@example.com.']
+          outro: ['Vragen over deze voorwaarden kun je sturen naar itmadge@gmail.com.']
         }
       }
     },
@@ -1598,7 +1598,7 @@ export default function Portfolio() {
         </section>
 
         <section id="services" className="py-32 px-6 max-w-6xl mx-auto border-t border-stone-200">
-          <h2 className="text-sm font-bold uppercase tracking-[0.3em] mb-16 text-stone-400">{t.ui.services}</h2>
+          <h2 className="text-lg md:text-xl font-bold uppercase tracking-[0.22em] mb-16 text-stone-400">{t.ui.services}</h2>
           <div className="grid border-t border-stone-200">
             {t.services.map((service, index) => (
               <div key={index} className="border-b border-stone-200 group">
@@ -1628,7 +1628,7 @@ export default function Portfolio() {
 
         <section id="projects" className="py-32 px-6 bg-stone-900 text-stone-50 selection:bg-stone-50 selection:text-stone-900">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-sm font-bold uppercase tracking-[0.3em] mb-16 text-stone-500">{t.ui.projects}</h2>
+            <h2 className="text-lg md:text-xl font-bold uppercase tracking-[0.22em] mb-16 text-stone-400">{t.ui.projects}</h2>
             <div className="grid md:grid-cols-2 gap-12">
               {t.projects.map((project, index) => (
                 <div key={index} className="group">
@@ -1697,11 +1697,11 @@ export default function Portfolio() {
         </section>
 
         <section id="process" className="py-32 px-6 max-w-6xl mx-auto border-t border-stone-200">
-          <h2 className="text-sm font-bold uppercase tracking-[0.3em] mb-16 text-stone-400">{t.ui.process}</h2>
+          <h2 className="text-lg md:text-xl font-bold uppercase tracking-[0.22em] mb-16 text-stone-400">{t.ui.process}</h2>
           <div className="grid md:grid-cols-4 gap-12">
             {t.process.map((step, index) => (
               <div key={index} className="relative pt-10 pl-2 pr-4">
-                <div className="text-5xl font-light text-stone-100 absolute -top-4 -left-2 z-0">{step[0]}</div>
+                <div className="text-5xl font-medium text-stone-300 absolute -top-4 -left-2 z-0">{step[0]}</div>
                 <div className="relative z-10 space-y-4">
                   <h3 className="text-xl font-medium leading-snug">{step[1]}</h3>
                   <p className="text-stone-500 font-light leading-relaxed">{step[2]}</p>
@@ -1712,7 +1712,7 @@ export default function Portfolio() {
         </section>
 
         <section id="articles" className="py-32 px-6 max-w-6xl mx-auto border-t border-stone-200">
-          <h2 className="text-sm font-bold uppercase tracking-[0.3em] mb-16 text-stone-400">{t.ui.articles}</h2>
+          <h2 className="text-lg md:text-xl font-bold uppercase tracking-[0.22em] mb-16 text-stone-400">{t.ui.articles}</h2>
 
           {activeArticle === null ? (
             <div className="grid gap-8">
@@ -1761,17 +1761,17 @@ export default function Portfolio() {
 
         <section id="contact" className="py-48 px-6 bg-stone-900 text-stone-50 text-center selection:bg-stone-50 selection:text-stone-900">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-sm font-bold uppercase tracking-[0.3em] mb-12 text-stone-500">{t.ui.ready}</h2>
+            <h2 className="text-lg md:text-xl font-bold uppercase tracking-[0.22em] mb-12 text-stone-400">{t.ui.ready}</h2>
             <p className="text-4xl md:text-6xl font-light tracking-tight leading-tight mb-16">{t.ui.contactLead}</p>
             <div className="flex flex-col md:flex-row justify-center items-center gap-12 md:gap-24">
-              <a href="mailto:your.email@example.com" className="group">
+              <a href="mailto:itmadge@gmail.com" className="group">
                 <div className="flex items-center gap-4 text-2xl font-light hover:text-stone-400 transition-colors">
                   <Mail size={32} strokeWidth={1} />
-                  your.email@example.com
+                  itmadge@gmail.com
                 </div>
                 <div className="h-px bg-stone-700 mt-2 group-hover:scale-x-110 transition-transform origin-center" />
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="group">
+              <a href="https://www.linkedin.com/in/margarita-smy/" target="_blank" rel="noopener noreferrer" className="group">
                 <div className="flex items-center gap-4 text-2xl font-light hover:text-stone-400 transition-colors">
                   <Linkedin size={32} strokeWidth={1} />
                   LinkedIn
