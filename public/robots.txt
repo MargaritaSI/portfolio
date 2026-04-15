@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://margaritasi.github.io/portfolio/sitemap.xml

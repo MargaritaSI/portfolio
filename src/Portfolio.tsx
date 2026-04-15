@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { X, ArrowRight, Mail, Linkedin, ChevronDown, Plus, ArrowLeft, ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
-import adhdImage0 from '../adhd.png';
-import adhdImage1 from '../adhd1.png';
-import adhdImage2 from '../adhd2.png';
-import adhdImage3 from '../adhd3.png';
-import dogImage0 from '../dog.png';
-import dogImage1 from '../dog1.png';
-import dutchImage0 from '../dutch1.png';
-import dutchImage1 from '../dutch2.png';
-import dutchImage2 from '../dutch3.png';
-import massageImage0 from '../massage1.png';
-import massageImage1 from '../massage2.png';
-import massageImage2 from '../massage3.png';
+import adhdImage0 from '../adhd.jpg';
+import adhdImage1 from '../adhd1.jpg';
+import adhdImage2 from '../adhd2.jpg';
+import adhdImage3 from '../adhd3.jpg';
+import dogImage0 from '../dog.jpg';
+import dogImage1 from '../dog1.jpg';
+import dutchImage0 from '../dutch1.jpg';
+import dutchImage1 from '../dutch2.jpg';
+import dutchImage2 from '../dutch3.jpg';
+import massageImage0 from '../massage1.jpg';
+import massageImage1 from '../massage2.jpg';
+import massageImage2 from '../massage3.jpg';
 import dailyPracticesImage0 from '../Daily Practices1.jpg';
 import dailyPracticesImage1 from '../Daily Practices2.jpg';
 import dailyPracticesImage2 from '../Daily Practices3.jpg';
@@ -53,6 +53,7 @@ type LegalEntry = {
 };
 
 type Project = {
+  slug: string;
   title: string;
   category: string;
   description: string;
@@ -140,6 +141,66 @@ const projectImages = {
   achievemater: [achievematerImage0, achievematerImage1, achievematerImage2, achievematerImage3],
   stretching: [stretchingImage0, stretchingImage1],
   qa: [qaImage0, qaImage1, qaImage2]
+};
+
+const SITE_URL = 'https://margaritasi.github.io/portfolio';
+
+const SERVICE_SLUGS = [
+  'ui-ux-design',
+  'ai-solutions-automation',
+  'testing-analytics',
+  'strategic-marketing',
+  'project-management',
+  'enterprise-solutions'
+] as const;
+
+const ARTICLE_SLUGS = [
+  'natural-link-profile-2026',
+  'ux-trends-2026',
+  'seo-for-small-business'
+] as const;
+
+const SERVICE_RELATIONS = [
+  { projectSlugs: ['netherlands-harmony-guide', 'smart-massage'], articleSlug: 'ux-trends-2026' },
+  { projectSlugs: ['focus-meetings-platform', 'daily-practices'], articleSlug: 'ux-trends-2026' },
+  { projectSlugs: ['qa-testing-blog'], articleSlug: 'seo-for-small-business' },
+  { projectSlugs: ['walk-the-dog', 'netherlands-harmony-guide'], articleSlug: 'natural-link-profile-2026' },
+  { projectSlugs: ['achievemater', 'focus-meetings-platform'], articleSlug: 'ux-trends-2026' },
+  { projectSlugs: ['achievemater', 'focus-meetings-platform'], articleSlug: 'seo-for-small-business' }
+] as const;
+
+const ARTICLE_RELATIONS = [
+  { serviceSlug: 'strategic-marketing', projectSlugs: ['walk-the-dog'] },
+  { serviceSlug: 'ui-ux-design', projectSlugs: ['smart-massage', 'netherlands-harmony-guide'] },
+  { serviceSlug: 'testing-analytics', projectSlugs: ['qa-testing-blog'] }
+] as const;
+
+const ensureMetaTag = (selector: string, attributes: Record<string, string>) => {
+  if (typeof document === 'undefined') return;
+
+  let element = document.head.querySelector(selector) as HTMLMetaElement | null;
+  if (!element) {
+    element = document.createElement('meta');
+    document.head.appendChild(element);
+  }
+
+  Object.entries(attributes).forEach(([key, value]) => {
+    element!.setAttribute(key, value);
+  });
+};
+
+const ensureLinkTag = (selector: string, attributes: Record<string, string>) => {
+  if (typeof document === 'undefined') return;
+
+  let element = document.head.querySelector(selector) as HTMLLinkElement | null;
+  if (!element) {
+    element = document.createElement('link');
+    document.head.appendChild(element);
+  }
+
+  Object.entries(attributes).forEach(([key, value]) => {
+    element!.setAttribute(key, value);
+  });
 };
 
 const data: Record<string, LocaleData> = {
@@ -400,6 +461,7 @@ with intelligence`,
     ],
     projects: [
       {
+        slug: 'netherlands-harmony-guide',
         title: 'Netherlands Harmony Guide',
         category: 'UI/UX & Content',
         description: 'A visual guide website about the Netherlands with a calm editorial structure, clear navigation, and immersive location storytelling.',
@@ -407,6 +469,7 @@ with intelligence`,
         images: projectImages.dutch
       },
       {
+        slug: 'walk-the-dog',
         title: 'Walk the Dog',
         category: 'Pet Care & Local Service',
         description: 'A compact service website for dog walking with clear offer blocks, trust-focused messaging, and a friendly local brand feel.',
@@ -415,6 +478,7 @@ with intelligence`,
         url: 'https://wukkishim.wixsite.com/walkthedog'
       },
       {
+        slug: 'smart-massage',
         title: 'Smart Massage',
         category: 'Wellness & Booking',
         description: 'A massage studio website with gentle visual rhythm, service highlights, and a stronger path from discovery to appointment booking.',
@@ -423,6 +487,7 @@ with intelligence`,
         url: 'https://wukkishim.wixstudio.com/smartmassage'
       },
       {
+        slug: 'focus-meetings-platform',
         title: 'Focus Meetings Platform',
         category: 'UI/UX & Product',
         description: 'MVP design for organizing meetings with activities system for users who benefit from more focused and supportive planning flows.',
@@ -431,6 +496,7 @@ with intelligence`,
         url: 'https://adhd-harmony-guide.lovable.app'
       },
       {
+        slug: 'daily-practices',
         title: 'Daily Practices',
         category: 'Mental Health & Habit Support',
         description: 'A mental health product concept centered on gentle daily rituals, structured reflection, and supportive self-regulation flows.',
@@ -439,6 +505,7 @@ with intelligence`,
         url: 'https://body-mind-harmony-guide.lovable.app'
       },
       {
+        slug: 'achievemater',
         title: 'Achievemater',
         category: 'Community & Productivity',
         description: 'A collaborative group workspace where people can work side by side toward different goals with structure, accountability, and shared momentum.',
@@ -447,6 +514,7 @@ with intelligence`,
         url: 'https://wukkishim.wixstudio.com/achievemater'
       },
       {
+        slug: 'stretching-workout',
         title: 'Stretching & Workout',
         category: 'Fitness & Coaching',
         description: 'A training website for stretching and workout coaching with a clear service structure, approachable guidance, and a stronger conversion path.',
@@ -455,6 +523,7 @@ with intelligence`,
         url: 'https://wukkishim.wixstudio.com/ithealthyback'
       },
       {
+        slug: 'qa-testing-blog',
         title: 'QA Testing Blog',
         category: 'Content & Knowledge',
         description: 'A QA blog with curated testing materials, practical notes, and resources that feel genuinely useful for learning and day-to-day work.',
@@ -855,6 +924,7 @@ with intelligence`,
     ],
     projects: [
       {
+        slug: 'netherlands-harmony-guide',
         title: 'Гид по Нидерландам',
         category: 'UI/UX и контент',
         description: 'Визуальный сайт-гид о Нидерландах со спокойной редакционной структурой, понятной навигацией и атмосферной подачей локаций.',
@@ -862,6 +932,7 @@ with intelligence`,
         images: projectImages.dutch
       },
       {
+        slug: 'walk-the-dog',
         title: 'Walk the Dog',
         category: 'Pet Care и локальный сервис',
         description: 'Компактный сайт услуги по выгулу собак с понятными блоками предложения, сообщениями про доверие и дружелюбным локальным характером.',
@@ -870,6 +941,7 @@ with intelligence`,
         url: 'https://wukkishim.wixsite.com/walkthedog'
       },
       {
+        slug: 'smart-massage',
         title: 'Smart Massage',
         category: 'Wellness и запись',
         description: 'Сайт массажной студии с мягким визуальным ритмом, акцентом на услугах и более понятным переходом от знакомства к записи.',
@@ -878,6 +950,7 @@ with intelligence`,
         url: 'https://wukkishim.wixstudio.com/smartmassage'
       },
       {
+        slug: 'focus-meetings-platform',
         title: 'Focus Meetings Platform',
         category: 'UI/UX и продукт',
         description: 'MVP-дизайн платформы для организации встреч с системой активностей для пользователей, которым важны более сфокусированные и поддерживающие сценарии планирования.',
@@ -886,6 +959,7 @@ with intelligence`,
         url: 'https://adhd-harmony-guide.lovable.app'
       },
       {
+        slug: 'daily-practices',
         title: 'Daily Practices',
         category: 'Mental Health и привычки',
         description: 'Концепт ментал-хелс продукта, построенный вокруг мягких ежедневных практик, структурированной рефлексии и поддерживающих сценариев саморегуляции.',
@@ -894,6 +968,7 @@ with intelligence`,
         url: 'https://body-mind-harmony-guide.lovable.app'
       },
       {
+        slug: 'achievemater',
         title: 'Achievemater',
         category: 'Комьюнити и продуктивность',
         description: 'Совместное групповое пространство, где люди могут работать рядом над разными целями с опорой на структуру, accountability и общий ритм.',
@@ -902,6 +977,7 @@ with intelligence`,
         url: 'https://wukkishim.wixstudio.com/achievemater'
       },
       {
+        slug: 'stretching-workout',
         title: 'Stretching & Workout',
         category: 'Фитнес и коучинг',
         description: 'Сайт для тренировок по стретчингу и воркауту с понятной структурой услуг, дружелюбной подачей и более ясным путём к записи.',
@@ -910,6 +986,7 @@ with intelligence`,
         url: 'https://wukkishim.wixstudio.com/ithealthyback'
       },
       {
+        slug: 'qa-testing-blog',
         title: 'QA Testing Blog',
         category: 'Контент и знания',
         description: 'QA-блог с полезными и интересными материалами по тестированию, практическими заметками и подборками ресурсов для работы и обучения.',
@@ -1310,6 +1387,7 @@ met intelligentie`,
     ],
     projects: [
       {
+        slug: 'netherlands-harmony-guide',
         title: 'Nederland Gids',
         category: 'UI/UX & Content',
         description: 'Een visuele gidswebsite over Nederland met een rustige editorial structuur, heldere navigatie en sfeervolle presentatie van locaties.',
@@ -1317,6 +1395,7 @@ met intelligentie`,
         images: projectImages.dutch
       },
       {
+        slug: 'walk-the-dog',
         title: 'Walk the Dog',
         category: 'Pet Care & Lokale service',
         description: 'Een compacte website voor hondenuitlaatservice met heldere aanbodblokken, vertrouwenwekkende copy en een vriendelijke lokale uitstraling.',
@@ -1325,6 +1404,7 @@ met intelligentie`,
         url: 'https://wukkishim.wixsite.com/walkthedog'
       },
       {
+        slug: 'smart-massage',
         title: 'Smart Massage',
         category: 'Wellness & Boekingen',
         description: 'Een website voor een massagestudio met een zachte visuele cadans, sterke serviceblokken en een duidelijker pad naar een afspraak.',
@@ -1333,6 +1413,7 @@ met intelligentie`,
         url: 'https://wukkishim.wixstudio.com/smartmassage'
       },
       {
+        slug: 'focus-meetings-platform',
         title: 'Focus Meetings Platform',
         category: 'UI/UX & Product',
         description: 'MVP-ontwerp voor het organiseren van afspraken met een activiteitensysteem voor gebruikers die baat hebben bij meer focus en ondersteunende planningsflows.',
@@ -1341,6 +1422,7 @@ met intelligentie`,
         url: 'https://adhd-harmony-guide.lovable.app'
       },
       {
+        slug: 'daily-practices',
         title: 'Daily Practices',
         category: 'Mental Health & Gewoontevorming',
         description: 'Een mental-health productconcept rond zachte dagelijkse rituelen, gestructureerde reflectie en ondersteunende flows voor zelfregulatie.',
@@ -1349,6 +1431,7 @@ met intelligentie`,
         url: 'https://body-mind-harmony-guide.lovable.app'
       },
       {
+        slug: 'achievemater',
         title: 'Achievemater',
         category: 'Community & Productiviteit',
         description: 'Een gezamenlijke groepsruimte waar mensen naast elkaar aan verschillende doelen kunnen werken met structuur, accountability en gedeelde energie.',
@@ -1357,6 +1440,7 @@ met intelligentie`,
         url: 'https://wukkishim.wixstudio.com/achievemater'
       },
       {
+        slug: 'stretching-workout',
         title: 'Stretching & Workout',
         category: 'Fitness & Coaching',
         description: 'Een trainingswebsite voor stretching- en workoutcoaching met een heldere dienstenstructuur, toegankelijke begeleiding en een sterker pad naar aanmelding.',
@@ -1365,6 +1449,7 @@ met intelligentie`,
         url: 'https://wukkishim.wixstudio.com/ithealthyback'
       },
       {
+        slug: 'qa-testing-blog',
         title: 'QA Testing Blog',
         category: 'Content & Kennis',
         description: 'Een QA-blog met nuttige testmaterialen, praktische notities en bronnen die echt bruikbaar zijn voor leren en dagelijks werk.',
@@ -1513,8 +1598,20 @@ met intelligentie`,
 };
 
 export default function Portfolio() {
-  const [expandedService, setExpandedService] = useState<number | null>(null);
-  const [activeArticle, setActiveArticle] = useState<number | null>(null);
+  const [expandedService, setExpandedService] = useState<number | null>(() => {
+    if (typeof window === 'undefined') return null;
+
+    const slug = new URLSearchParams(window.location.search).get('service');
+    const index = slug ? SERVICE_SLUGS.indexOf(slug as (typeof SERVICE_SLUGS)[number]) : -1;
+    return index >= 0 ? index : null;
+  });
+  const [activeArticle, setActiveArticle] = useState<number | null>(() => {
+    if (typeof window === 'undefined') return null;
+
+    const slug = new URLSearchParams(window.location.search).get('article');
+    const index = slug ? ARTICLE_SLUGS.indexOf(slug as (typeof ARTICLE_SLUGS)[number]) : -1;
+    return index >= 0 ? index : null;
+  });
   const [showLegalModal, setShowLegalModal] = useState<'privacy' | 'cookies' | 'terms' | null>(null);
   const [language, setLanguage] = useState<'en' | 'ru' | 'nl'>('en');
   const [projectSlides, setProjectSlides] = useState<Record<number, number>>({});
@@ -1526,11 +1623,147 @@ export default function Portfolio() {
     if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - 80, behavior: 'smooth' });
   };
 
+  const scrollToId = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - 80, behavior: 'smooth' });
+  };
+
+  const pushRoute = (params: { article?: string | null; service?: string | null; hash?: string }) => {
+    const nextParams = new URLSearchParams(window.location.search);
+
+    if (params.article) {
+      nextParams.set('article', params.article);
+      nextParams.delete('service');
+    } else if (params.service) {
+      nextParams.set('service', params.service);
+      nextParams.delete('article');
+    } else {
+      nextParams.delete('article');
+      nextParams.delete('service');
+    }
+
+    const query = nextParams.toString();
+    const nextUrl = `${window.location.pathname}${query ? `?${query}` : ''}${params.hash ?? window.location.hash}`;
+    window.history.pushState({}, '', nextUrl);
+  };
+
   const setProjectSlide = (projectIndex: number, nextIndex: number) => {
     setProjectSlides((current) => ({ ...current, [projectIndex]: nextIndex }));
   };
 
   const t = data[language];
+  const defaultOgImage = `${SITE_URL}/og-cover.jpg`;
+
+  useEffect(() => {
+    const readRouteState = () => {
+      const params = new URLSearchParams(window.location.search);
+      const articleSlug = params.get('article');
+      const serviceSlug = params.get('service');
+      const articleIndex = articleSlug ? ARTICLE_SLUGS.indexOf(articleSlug as (typeof ARTICLE_SLUGS)[number]) : -1;
+      const serviceIndex = serviceSlug ? SERVICE_SLUGS.indexOf(serviceSlug as (typeof SERVICE_SLUGS)[number]) : -1;
+
+      setActiveArticle(articleIndex >= 0 ? articleIndex : null);
+      setExpandedService(serviceIndex >= 0 ? serviceIndex : null);
+    };
+
+    readRouteState();
+    window.addEventListener('popstate', readRouteState);
+
+    return () => window.removeEventListener('popstate', readRouteState);
+  }, []);
+
+  useEffect(() => {
+    const html = document.documentElement;
+    html.lang = language;
+  }, [language]);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const articleSlug = activeArticle !== null ? ARTICLE_SLUGS[activeArticle] : null;
+    const serviceSlug = activeArticle === null && expandedService !== null ? SERVICE_SLUGS[expandedService] : null;
+
+    if (articleSlug) {
+      params.set('article', articleSlug);
+      params.delete('service');
+    } else if (serviceSlug) {
+      params.set('service', serviceSlug);
+      params.delete('article');
+    } else {
+      params.delete('article');
+      params.delete('service');
+    }
+
+    const query = params.toString();
+    const nextUrl = `${window.location.pathname}${query ? `?${query}` : ''}${window.location.hash}`;
+    window.history.replaceState({}, '', nextUrl);
+  }, [activeArticle, expandedService]);
+
+  useEffect(() => {
+    const article = activeArticle !== null ? t.articles[activeArticle] : null;
+    const service = activeArticle === null && expandedService !== null ? t.services[expandedService] : null;
+    const query = article
+      ? `?article=${ARTICLE_SLUGS[activeArticle]}`
+      : service
+        ? `?service=${SERVICE_SLUGS[expandedService]}`
+        : '';
+
+    const canonicalUrl = `${SITE_URL}/${query}`;
+    const title = article
+      ? `${article.title} | Expert Article | It healthy coder`
+      : service
+        ? `${service[0]} | Service | It healthy coder`
+        : 'Digital Product Design, AI Automation & Strategy | It healthy coder';
+    const description = article
+      ? article.excerpt
+      : service
+        ? service[1]
+        : 'Portfolio of digital product work spanning UI/UX design, AI automation, testing, analytics, and strategic marketing for measurable business growth.';
+
+    document.title = title;
+
+    ensureMetaTag('meta[name="description"]', { name: 'description', content: description });
+    ensureLinkTag('link[rel="canonical"]', { rel: 'canonical', href: canonicalUrl });
+    ensureMetaTag('meta[property="og:title"]', { property: 'og:title', content: title });
+    ensureMetaTag('meta[property="og:description"]', { property: 'og:description', content: description });
+    ensureMetaTag('meta[property="og:type"]', { property: 'og:type', content: article ? 'article' : 'website' });
+    ensureMetaTag('meta[property="og:url"]', { property: 'og:url', content: canonicalUrl });
+    ensureMetaTag('meta[property="og:image"]', { property: 'og:image', content: defaultOgImage });
+    ensureMetaTag('meta[name="twitter:card"]', { name: 'twitter:card', content: 'summary_large_image' });
+    ensureMetaTag('meta[name="twitter:title"]', { name: 'twitter:title', content: title });
+    ensureMetaTag('meta[name="twitter:description"]', { name: 'twitter:description', content: description });
+    ensureMetaTag('meta[name="twitter:image"]', { name: 'twitter:image', content: defaultOgImage });
+  }, [activeArticle, expandedService, language]);
+
+  const openArticle = (index: number) => {
+    pushRoute({ article: ARTICLE_SLUGS[index], hash: '#articles' });
+    setExpandedService(null);
+    setActiveArticle(index);
+    requestAnimationFrame(() => scrollToId('articles'));
+  };
+
+  const closeArticle = () => {
+    pushRoute({ hash: '#articles' });
+    setActiveArticle(null);
+    requestAnimationFrame(() => scrollToId('articles'));
+  };
+
+  const openService = (index: number) => {
+    const nextExpanded = expandedService === index ? null : index;
+    pushRoute({ service: nextExpanded !== null ? SERVICE_SLUGS[nextExpanded] : null, hash: '#services' });
+    setActiveArticle(null);
+    setExpandedService(nextExpanded);
+    requestAnimationFrame(() => scrollToId('services'));
+  };
+
+  const jumpToService = (index: number) => {
+    pushRoute({ service: SERVICE_SLUGS[index], hash: '#services' });
+    setActiveArticle(null);
+    setExpandedService(index);
+    requestAnimationFrame(() => scrollToId('services'));
+  };
+
+  const getProjectImageAlt = (project: Project, imageIndex: number) =>
+    `${project.title} screenshot ${imageIndex + 1}, showing ${project.summary.toLowerCase()}.`;
 
   return (
     <div className="min-h-screen bg-stone-50 text-stone-900 font-sans selection:bg-stone-900 selection:text-stone-50">
@@ -1602,7 +1835,7 @@ export default function Portfolio() {
           <div className="grid border-t border-stone-200">
             {t.services.map((service, index) => (
               <div key={index} className="border-b border-stone-200 group">
-                <button onClick={() => setExpandedService(expandedService === index ? null : index)} className="w-full py-12 flex flex-col md:flex-row justify-between items-start md:items-center text-left hover:px-4 transition-all duration-500">
+                <button onClick={() => openService(index)} className="w-full py-12 flex flex-col md:flex-row justify-between items-start md:items-center text-left hover:px-4 transition-all duration-500">
                   <div className="max-w-md mb-4 md:mb-0">
                     <h3 className="text-3xl font-light mb-2">{service[0]}</h3>
                     <p className="text-stone-500 font-light leading-relaxed">{service[1]}</p>
@@ -1611,7 +1844,7 @@ export default function Portfolio() {
                     <ChevronDown size={32} strokeWidth={1} />
                   </div>
                 </button>
-                <div className={`overflow-hidden transition-all duration-700 ease-in-out ${expandedService === index ? 'max-h-[520px] pb-12 px-4' : 'max-h-0'}`}>
+                <div className={`overflow-hidden transition-all duration-700 ease-in-out ${expandedService === index ? 'max-h-[760px] pb-12 px-4' : 'max-h-0'}`}>
                   <div className="grid md:grid-cols-2 gap-6">
                     {service[2].map((detail, detailIndex) => (
                       <div key={detailIndex} className="flex items-center gap-4 text-stone-600 font-light italic">
@@ -1619,6 +1852,46 @@ export default function Portfolio() {
                         {detail}
                       </div>
                     ))}
+                  </div>
+                  <div className="mt-8 grid md:grid-cols-2 gap-6 border-t border-stone-200 pt-8">
+                    <div className="space-y-3">
+                      <div className="text-xs font-bold uppercase tracking-[0.25em] text-stone-400">Related Projects</div>
+                      {SERVICE_RELATIONS[index].projectSlugs.map((projectSlug) => {
+                        const project = t.projects.find((item) => item.slug === projectSlug);
+                        if (!project) return null;
+
+                        return (
+                          <a
+                            key={project.slug}
+                            href={`#project-${project.slug}`}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              scrollToId(`project-${project.slug}`);
+                            }}
+                            className="block text-stone-700 hover:text-stone-900 transition-colors"
+                          >
+                            {project.title}
+                          </a>
+                        );
+                      })}
+                    </div>
+                    <div className="space-y-3">
+                      <div className="text-xs font-bold uppercase tracking-[0.25em] text-stone-400">Related Article</div>
+                      <a
+                        href={`?article=${SERVICE_RELATIONS[index].articleSlug}#articles`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          openArticle(ARTICLE_SLUGS.indexOf(SERVICE_RELATIONS[index].articleSlug));
+                        }}
+                        className="block text-stone-700 hover:text-stone-900 transition-colors"
+                      >
+                        {t.articles[ARTICLE_SLUGS.indexOf(SERVICE_RELATIONS[index].articleSlug)].title}
+                      </a>
+                      <a href="#contact" onClick={(e) => scroll(e, 'contact')} className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-stone-500 hover:text-stone-900 transition-colors">
+                        Discuss this service
+                        <ArrowRight size={16} />
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1631,7 +1904,7 @@ export default function Portfolio() {
             <h2 className="text-lg md:text-xl font-bold uppercase tracking-[0.22em] mb-16 text-stone-400">{t.ui.projects}</h2>
             <div className="grid md:grid-cols-2 gap-12">
               {t.projects.map((project, index) => (
-                <div key={index} className="group">
+                <div key={index} id={`project-${project.slug}`} className="group scroll-mt-28">
                   <div className="aspect-[16/10] bg-stone-800 mb-8 overflow-hidden relative shadow-2xl">
                     <button
                       type="button"
@@ -1641,7 +1914,7 @@ export default function Portfolio() {
                     >
                       <img
                         src={project.images[projectSlides[index] ?? 0]}
-                        alt={project.title}
+                        alt={getProjectImageAlt(project, projectSlides[index] ?? 0)}
                         className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                       />
                     </button>
@@ -1717,7 +1990,15 @@ export default function Portfolio() {
           {activeArticle === null ? (
             <div className="grid gap-8">
               {t.articles.map((article, index) => (
-                <button key={index} className="border border-stone-200 px-6 py-8 md:px-12 md:py-12 hover:bg-stone-100 transition-colors group cursor-pointer text-left" onClick={() => setActiveArticle(index)}>
+                <a
+                  key={index}
+                  href={`?article=${ARTICLE_SLUGS[index]}#articles`}
+                  className="border border-stone-200 px-6 py-8 md:px-12 md:py-12 hover:bg-stone-100 transition-colors group cursor-pointer text-left block"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    openArticle(index);
+                  }}
+                >
                   <div className="flex flex-col gap-6 md:gap-7">
                     <div className="flex flex-wrap items-center gap-x-4 gap-y-3">
                       <span className="text-xs font-bold uppercase tracking-widest bg-stone-900 text-stone-50 px-3 py-1">{article.category}</span>
@@ -1730,17 +2011,17 @@ export default function Portfolio() {
                       <Plus size={16} className="transition-transform duration-500 group-hover:rotate-90" />
                     </div>
                   </div>
-                </button>
+                </a>
               ))}
             </div>
           ) : (
             <article className="border border-stone-200 bg-white px-6 py-8 md:px-12 md:py-12 shadow-sm">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-10">
-                <button onClick={() => setActiveArticle(null)} className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-stone-500 hover:text-stone-900 transition-colors">
+                <button onClick={closeArticle} className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-stone-500 hover:text-stone-900 transition-colors">
                   <ArrowLeft size={16} />
                   {t.ui.back}
                 </button>
-                <button onClick={() => setActiveArticle(null)} className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-stone-500 hover:text-stone-900 transition-colors">
+                <button onClick={closeArticle} className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-stone-500 hover:text-stone-900 transition-colors">
                   {t.ui.close}
                   <X size={18} />
                 </button>
@@ -1755,6 +2036,50 @@ export default function Portfolio() {
               <p className="text-xl text-stone-500 font-light leading-relaxed max-w-3xl mb-12">{t.articles[activeArticle].excerpt}</p>
               <div className="w-12 h-px bg-stone-900 mb-10" />
               {renderRichContent(t.articles[activeArticle].content)}
+              <div className="mt-12 pt-8 border-t border-stone-200 grid md:grid-cols-2 gap-8">
+                <div className="space-y-3">
+                  <div className="text-xs font-bold uppercase tracking-[0.25em] text-stone-400">Related Service</div>
+                  <a
+                    href={`?service=${ARTICLE_RELATIONS[activeArticle].serviceSlug}#services`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      jumpToService(SERVICE_SLUGS.indexOf(ARTICLE_RELATIONS[activeArticle].serviceSlug));
+                    }}
+                    className="block text-stone-900 hover:text-stone-600 transition-colors"
+                  >
+                    {t.services[SERVICE_SLUGS.indexOf(ARTICLE_RELATIONS[activeArticle].serviceSlug)][0]}
+                  </a>
+                  {ARTICLE_RELATIONS[activeArticle].projectSlugs.map((projectSlug) => {
+                    const project = t.projects.find((item) => item.slug === projectSlug);
+                    if (!project) return null;
+
+                    return (
+                      <a
+                        key={project.slug}
+                        href={`#project-${project.slug}`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setActiveArticle(null);
+                          requestAnimationFrame(() => scrollToId(`project-${project.slug}`));
+                        }}
+                        className="block text-stone-600 hover:text-stone-900 transition-colors"
+                      >
+                        {project.title}
+                      </a>
+                    );
+                  })}
+                </div>
+                <div className="space-y-3">
+                  <div className="text-xs font-bold uppercase tracking-[0.25em] text-stone-400">Next Step</div>
+                  <p className="text-stone-600 font-light leading-relaxed">
+                    If this topic matches your project, use the related service above or jump straight into a contact conversation.
+                  </p>
+                  <a href="#contact" onClick={(e) => scroll(e, 'contact')} className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-stone-500 hover:text-stone-900 transition-colors">
+                    Start a project conversation
+                    <ArrowRight size={16} />
+                  </a>
+                </div>
+              </div>
             </article>
           )}
         </section>
