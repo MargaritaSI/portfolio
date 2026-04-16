@@ -1,5 +1,9 @@
 :root {
   color-scheme: light;
+  --midnight-ink: #081a3a;
+  --midnight-ink-strong: #06142f;
+  --midnight-ink-soft: rgba(8, 26, 58, 0.6);
+  --midnight-overlay: rgba(6, 20, 47, 0.9);
 }
 
 html {
@@ -14,4 +18,32 @@ body {
 
 * {
   box-sizing: border-box;
+}
+
+.midnight-ink {
+  color: var(--midnight-ink);
+}
+
+.midnight-ink-hover:hover {
+  color: var(--midnight-ink);
+}
+
+.midnight-bg {
+  background-color: var(--midnight-ink);
+}
+
+.midnight-bg-strong {
+  background-color: var(--midnight-ink-strong);
+}
+
+.midnight-border {
+  border-color: var(--midnight-ink);
+}
+
+.midnight-line {
+  background-color: var(--midnight-ink);
+}
+
+.midnight-overlay {
+  background-color: var(--midnight-overlay);
 }

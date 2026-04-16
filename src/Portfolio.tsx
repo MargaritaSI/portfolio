@@ -105,7 +105,7 @@ const renderRichContent = (content: RichContent) => (
 
     {content.sections.map((section, index) => (
       <section key={`${section.title}-${index}`} className="space-y-4">
-        <h4 className="text-xl md:text-2xl font-medium tracking-tight text-stone-900">{section.title}</h4>
+        <h4 className="text-xl md:text-2xl font-medium tracking-tight text-[#081a3a]">{section.title}</h4>
         {section.paragraphs?.map((paragraph, paragraphIndex) => (
           <p key={`paragraph-${paragraphIndex}`} className="text-base md:text-lg leading-8 font-light">
             {paragraph}
@@ -1766,29 +1766,29 @@ export default function Portfolio() {
     `${project.title} screenshot ${imageIndex + 1}, showing ${project.summary.toLowerCase()}.`;
 
   return (
-    <div className="min-h-screen bg-stone-50 text-stone-900 font-sans selection:bg-stone-900 selection:text-stone-50">
+    <div className="min-h-screen bg-stone-50 text-[#081a3a] font-sans selection:bg-[#081a3a] selection:text-stone-50">
       {showLegalModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-900/40 backdrop-blur-sm" onClick={() => setShowLegalModal(null)}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[rgba(6,20,47,0.4)] backdrop-blur-sm" onClick={() => setShowLegalModal(null)}>
           <div className="bg-stone-50 w-full max-w-3xl max-h-[88vh] overflow-y-auto p-6 md:p-12 relative shadow-2xl" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between gap-4 mb-8">
-              <button onClick={() => setShowLegalModal(null)} className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-stone-500 hover:text-stone-900 transition-colors">
+              <button onClick={() => setShowLegalModal(null)} className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-stone-500 hover:text-[#081a3a] transition-colors">
                 <ArrowLeft size={16} />
                 {t.ui.back}
               </button>
-              <button onClick={() => setShowLegalModal(null)} className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-stone-500 hover:text-stone-900 transition-colors">
+              <button onClick={() => setShowLegalModal(null)} className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-stone-500 hover:text-[#081a3a] transition-colors">
                 {t.ui.close}
                 <X size={18} />
               </button>
             </div>
             <h2 className="text-3xl md:text-4xl font-light mb-6 tracking-tight">{t.legal[showLegalModal].title}</h2>
-            <div className="w-12 h-px bg-stone-900 mb-10" />
+            <div className="w-12 h-px bg-[#081a3a] mb-10" />
             {renderRichContent(t.legal[showLegalModal].content)}
           </div>
         </div>
       )}
 
       {lightboxImage && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-stone-950/90 p-4" onClick={() => setLightboxImage(null)}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(6,20,47,0.9)] p-4" onClick={() => setLightboxImage(null)}>
           <button onClick={() => setLightboxImage(null)} className="absolute top-6 right-6 inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-stone-300 hover:text-white transition-colors">
             {t.ui.close}
             <X size={18} />
@@ -1810,9 +1810,9 @@ export default function Portfolio() {
             ))}
           </div>
           <div className="flex bg-stone-100 p-1 rounded-full">
-            <button onClick={() => setLanguage('en')} className={`px-3 py-1 rounded-full text-sm transition-all ${language === 'en' ? 'bg-stone-900 text-white shadow-lg' : 'hover:text-stone-500'}`}>EN</button>
-            <button onClick={() => setLanguage('ru')} className={`px-3 py-1 rounded-full text-sm transition-all ${language === 'ru' ? 'bg-stone-900 text-white shadow-lg' : 'hover:text-stone-500'}`}>RU</button>
-            <button onClick={() => setLanguage('nl')} className={`px-3 py-1 rounded-full text-sm transition-all ${language === 'nl' ? 'bg-stone-900 text-white shadow-lg' : 'hover:text-stone-500'}`}>NL</button>
+            <button onClick={() => setLanguage('en')} className={`px-3 py-1 rounded-full text-sm transition-all ${language === 'en' ? 'bg-[#081a3a] text-white shadow-lg' : 'hover:text-stone-500'}`}>EN</button>
+            <button onClick={() => setLanguage('ru')} className={`px-3 py-1 rounded-full text-sm transition-all ${language === 'ru' ? 'bg-[#081a3a] text-white shadow-lg' : 'hover:text-stone-500'}`}>RU</button>
+            <button onClick={() => setLanguage('nl')} className={`px-3 py-1 rounded-full text-sm transition-all ${language === 'nl' ? 'bg-[#081a3a] text-white shadow-lg' : 'hover:text-stone-500'}`}>NL</button>
           </div>
         </nav>
       </header>
@@ -1823,7 +1823,7 @@ export default function Portfolio() {
           <div className="grid md:grid-cols-2 gap-12 items-end">
             <p className="text-xl md:text-2xl text-stone-500 font-light leading-relaxed max-w-lg">{t.hero[1]}</p>
             <div className="flex justify-start md:justify-end">
-              <a href="#contact" onClick={(e) => scroll(e, 'contact')} className="inline-flex items-center gap-2 bg-stone-900 text-stone-50 px-12 py-5 text-lg hover:bg-stone-50 hover:text-stone-900 border-2 border-stone-900 transition-all duration-300 group shadow-xl">
+              <a href="#contact" onClick={(e) => scroll(e, 'contact')} className="inline-flex items-center gap-2 bg-[#081a3a] text-stone-50 px-12 py-5 text-lg hover:bg-stone-50 hover:text-[#081a3a] border-2 border-[#081a3a] transition-all duration-300 group shadow-xl">
                 {t.hero[2]} <ArrowRight className="group-hover:translate-x-1 transition-transform" />
               </a>
             </div>
@@ -1868,7 +1868,7 @@ export default function Portfolio() {
                               e.preventDefault();
                               scrollToId(`project-${project.slug}`);
                             }}
-                            className="block text-stone-700 hover:text-stone-900 transition-colors"
+                            className="block text-stone-700 hover:text-[#081a3a] transition-colors"
                           >
                             {project.title}
                           </a>
@@ -1883,11 +1883,11 @@ export default function Portfolio() {
                           e.preventDefault();
                           openArticle(ARTICLE_SLUGS.indexOf(SERVICE_RELATIONS[index].articleSlug));
                         }}
-                        className="block text-stone-700 hover:text-stone-900 transition-colors"
+                        className="block text-stone-700 hover:text-[#081a3a] transition-colors"
                       >
                         {t.articles[ARTICLE_SLUGS.indexOf(SERVICE_RELATIONS[index].articleSlug)].title}
                       </a>
-                      <a href="#contact" onClick={(e) => scroll(e, 'contact')} className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-stone-500 hover:text-stone-900 transition-colors">
+                      <a href="#contact" onClick={(e) => scroll(e, 'contact')} className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-stone-500 hover:text-[#081a3a] transition-colors">
                         Discuss this service
                         <ArrowRight size={16} />
                       </a>
@@ -1899,7 +1899,7 @@ export default function Portfolio() {
           </div>
         </section>
 
-        <section id="projects" className="py-32 px-6 bg-stone-900 text-stone-50 selection:bg-stone-50 selection:text-stone-900">
+        <section id="projects" className="py-32 px-6 bg-[#081a3a] text-stone-50 selection:bg-stone-50 selection:text-[#081a3a]">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-lg md:text-xl font-bold uppercase tracking-[0.22em] mb-16 text-stone-400">{t.ui.projects}</h2>
             <div className="grid md:grid-cols-2 gap-12">
@@ -1922,7 +1922,7 @@ export default function Portfolio() {
                       <>
                         <button
                           type="button"
-                          className="absolute left-4 top-1/2 -translate-y-1/2 h-11 w-11 rounded-full border border-white/25 bg-stone-900/60 text-white backdrop-blur hover:bg-stone-50 hover:text-stone-900 transition-colors"
+                          className="absolute left-4 top-1/2 -translate-y-1/2 h-11 w-11 rounded-full border border-white/25 bg-[rgba(8,26,58,0.6)] text-white backdrop-blur hover:bg-stone-50 hover:text-[#081a3a] transition-colors"
                           onClick={() => setProjectSlide(index, ((projectSlides[index] ?? 0) - 1 + project.images.length) % project.images.length)}
                           aria-label="Previous image"
                         >
@@ -1930,7 +1930,7 @@ export default function Portfolio() {
                         </button>
                         <button
                           type="button"
-                          className="absolute right-4 top-1/2 -translate-y-1/2 h-11 w-11 rounded-full border border-white/25 bg-stone-900/60 text-white backdrop-blur hover:bg-stone-50 hover:text-stone-900 transition-colors"
+                          className="absolute right-4 top-1/2 -translate-y-1/2 h-11 w-11 rounded-full border border-white/25 bg-[rgba(8,26,58,0.6)] text-white backdrop-blur hover:bg-stone-50 hover:text-[#081a3a] transition-colors"
                           onClick={() => setProjectSlide(index, ((projectSlides[index] ?? 0) + 1) % project.images.length)}
                           aria-label="Next image"
                         >
@@ -2001,7 +2001,7 @@ export default function Portfolio() {
                 >
                   <div className="flex flex-col gap-6 md:gap-7">
                     <div className="flex flex-wrap items-center gap-x-4 gap-y-3">
-                      <span className="text-xs font-bold uppercase tracking-widest bg-stone-900 text-stone-50 px-3 py-1">{article.category}</span>
+                      <span className="text-xs font-bold uppercase tracking-widest bg-[#081a3a] text-stone-50 px-3 py-1">{article.category}</span>
                       <span className="text-sm text-stone-400 font-medium tracking-wider">{article.date} — {article.readTime}</span>
                     </div>
                     <h3 className="text-3xl md:text-4xl font-light leading-tight group-hover:translate-x-2 transition-transform duration-500">{article.title}</h3>
@@ -2017,24 +2017,24 @@ export default function Portfolio() {
           ) : (
             <article className="border border-stone-200 bg-white px-6 py-8 md:px-12 md:py-12 shadow-sm">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-10">
-                <button onClick={closeArticle} className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-stone-500 hover:text-stone-900 transition-colors">
+                <button onClick={closeArticle} className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-stone-500 hover:text-[#081a3a] transition-colors">
                   <ArrowLeft size={16} />
                   {t.ui.back}
                 </button>
-                <button onClick={closeArticle} className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-stone-500 hover:text-stone-900 transition-colors">
+                <button onClick={closeArticle} className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-stone-500 hover:text-[#081a3a] transition-colors">
                   {t.ui.close}
                   <X size={18} />
                 </button>
               </div>
 
               <div className="flex flex-wrap items-center gap-x-4 gap-y-3 mb-6">
-                <span className="text-xs font-bold uppercase tracking-widest bg-stone-900 text-stone-50 px-3 py-1">{t.articles[activeArticle].category}</span>
+                <span className="text-xs font-bold uppercase tracking-widest bg-[#081a3a] text-stone-50 px-3 py-1">{t.articles[activeArticle].category}</span>
                 <span className="text-sm text-stone-400 font-medium tracking-wider">{t.articles[activeArticle].date} — {t.articles[activeArticle].readTime}</span>
               </div>
 
               <h3 className="text-4xl md:text-5xl font-light leading-tight tracking-tight mb-6">{t.articles[activeArticle].title}</h3>
               <p className="text-xl text-stone-500 font-light leading-relaxed max-w-3xl mb-12">{t.articles[activeArticle].excerpt}</p>
-              <div className="w-12 h-px bg-stone-900 mb-10" />
+              <div className="w-12 h-px bg-[#081a3a] mb-10" />
               {renderRichContent(t.articles[activeArticle].content)}
               <div className="mt-12 pt-8 border-t border-stone-200 grid md:grid-cols-2 gap-8">
                 <div className="space-y-3">
@@ -2045,7 +2045,7 @@ export default function Portfolio() {
                       e.preventDefault();
                       jumpToService(SERVICE_SLUGS.indexOf(ARTICLE_RELATIONS[activeArticle].serviceSlug));
                     }}
-                    className="block text-stone-900 hover:text-stone-600 transition-colors"
+                    className="block text-[#081a3a] hover:text-stone-600 transition-colors"
                   >
                     {t.services[SERVICE_SLUGS.indexOf(ARTICLE_RELATIONS[activeArticle].serviceSlug)][0]}
                   </a>
@@ -2062,7 +2062,7 @@ export default function Portfolio() {
                           setActiveArticle(null);
                           requestAnimationFrame(() => scrollToId(`project-${project.slug}`));
                         }}
-                        className="block text-stone-600 hover:text-stone-900 transition-colors"
+                        className="block text-stone-600 hover:text-[#081a3a] transition-colors"
                       >
                         {project.title}
                       </a>
@@ -2074,7 +2074,7 @@ export default function Portfolio() {
                   <p className="text-stone-600 font-light leading-relaxed">
                     If this topic matches your project, use the related service above or jump straight into a contact conversation.
                   </p>
-                  <a href="#contact" onClick={(e) => scroll(e, 'contact')} className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-stone-500 hover:text-stone-900 transition-colors">
+                  <a href="#contact" onClick={(e) => scroll(e, 'contact')} className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-stone-500 hover:text-[#081a3a] transition-colors">
                     Start a project conversation
                     <ArrowRight size={16} />
                   </a>
@@ -2084,7 +2084,7 @@ export default function Portfolio() {
           )}
         </section>
 
-        <section id="contact" className="py-48 px-6 bg-stone-900 text-stone-50 text-center selection:bg-stone-50 selection:text-stone-900">
+        <section id="contact" className="py-48 px-6 bg-[#081a3a] text-stone-50 text-center selection:bg-stone-50 selection:text-[#081a3a]">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-lg md:text-xl font-bold uppercase tracking-[0.22em] mb-12 text-stone-400">{t.ui.ready}</h2>
             <p className="text-4xl md:text-6xl font-light tracking-tight leading-tight mb-16">{t.ui.contactLead}</p>
@@ -2108,7 +2108,7 @@ export default function Portfolio() {
         </section>
       </main>
 
-      <footer className="py-24 px-6 border-t border-stone-200 bg-stone-900 text-stone-500">
+      <footer className="py-24 px-6 border-t border-stone-200 bg-[#081a3a] text-stone-500">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
           <div className="text-sm font-medium tracking-widest">{t.ui.footerCopy}</div>
           <div className="flex flex-wrap justify-center gap-8 md:gap-12 text-sm font-medium tracking-widest uppercase">
