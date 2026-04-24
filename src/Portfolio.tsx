@@ -62,6 +62,41 @@ type Project = {
   url?: string;
 };
 
+type ProjectCase = {
+  goal: string;
+  role: string;
+  did: string;
+  outcome: string;
+};
+
+type PrimaryServiceGroup = {
+  slug: string;
+  title: string;
+  positioning: string;
+  subserviceIndices: number[];
+  supporting: string[];
+  relatedProjects: string[];
+  relatedArticle: (typeof ARTICLE_SLUGS)[number];
+  pagePath: string;
+};
+
+type VisualizationBlock = {
+  title: string;
+  intro: string;
+  labels: {
+    before: string;
+    after: string;
+    placeholder: string;
+    input: string;
+    process: string;
+    output: string;
+    value: string;
+  };
+  before: string;
+  after: string;
+  details: [string, string][];
+};
+
 type LocaleData = {
   nav: string[];
   hero: [string, string, string];
@@ -96,7 +131,7 @@ type LocaleData = {
 };
 
 const renderRichContent = (content: RichContent) => (
-  <div className="space-y-10 text-stone-700">
+  <div className="space-y-10 text-[#40506f]">
     {content.intro?.map((paragraph, index) => (
       <p key={`intro-${index}`} className="text-lg leading-8 font-light">
         {paragraph}
@@ -115,7 +150,7 @@ const renderRichContent = (content: RichContent) => (
           <ul className="space-y-3 pl-0">
             {section.bullets.map((bullet, bulletIndex) => (
               <li key={`bullet-${bulletIndex}`} className="flex items-start gap-3 text-base md:text-lg leading-8 font-light">
-                <span className="mt-3 h-1.5 w-1.5 flex-none rounded-full bg-stone-400" />
+                <span className="mt-3 h-1.5 w-1.5 flex-none rounded-full bg-[#7c8ba8]" />
                 <span>{bullet}</span>
               </li>
             ))}
@@ -125,7 +160,7 @@ const renderRichContent = (content: RichContent) => (
     ))}
 
     {content.outro?.map((paragraph, index) => (
-      <p key={`outro-${index}`} className="text-lg leading-8 font-light italic text-stone-600">
+      <p key={`outro-${index}`} className="text-lg leading-8 font-light italic text-[#556480]">
         {paragraph}
       </p>
     ))}
@@ -146,12 +181,9 @@ const projectImages = {
 const SITE_URL = 'https://margaritasi.github.io/portfolio';
 
 const SERVICE_SLUGS = [
-  'ui-ux-design',
-  'ai-solutions-automation',
-  'testing-analytics',
-  'strategic-marketing',
-  'project-management',
-  'enterprise-solutions'
+  'ux-website-design',
+  'digital-product-automation',
+  'content-seo-optimization'
 ] as const;
 
 const ARTICLE_SLUGS = [
@@ -160,20 +192,482 @@ const ARTICLE_SLUGS = [
   'seo-for-small-business'
 ] as const;
 
-const SERVICE_RELATIONS = [
-  { projectSlugs: ['netherlands-harmony-guide', 'smart-massage'], articleSlug: 'ux-trends-2026' },
-  { projectSlugs: ['focus-meetings-platform', 'daily-practices'], articleSlug: 'ux-trends-2026' },
-  { projectSlugs: ['qa-testing-blog'], articleSlug: 'seo-for-small-business' },
-  { projectSlugs: ['walk-the-dog', 'netherlands-harmony-guide'], articleSlug: 'natural-link-profile-2026' },
-  { projectSlugs: ['achievemater', 'focus-meetings-platform'], articleSlug: 'ux-trends-2026' },
-  { projectSlugs: ['achievemater', 'focus-meetings-platform'], articleSlug: 'seo-for-small-business' }
+const ARTICLE_RELATIONS = [
+  { serviceSlug: 'content-seo-optimization', projectSlugs: ['seo-optimization-proposal', 'qa-testing-blog'] },
+  { serviceSlug: 'ux-website-design', projectSlugs: ['netherlands-harmony-guide', 'walk-the-dog'] },
+  { serviceSlug: 'content-seo-optimization', projectSlugs: ['seo-optimization-proposal', 'qa-testing-blog'] }
 ] as const;
 
-const ARTICLE_RELATIONS = [
-  { serviceSlug: 'strategic-marketing', projectSlugs: ['walk-the-dog'] },
-  { serviceSlug: 'ui-ux-design', projectSlugs: ['smart-massage', 'netherlands-harmony-guide'] },
-  { serviceSlug: 'testing-analytics', projectSlugs: ['qa-testing-blog'] }
-] as const;
+const SECTION_TEXT = {
+  en: {
+    primaryDirections: 'Primary Directions',
+    supportingCapabilities: 'Supporting capabilities',
+    servicePage: 'Open service page',
+    whatIHelpWith: 'What I help with',
+    relatedProjects: 'Related Projects',
+    relatedArticle: 'Related Article',
+    relatedService: 'Related Service',
+    discussDirection: 'Discuss this direction',
+    nextStep: 'Next Step',
+    articleCta: 'If this topic matches your project, use the related service above or jump straight into a contact conversation.',
+    articleStart: 'Start a project conversation',
+    goal: 'Goal',
+    role: 'My role',
+    did: 'What I did',
+    outcome: 'Outcome',
+    visualWork: '3D & Spatial Visuals',
+    projectPlaceholder: 'Structured case prepared for later visuals'
+  },
+  ru: {
+    primaryDirections: 'Основные направления',
+    supportingCapabilities: 'Поддерживающие компетенции',
+    servicePage: 'Открыть service page',
+    whatIHelpWith: 'Чем я могу помочь',
+    relatedProjects: 'Связанные проекты',
+    relatedArticle: 'Связанная статья',
+    relatedService: 'Связанная услуга',
+    discussDirection: 'Обсудить это направление',
+    nextStep: 'Следующий шаг',
+    articleCta: 'Если эта тема близка вашему проекту, перейдите к связанной услуге выше или сразу напишите мне.',
+    articleStart: 'Начать обсуждение проекта',
+    goal: 'Цель',
+    role: 'Моя роль',
+    did: 'Что я сделала',
+    outcome: 'Результат',
+    visualWork: '3D и визуализация пространства',
+    projectPlaceholder: 'Кейс подготовлен для будущих визуалов'
+  },
+  nl: {
+    primaryDirections: 'Primaire richtingen',
+    supportingCapabilities: 'Ondersteunende capabilities',
+    servicePage: 'Servicepagina openen',
+    whatIHelpWith: 'Waar ik mee help',
+    relatedProjects: 'Gerelateerde projecten',
+    relatedArticle: 'Gerelateerd artikel',
+    relatedService: 'Gerelateerde service',
+    discussDirection: 'Deze richting bespreken',
+    nextStep: 'Volgende stap',
+    articleCta: 'Als dit onderwerp bij je project past, gebruik dan de gerelateerde service hierboven of neem direct contact op.',
+    articleStart: 'Start een projectgesprek',
+    goal: 'Doel',
+    role: 'Mijn rol',
+    did: 'Wat ik deed',
+    outcome: 'Uitkomst',
+    visualWork: '3D & ruimtelijke visuals',
+    projectPlaceholder: 'Case voorbereid voor latere visuals'
+  }
+} as const;
+
+const PRIMARY_SERVICE_GROUPS: Record<'en' | 'ru' | 'nl', PrimaryServiceGroup[]> = {
+  en: [
+    {
+      slug: 'ux-website-design',
+      title: 'UX & Website Design',
+      positioning: 'Websites, landing pages, and interface systems shaped for clarity, credibility, and easier decision-making.',
+      subserviceIndices: [0],
+      supporting: ['Audience and competitor research', 'Information architecture', 'Wireframes and MVP structure', 'Design systems and scanning clarity'],
+      relatedProjects: ['netherlands-harmony-guide', 'walk-the-dog', 'stretching-workout'],
+      relatedArticle: 'ux-trends-2026',
+      pagePath: './services/ux-website-design.html'
+    },
+    {
+      slug: 'digital-product-automation',
+      title: 'Digital Product & Automation',
+      positioning: 'Structured product flows, conversational systems, and lightweight automation for services that need less friction and clearer support.',
+      subserviceIndices: [1, 4, 5],
+      supporting: ['Product thinking and flow mapping', 'Workflow support and structured logic', 'Research-led discovery', 'Complex workflow and digital solution support'],
+      relatedProjects: ['restaurant-support-automation', 'smart-massage', 'focus-meetings-platform', 'daily-practices', 'achievemater'],
+      relatedArticle: 'ux-trends-2026',
+      pagePath: './services/digital-product-automation.html'
+    },
+    {
+      slug: 'content-seo-optimization',
+      title: 'Content, SEO & Optimization',
+      positioning: 'Content structure, QA thinking, SEO observations, and practical optimization recommendations that make digital work easier to scan and improve.',
+      subserviceIndices: [2, 3],
+      supporting: ['QA and content review', 'SEO observations and prioritization', 'Optimization recommendations', 'Testing and measurement support'],
+      relatedProjects: ['qa-testing-blog', 'seo-optimization-proposal'],
+      relatedArticle: 'seo-for-small-business',
+      pagePath: './services/content-seo-optimization.html'
+    }
+  ],
+  ru: [
+    {
+      slug: 'ux-website-design',
+      title: 'UX & Website Design',
+      positioning: 'Сайты, лендинги и интерфейсы, собранные так, чтобы предложение было понятнее, спокойнее и легче для принятия решения.',
+      subserviceIndices: [0],
+      supporting: ['Исследование аудитории и конкурентов', 'Информационная архитектура', 'Wireframes и MVP-структура', 'Дизайн-системы и ясность сканирования'],
+      relatedProjects: ['netherlands-harmony-guide', 'walk-the-dog', 'stretching-workout'],
+      relatedArticle: 'ux-trends-2026',
+      pagePath: './services/ux-website-design.html'
+    },
+    {
+      slug: 'digital-product-automation',
+      title: 'Digital Product & Automation',
+      positioning: 'Структурированные продуктовые сценарии, conversational systems и лёгкая автоматизация для сервисов, которым нужен более понятный пользовательский путь.',
+      subserviceIndices: [1, 4, 5],
+      supporting: ['Product thinking и flow mapping', 'Workflow support и логика сценариев', 'Research-driven discovery', 'Поддержка сложных цифровых процессов'],
+      relatedProjects: ['restaurant-support-automation', 'smart-massage', 'focus-meetings-platform', 'daily-practices', 'achievemater'],
+      relatedArticle: 'ux-trends-2026',
+      pagePath: './services/digital-product-automation.html'
+    },
+    {
+      slug: 'content-seo-optimization',
+      title: 'Content, SEO & Optimization',
+      positioning: 'Контентная структура, QA-подход, SEO-наблюдения и практические рекомендации по улучшению, которые делают сайт яснее и полезнее.',
+      subserviceIndices: [2, 3],
+      supporting: ['QA и контент-ревью', 'SEO-наблюдения и приоритизация', 'Рекомендации по оптимизации', 'Поддержка тестирования и метрик'],
+      relatedProjects: ['qa-testing-blog', 'seo-optimization-proposal'],
+      relatedArticle: 'seo-for-small-business',
+      pagePath: './services/content-seo-optimization.html'
+    }
+  ],
+  nl: [
+    {
+      slug: 'ux-website-design',
+      title: 'UX & Website Design',
+      positioning: 'Websites, landingspagina’s en interfaces die zijn opgebouwd voor duidelijkheid, geloofwaardigheid en een rustiger beslissingsproces.',
+      subserviceIndices: [0],
+      supporting: ['Doelgroep- en concurrentieonderzoek', 'Informatiearchitectuur', 'Wireframes en MVP-structuur', 'Design systems en scanbare inhoud'],
+      relatedProjects: ['netherlands-harmony-guide', 'walk-the-dog', 'stretching-workout'],
+      relatedArticle: 'ux-trends-2026',
+      pagePath: './services/ux-website-design.html'
+    },
+    {
+      slug: 'digital-product-automation',
+      title: 'Digital Product & Automation',
+      positioning: 'Gestructureerde productflows, conversationele systemen en lichte automatisering voor diensten die minder frictie en duidelijkere support nodig hebben.',
+      subserviceIndices: [1, 4, 5],
+      supporting: ['Product thinking en flow mapping', 'Workflow support en gestructureerde logica', 'Research-led discovery', 'Ondersteuning voor complexere digitale workflows'],
+      relatedProjects: ['restaurant-support-automation', 'smart-massage', 'focus-meetings-platform', 'daily-practices', 'achievemater'],
+      relatedArticle: 'ux-trends-2026',
+      pagePath: './services/digital-product-automation.html'
+    },
+    {
+      slug: 'content-seo-optimization',
+      title: 'Content, SEO & Optimization',
+      positioning: 'Contentstructuur, QA-denken, SEO-observaties en praktische optimalisatievoorstellen die digitale inhoud duidelijker en bruikbaarder maken.',
+      subserviceIndices: [2, 3],
+      supporting: ['QA en content review', 'SEO-observaties en prioritering', 'Optimalisatievoorstellen', 'Ondersteuning voor testen en metingen'],
+      relatedProjects: ['qa-testing-blog', 'seo-optimization-proposal'],
+      relatedArticle: 'seo-for-small-business',
+      pagePath: './services/content-seo-optimization.html'
+    }
+  ]
+};
+
+const EXTRA_PROJECTS: Record<'en' | 'ru' | 'nl', Project[]> = {
+  en: [
+    {
+      slug: 'restaurant-support-automation',
+      title: 'Restaurant Support Automation',
+      category: 'Digital Product & Automation',
+      description: 'Conversational reservation inquiry and guest support system for restaurants.',
+      summary: 'Clearer inquiry flow and lighter communication load',
+      images: []
+    },
+    {
+      slug: 'seo-optimization-proposal',
+      title: 'SEO Analysis & Optimization Proposal',
+      category: 'Content, SEO & Optimization',
+      description: 'Audit-style review of structure, content clarity, and practical optimization priorities.',
+      summary: 'Clearer improvement priorities without inflated ranking claims',
+      images: []
+    }
+  ],
+  ru: [
+    {
+      slug: 'restaurant-support-automation',
+      title: 'Restaurant Support Automation',
+      category: 'Digital Product & Automation',
+      description: 'Conversational system для запросов на бронирование и поддержки гостей ресторана.',
+      summary: 'Более понятный путь запроса и меньше повторяющейся коммуникации',
+      images: []
+    },
+    {
+      slug: 'seo-optimization-proposal',
+      title: 'SEO Analysis & Optimization Proposal',
+      category: 'Content, SEO & Optimization',
+      description: 'Аудит сайта с обзором структуры, ясности контента и приоритетов улучшений.',
+      summary: 'Понятные рекомендации по улучшению без завышенных обещаний',
+      images: []
+    }
+  ],
+  nl: [
+    {
+      slug: 'restaurant-support-automation',
+      title: 'Restaurant Support Automation',
+      category: 'Digital Product & Automation',
+      description: 'Conversationeel systeem voor reserveringsaanvragen en veelgestelde gastvragen in restaurants.',
+      summary: 'Duidelijker aanvraagpad en minder repetitieve communicatie',
+      images: []
+    },
+    {
+      slug: 'seo-optimization-proposal',
+      title: 'SEO Analysis & Optimization Proposal',
+      category: 'Content, SEO & Optimization',
+      description: 'Auditgerichte review van sitestructuur, contentduidelijkheid en geprioriteerde optimalisaties.',
+      summary: 'Praktische verbeterprioriteiten zonder overdreven rankingclaims',
+      images: []
+    }
+  ]
+};
+
+const PROJECT_CASES: Record<'en' | 'ru' | 'nl', Record<string, ProjectCase>> = {
+  en: {
+    'netherlands-harmony-guide': {
+      goal: 'Create a calmer, easier-to-scan guide format for location-based content about the Netherlands.',
+      role: 'UX and website design, structure planning, content organization.',
+      did: 'Organized pages around clearer hierarchy, readable sections, and a softer editorial rhythm for browsing.',
+      outcome: 'Improved content organization and made the guide easier to explore.'
+    },
+    'walk-the-dog': {
+      goal: 'Clarify a local dog walking service offer and make the site easier to scan before contact.',
+      role: 'UX and website design, service communication, structure refinement.',
+      did: 'Simplified the service offer, grouped trust signals, and made the booking path easier to understand.',
+      outcome: 'Made service communication easier to scan and improved booking flow clarity.'
+    },
+    'restaurant-support-automation': {
+      goal: 'Create a conversational system to support restaurant reservation requests and common customer questions.',
+      role: 'Product structure, conversation logic, UX flow, content organization.',
+      did: 'Mapped user flows for booking requests, FAQ handling, and menu guidance; structured key conversation branches; shaped a simpler support journey.',
+      outcome: 'Created a clearer reservation inquiry flow and reduced repetitive communication patterns.'
+    },
+    'smart-massage': {
+      goal: 'Create a clearer client support flow for appointment requests, service overview, and pre-contact questions.',
+      role: 'Product structure, service UX, automation logic, content organization.',
+      did: 'Structured appointment request steps, common question handling, and treatment information into a calmer support path.',
+      outcome: 'Made service information easier to understand before contact and clarified communication flow.'
+    },
+    'focus-meetings-platform': {
+      goal: 'Create an MVP structure for validation around organizing meetings and activities with more supportive planning flows.',
+      role: 'Product UX, interaction structure, MVP definition.',
+      did: 'Mapped planning scenarios, clarified feature hierarchy, and shaped a simpler structure for early product testing.',
+      outcome: 'Created MVP structure for validation and clarified the planning experience.'
+    },
+    'daily-practices': {
+      goal: 'Build a structured concept for daily wellbeing practices and supportive self-reflection.',
+      role: 'Product UX, flow design, content structure.',
+      did: 'Defined a calmer routine framework, organized practice paths, and shaped a more coherent self-guided experience.',
+      outcome: 'Created a more supportive structure for daily use and emotional balance.'
+    },
+    achievemater: {
+      goal: 'Shape a group work environment where people can stay focused on different goals with shared momentum.',
+      role: 'Product structure, UX flow, collaboration framing.',
+      did: 'Clarified the session structure, grouped user goals, and made the collaborative work model easier to understand.',
+      outcome: 'Made the group productivity concept easier to explain and easier to validate.'
+    },
+    'stretching-workout': {
+      goal: 'Present stretching and workout coaching in a cleaner, easier-to-follow service structure.',
+      role: 'Website UX, service framing, content clarity.',
+      did: 'Reworked service hierarchy, simplified training communication, and shaped a more readable path to contact.',
+      outcome: 'Clarified service communication and made the offer easier to scan.'
+    },
+    'qa-testing-blog': {
+      goal: 'Organize useful QA materials into a more structured and approachable knowledge space.',
+      role: 'Content structure, QA perspective, information design.',
+      did: 'Grouped useful materials, shaped more readable entry points, and clarified how content supports day-to-day learning.',
+      outcome: 'Improved content organization and made useful materials easier to find.'
+    },
+    'seo-optimization-proposal': {
+      goal: 'Review site structure, content clarity, and SEO basics to identify practical optimization priorities.',
+      role: 'SEO analysis, content review, prioritization.',
+      did: 'Reviewed structure, page communication, SEO observations, and grouped improvements into clearer next steps.',
+      outcome: 'Created a practical optimization proposal with clearer priorities for improvement.'
+    }
+  },
+  ru: {
+    'netherlands-harmony-guide': {
+      goal: 'Собрать более спокойный и легче сканируемый формат сайта-гида о Нидерландах.',
+      role: 'UX и website design, структурирование контента, архитектура страниц.',
+      did: 'Выстроила более понятную иерархию, редакционный ритм и структуру разделов для спокойного просмотра.',
+      outcome: 'Улучшила организацию контента и сделала гид проще для изучения.'
+    },
+    'walk-the-dog': {
+      goal: 'Сделать локальную услугу по выгулу собак понятнее и удобнее для просмотра до обращения.',
+      role: 'UX и website design, сервисная коммуникация, структурирование.',
+      did: 'Упростила оффер, сгруппировала trust-сигналы и сделала путь к заявке понятнее.',
+      outcome: 'Сделала предложение легче для сканирования и улучшила ясность booking flow.'
+    },
+    'restaurant-support-automation': {
+      goal: 'Создать conversational system для запросов на бронирование и частых вопросов гостей ресторана.',
+      role: 'Product structure, conversation logic, UX flow, content organization.',
+      did: 'Разобрала user flows для reservation requests, FAQ и menu guidance, выстроила ключевые ветки диалога и упростила support journey.',
+      outcome: 'Сформировала более понятный inquiry flow и снизила повторяющиеся паттерны коммуникации.'
+    },
+    'smart-massage': {
+      goal: 'Сделать более понятный support flow для записи, обзора услуг и частых клиентских вопросов.',
+      role: 'Product structure, service UX, automation logic, content organization.',
+      did: 'Выстроила шаги appointment requests, блок common questions и treatment information в более спокойный путь для клиента.',
+      outcome: 'Сделала service information понятнее до контакта и улучшила ясность коммуникации.'
+    },
+    'focus-meetings-platform': {
+      goal: 'Собрать MVP-структуру для проверки идеи организации встреч и активностей с более поддерживающими planning flows.',
+      role: 'Product UX, interaction structure, MVP definition.',
+      did: 'Разложила planning scenarios, уточнила иерархию функций и собрала более ясную структуру для ранней валидации.',
+      outcome: 'Создала MVP structure for validation и сделала planning experience понятнее.'
+    },
+    'daily-practices': {
+      goal: 'Построить структурированный концепт для ежедневных wellbeing-практик и поддерживающей рефлексии.',
+      role: 'Product UX, flow design, content structure.',
+      did: 'Определила более спокойный каркас рутин, организовала practice paths и собрала более цельный self-guided experience.',
+      outcome: 'Создала более поддерживающую структуру для ежедневного использования и эмоционального баланса.'
+    },
+    achievemater: {
+      goal: 'Сформировать групповое рабочее пространство, где люди могут двигаться к разным целям в общем ритме.',
+      role: 'Product structure, UX flow, collaboration framing.',
+      did: 'Уточнила структуру сессий, сгруппировала сценарии целей и сделала модель совместной работы понятнее.',
+      outcome: 'Сделала концепт групповой продуктивности понятнее и удобнее для валидации.'
+    },
+    'stretching-workout': {
+      goal: 'Представить стретчинг и тренировки в более чистой и понятной структуре услуг.',
+      role: 'Website UX, service framing, content clarity.',
+      did: 'Пересобрала иерархию услуг, упростила коммуникацию о тренировках и сделала путь к контакту понятнее.',
+      outcome: 'Уточнила сервисную коммуникацию и сделала оффер проще для сканирования.'
+    },
+    'qa-testing-blog': {
+      goal: 'Организовать полезные QA-материалы в более понятное и удобное knowledge space.',
+      role: 'Content structure, QA perspective, information design.',
+      did: 'Сгруппировала материалы, сделала точки входа читабельнее и уточнила, как контент помогает в повседневном обучении.',
+      outcome: 'Улучшила организацию контента и сделала материалы проще для поиска.'
+    },
+    'seo-optimization-proposal': {
+      goal: 'Проверить структуру сайта, ясность контента и SEO-базу, чтобы определить практические приоритеты улучшений.',
+      role: 'SEO analysis, content review, prioritization.',
+      did: 'Провела обзор структуры, коммуникации страниц и SEO-наблюдений, затем сгруппировала улучшения по приоритету.',
+      outcome: 'Собрала практическое optimization proposal с более ясными приоритетами.'
+    }
+  },
+  nl: {
+    'netherlands-harmony-guide': {
+      goal: 'Een rustiger en beter scanbaar gidsformat maken voor locatiegerichte content over Nederland.',
+      role: 'UX en website design, structuurplanning, contentorganisatie.',
+      did: 'Een duidelijkere hiërarchie, leesbare secties en een kalmere editorial flow voor browsegedrag opgezet.',
+      outcome: 'De contentorganisatie verbeterd en de gids makkelijker gemaakt om te verkennen.'
+    },
+    'walk-the-dog': {
+      goal: 'Een lokale hondenuitlaatservice duidelijker maken en makkelijker scanbaar vóór contact.',
+      role: 'UX en website design, servicecommunicatie, structuurverbetering.',
+      did: 'Het aanbod vereenvoudigd, trust-signals gegroepeerd en het boekingspad duidelijker gemaakt.',
+      outcome: 'De servicecommunicatie verduidelijkt en de booking flow beter scanbaar gemaakt.'
+    },
+    'restaurant-support-automation': {
+      goal: 'Een conversationeel systeem opzetten voor reserveringsaanvragen en veelgestelde restaurantvragen.',
+      role: 'Productstructuur, conversation logic, UX flow, contentorganisatie.',
+      did: 'User flows voor booking requests, FAQ-afhandeling en menubegeleiding uitgewerkt; belangrijke gesprekstakken gestructureerd; een eenvoudiger support journey gevormd.',
+      outcome: 'Een duidelijker reserveringsaanvraag-pad gecreëerd en repetitieve communicatie verminderd.'
+    },
+    'smart-massage': {
+      goal: 'Een duidelijker support flow maken voor afspraakverzoeken, service-overzicht en veelgestelde cliëntvragen.',
+      role: 'Productstructuur, service UX, automation logic, contentorganisatie.',
+      did: 'Afspraakverzoeken, vraagafhandeling en treatment information in een rustiger supportpad gestructureerd.',
+      outcome: 'Service-informatie vóór contact verduidelijkt en de communicatiestroom beter gestructureerd.'
+    },
+    'focus-meetings-platform': {
+      goal: 'Een MVP-structuur maken om een afspraken- en activiteitenconcept met ondersteunende planning flows te valideren.',
+      role: 'Product UX, interactiestructuur, MVP-definitie.',
+      did: 'Planningsscenario’s uitgewerkt, feature-hiërarchie verduidelijkt en een eenvoudiger structuur voor vroege validatie gevormd.',
+      outcome: 'Een MVP-structuur voor validatie gecreëerd en de planningservaring verduidelijkt.'
+    },
+    'daily-practices': {
+      goal: 'Een gestructureerd concept bouwen voor dagelijkse wellbeing-praktijken en ondersteunende reflectie.',
+      role: 'Product UX, flow design, contentstructuur.',
+      did: 'Een rustiger routinekader uitgewerkt, practice paths georganiseerd en een coherenter self-guided experience opgebouwd.',
+      outcome: 'Een ondersteunendere structuur gemaakt voor dagelijks gebruik en emotionele balans.'
+    },
+    achievemater: {
+      goal: 'Een groepswerkruimte vormgeven waar mensen aan verschillende doelen kunnen werken met gedeeld momentum.',
+      role: 'Productstructuur, UX flow, collaboration framing.',
+      did: 'De sessiestructuur verduidelijkt, doeltypes gegroepeerd en het samenwerkingsmodel begrijpelijker gemaakt.',
+      outcome: 'Het groepsproductiviteitsconcept duidelijker en beter valideerbaar gemaakt.'
+    },
+    'stretching-workout': {
+      goal: 'Stretching- en workoutcoaching in een schonere en beter scanbare servicestructuur presenteren.',
+      role: 'Website UX, service framing, contentduidelijkheid.',
+      did: 'De dienstenhiërarchie herwerkt, trainingscommunicatie vereenvoudigd en het pad naar contact helderder gemaakt.',
+      outcome: 'De servicecommunicatie verduidelijkt en het aanbod makkelijker scanbaar gemaakt.'
+    },
+    'qa-testing-blog': {
+      goal: 'Nuttige QA-materialen ordenen in een toegankelijkere en overzichtelijkere kennisruimte.',
+      role: 'Contentstructuur, QA-perspectief, informatieontwerp.',
+      did: 'Materialen gegroepeerd, duidelijkere instappunten gemaakt en verduidelijkt hoe de content dagelijks leren ondersteunt.',
+      outcome: 'De contentorganisatie verbeterd en nuttige materialen makkelijker vindbaar gemaakt.'
+    },
+    'seo-optimization-proposal': {
+      goal: 'Sitestructuur, contentduidelijkheid en SEO-basis reviewen om praktische verbeterprioriteiten te bepalen.',
+      role: 'SEO-analyse, contentreview, prioritering.',
+      did: 'Structuur, paginahelderheid en SEO-observaties bekeken en verbeterpunten in duidelijke stappen gegroepeerd.',
+      outcome: 'Een praktisch optimalisatievoorstel met duidelijkere verbeterprioriteiten gemaakt.'
+    }
+  }
+};
+
+const VISUALIZATION_WORK: Record<'en' | 'ru' | 'nl', VisualizationBlock> = {
+  en: {
+    title: 'Visualization Work',
+    intro: 'A lightweight browser-based visualization case focused on making a rough interior concept easier to discuss through a clearer before / after presentation.',
+    labels: {
+      before: 'Before',
+      after: 'After',
+      placeholder: 'Prepared for before / after visuals',
+      input: 'Input',
+      process: 'Process',
+      output: 'Output',
+      value: 'Value'
+    },
+    before: 'Simple furniture arrangement and rough spatial setup with limited visual hierarchy.',
+    after: 'A cleaner, more appealing visualization that communicates the space more clearly without heavy specialist software.',
+    details: [
+      ['Input', 'A basic room layout or primitive interior setup used as a quick starting point.'],
+      ['Process', 'Refined the composition, presentation rhythm, and visual emphasis inside a lightweight visualizer.'],
+      ['Output', 'Created a clearer and more presentable before / after comparison for discussion.'],
+      ['Value', 'Helped communicate an interior or spatial concept faster and with less ambiguity.']
+    ]
+  },
+  ru: {
+    title: 'Visualization Work',
+    intro: 'Кейс лёгкой browser-based визуализации, где грубая пространственная схема была превращена в более понятную before / after подачу.',
+    labels: {
+      before: 'До',
+      after: 'После',
+      placeholder: 'Блок подготовлен для before / after визуалов',
+      input: 'Исходные данные',
+      process: 'Процесс',
+      output: 'Результат',
+      value: 'Ценность'
+    },
+    before: 'Простая расстановка мебели и грубая пространственная схема с минимальной визуальной иерархией.',
+    after: 'Более чистая и выразительная визуализация, которая понятнее передаёт идею пространства без тяжёлого специализированного софта.',
+    details: [
+      ['Исходные данные', 'Базовая схема комнаты или примитивный spatial setup как быстрый старт.'],
+      ['Процесс', 'Уточнила композицию, ритм подачи и визуальные акценты в лёгком визуализаторе.'],
+      ['Результат', 'Собрала более понятную и презентабельную before / after подачу для обсуждения.'],
+      ['Ценность', 'Помогла быстрее и яснее коммуницировать интерьерную или пространственную идею.']
+    ]
+  },
+  nl: {
+    title: 'Visualization Work',
+    intro: 'Een lichte browser-based visualisatiecase waarbij een ruwe ruimtelijke opzet werd omgezet in een duidelijkere before / after presentatie.',
+    labels: {
+      before: 'Voor',
+      after: 'Na',
+      placeholder: 'Voorbereid voor before / after visuals',
+      input: 'Input',
+      process: 'Proces',
+      output: 'Output',
+      value: 'Waarde'
+    },
+    before: 'Een eenvoudige meubelopstelling en ruwe ruimtelijke setup met beperkte visuele hiërarchie.',
+    after: 'Een schonere en aantrekkelijkere visualisatie die het ruimteconcept duidelijker laat zien zonder zware specialistische software.',
+    details: [
+      ['Input', 'Een basale kamerindeling of primitieve ruimtelijke setup als snelle startbasis.'],
+      ['Proces', 'Compositie, presentatieritme en visuele nadruk verfijnd in een lichte visualizer.'],
+      ['Output', 'Een duidelijkere en beter presenteerbare before / after vergelijking gemaakt.'],
+      ['Waarde', 'Maakte het sneller en duidelijker om een interieur- of ruimteconcept te communiceren.']
+    ]
+  }
+};
 
 const ensureMetaTag = (selector: string, attributes: Record<string, string>) => {
   if (typeof document === 'undefined') return;
@@ -1652,6 +2146,11 @@ export default function Portfolio() {
   };
 
   const t = data[language];
+  const labels = SECTION_TEXT[language];
+  const serviceGroups = PRIMARY_SERVICE_GROUPS[language];
+  const displayedProjects = [...t.projects, ...EXTRA_PROJECTS[language]];
+  const projectCases = PROJECT_CASES[language];
+  const visualizationBlock = VISUALIZATION_WORK[language];
   const defaultOgImage = `${SITE_URL}/og-cover.jpg`;
 
   useEffect(() => {
@@ -1700,7 +2199,7 @@ export default function Portfolio() {
 
   useEffect(() => {
     const article = activeArticle !== null ? t.articles[activeArticle] : null;
-    const service = activeArticle === null && expandedService !== null ? t.services[expandedService] : null;
+    const service = activeArticle === null && expandedService !== null ? serviceGroups[expandedService] : null;
     const query = article
       ? `?article=${ARTICLE_SLUGS[activeArticle]}`
       : service
@@ -1711,13 +2210,13 @@ export default function Portfolio() {
     const title = article
       ? `${article.title} | Expert Article | It healthy coder`
       : service
-        ? `${service[0]} | Service | It healthy coder`
-        : 'Digital Product Design, AI Automation & Strategy | It healthy coder';
+        ? `${service.title} | Service | It healthy coder`
+        : 'UX Design, Digital Product Automation & SEO | It healthy coder';
     const description = article
       ? article.excerpt
       : service
-        ? service[1]
-        : 'Portfolio of digital product work spanning UI/UX design, AI automation, testing, analytics, and strategic marketing for measurable business growth.';
+        ? service.positioning
+        : 'Portfolio focused on UX and website design, digital product and automation support, and content, SEO, and optimization work.';
 
     document.title = title;
 
@@ -1771,11 +2270,11 @@ export default function Portfolio() {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[rgba(6,20,47,0.4)] backdrop-blur-sm" onClick={() => setShowLegalModal(null)}>
           <div className="bg-stone-50 w-full max-w-3xl max-h-[88vh] overflow-y-auto p-6 md:p-12 relative shadow-2xl" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between gap-4 mb-8">
-              <button onClick={() => setShowLegalModal(null)} className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-stone-500 hover:text-[#081a3a] transition-colors">
+              <button onClick={() => setShowLegalModal(null)} className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-[#64748f] hover:text-[#081a3a] transition-colors">
                 <ArrowLeft size={16} />
                 {t.ui.back}
               </button>
-              <button onClick={() => setShowLegalModal(null)} className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-stone-500 hover:text-[#081a3a] transition-colors">
+              <button onClick={() => setShowLegalModal(null)} className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-[#64748f] hover:text-[#081a3a] transition-colors">
                 {t.ui.close}
                 <X size={18} />
               </button>
@@ -1789,7 +2288,7 @@ export default function Portfolio() {
 
       {lightboxImage && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(6,20,47,0.9)] p-4" onClick={() => setLightboxImage(null)}>
-          <button onClick={() => setLightboxImage(null)} className="absolute top-6 right-6 inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-stone-300 hover:text-white transition-colors">
+          <button onClick={() => setLightboxImage(null)} className="absolute top-6 right-6 inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-[#b8c4d8] hover:text-white transition-colors">
             {t.ui.close}
             <X size={18} />
           </button>
@@ -1799,20 +2298,20 @@ export default function Portfolio() {
         </div>
       )}
 
-      <header className="fixed top-0 w-full z-40 bg-stone-50/80 backdrop-blur-md border-b border-stone-200">
+      <header className="fixed top-0 w-full z-40 bg-[rgba(245,245,244,0.82)] backdrop-blur-md border-b border-[#d8e1ee]">
         <nav className="max-w-6xl mx-auto px-6 py-6 flex justify-between items-center gap-6">
           <div className="text-xl font-medium tracking-tight">It healthy coder.</div>
           <div className="hidden md:flex items-center gap-12">
             {t.nav.map((item, i) => (
-              <a key={i} href={`#${['services', 'projects', 'process', 'articles', 'contact'][i]}`} onClick={(e) => scroll(e, ['services', 'projects', 'process', 'articles', 'contact'][i])} className="text-sm font-medium hover:text-stone-400 transition lowercase tracking-wider">
+              <a key={i} href={`#${['services', 'projects', 'process', 'articles', 'contact'][i]}`} onClick={(e) => scroll(e, ['services', 'projects', 'process', 'articles', 'contact'][i])} className="text-sm font-medium hover:text-[#7686a4] transition lowercase tracking-wider">
                 {item}
               </a>
             ))}
           </div>
-          <div className="flex bg-stone-100 p-1 rounded-full">
-            <button onClick={() => setLanguage('en')} className={`px-3 py-1 rounded-full text-sm transition-all ${language === 'en' ? 'bg-[#081a3a] text-white shadow-lg' : 'hover:text-stone-500'}`}>EN</button>
-            <button onClick={() => setLanguage('ru')} className={`px-3 py-1 rounded-full text-sm transition-all ${language === 'ru' ? 'bg-[#081a3a] text-white shadow-lg' : 'hover:text-stone-500'}`}>RU</button>
-            <button onClick={() => setLanguage('nl')} className={`px-3 py-1 rounded-full text-sm transition-all ${language === 'nl' ? 'bg-[#081a3a] text-white shadow-lg' : 'hover:text-stone-500'}`}>NL</button>
+          <div className="flex bg-[#eef3f9] p-1 rounded-full">
+            <button onClick={() => setLanguage('en')} className={`px-3 py-1 rounded-full text-sm transition-all ${language === 'en' ? 'bg-[#081a3a] text-white shadow-lg' : 'text-[#5f6f8c] hover:text-[#081a3a]'}`}>EN</button>
+            <button onClick={() => setLanguage('ru')} className={`px-3 py-1 rounded-full text-sm transition-all ${language === 'ru' ? 'bg-[#081a3a] text-white shadow-lg' : 'text-[#5f6f8c] hover:text-[#081a3a]'}`}>RU</button>
+            <button onClick={() => setLanguage('nl')} className={`px-3 py-1 rounded-full text-sm transition-all ${language === 'nl' ? 'bg-[#081a3a] text-white shadow-lg' : 'text-[#5f6f8c] hover:text-[#081a3a]'}`}>NL</button>
           </div>
         </nav>
       </header>
@@ -1821,7 +2320,7 @@ export default function Portfolio() {
         <section className="pt-48 pb-32 px-6 max-w-6xl mx-auto min-h-screen flex flex-col justify-center">
           <h1 className="text-6xl md:text-8xl font-light tracking-tighter leading-[0.9] mb-12 whitespace-pre-wrap">{t.hero[0]}</h1>
           <div className="grid md:grid-cols-2 gap-12 items-end">
-            <p className="text-xl md:text-2xl text-stone-500 font-light leading-relaxed max-w-lg">{t.hero[1]}</p>
+            <p className="text-xl md:text-2xl text-[#546581] font-light leading-relaxed max-w-lg">{t.hero[1]}</p>
             <div className="flex justify-start md:justify-end">
               <a href="#contact" onClick={(e) => scroll(e, 'contact')} className="inline-flex items-center gap-2 bg-[#081a3a] text-stone-50 px-12 py-5 text-lg hover:bg-stone-50 hover:text-[#081a3a] border-2 border-[#081a3a] transition-all duration-300 group shadow-xl">
                 {t.hero[2]} <ArrowRight className="group-hover:translate-x-1 transition-transform" />
@@ -1830,34 +2329,76 @@ export default function Portfolio() {
           </div>
         </section>
 
-        <section id="services" className="py-32 px-6 max-w-6xl mx-auto border-t border-stone-200">
-          <h2 className="text-lg md:text-xl font-bold uppercase tracking-[0.22em] mb-16 text-stone-400">{t.ui.services}</h2>
-          <div className="grid border-t border-stone-200">
-            {t.services.map((service, index) => (
-              <div key={index} className="border-b border-stone-200 group">
+        <section id="services" className="py-32 px-6 max-w-6xl mx-auto border-t border-[#d8e1ee]">
+          <h2 className="text-lg md:text-xl font-bold uppercase tracking-[0.22em] mb-16 text-[#7384a2]">{t.ui.services}</h2>
+          <div className="grid md:grid-cols-3 gap-8 mb-16">
+            {serviceGroups.map((group, index) => (
+              <article key={group.slug} className="border border-[#d8e1ee] bg-white p-8 flex flex-col gap-5">
+                <div className="space-y-3">
+                  <div className="text-xs font-bold uppercase tracking-[0.25em] text-[#7384a2]">{labels.primaryDirections}</div>
+                  <h3 className="text-3xl font-light">{group.title}</h3>
+                  <p className="text-[#546581] font-light leading-relaxed">{group.positioning}</p>
+                </div>
+                <div className="space-y-3">
+                  <div className="text-xs font-bold uppercase tracking-[0.25em] text-[#7384a2]">{labels.supportingCapabilities}</div>
+                  <ul className="space-y-2">
+                    {group.supporting.map((item) => (
+                      <li key={item} className="flex items-start gap-3 text-[#5d6d88] font-light leading-relaxed">
+                        <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[#8b99b2]" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="flex flex-wrap gap-4 pt-2">
+                  <button onClick={() => openService(index)} className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-[#64748f] hover:text-[#081a3a] transition-colors">
+                    {labels.whatIHelpWith}
+                    <ChevronDown size={16} className={`${expandedService === index ? 'rotate-180' : ''} transition-transform`} />
+                  </button>
+                  <a href={group.pagePath} className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-[#64748f] hover:text-[#081a3a] transition-colors">
+                    {labels.servicePage}
+                    <ExternalLink size={16} />
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+          <div className="grid border-t border-[#d8e1ee]">
+            {serviceGroups.map((group, index) => (
+              <div key={index} className="border-b border-[#d8e1ee] group">
                 <button onClick={() => openService(index)} className="w-full py-12 flex flex-col md:flex-row justify-between items-start md:items-center text-left hover:px-4 transition-all duration-500">
                   <div className="max-w-md mb-4 md:mb-0">
-                    <h3 className="text-3xl font-light mb-2">{service[0]}</h3>
-                    <p className="text-stone-500 font-light leading-relaxed">{service[1]}</p>
+                    <h3 className="text-3xl font-light mb-2">{group.title}</h3>
+                    <p className="text-[#546581] font-light leading-relaxed">{group.positioning}</p>
                   </div>
                   <div className={`transition-transform duration-500 ${expandedService === index ? 'rotate-180' : ''}`}>
                     <ChevronDown size={32} strokeWidth={1} />
                   </div>
                 </button>
-                <div className={`overflow-hidden transition-all duration-700 ease-in-out ${expandedService === index ? 'max-h-[760px] pb-12 px-4' : 'max-h-0'}`}>
-                  <div className="grid md:grid-cols-2 gap-6">
-                    {service[2].map((detail, detailIndex) => (
-                      <div key={detailIndex} className="flex items-center gap-4 text-stone-600 font-light italic">
-                        <div className="w-1.5 h-1.5 bg-stone-300 rounded-full" />
-                        {detail}
+                <div className={`overflow-hidden transition-all duration-700 ease-in-out ${expandedService === index ? 'max-h-[1100px] pb-12 px-4' : 'max-h-0'}`}>
+                  <div className="grid md:grid-cols-2 gap-10">
+                    {group.subserviceIndices.map((serviceIndex) => (
+                      <div key={t.services[serviceIndex][0]} className="space-y-4">
+                        <div>
+                          <h4 className="text-xl font-medium text-[#081a3a] mb-2">{t.services[serviceIndex][0]}</h4>
+                          <p className="text-[#546581] font-light leading-relaxed">{t.services[serviceIndex][1]}</p>
+                        </div>
+                        <div className="space-y-3">
+                          {t.services[serviceIndex][2].map((detail) => (
+                            <div key={detail} className="flex items-start gap-3 text-[#5d6d88] font-light leading-relaxed">
+                              <div className="w-1.5 h-1.5 bg-[#8b99b2] rounded-full mt-2.5" />
+                              {detail}
+                            </div>
+                          ))}
+                        </div>
                       </div>
                     ))}
                   </div>
-                  <div className="mt-8 grid md:grid-cols-2 gap-6 border-t border-stone-200 pt-8">
+                  <div className="mt-8 grid md:grid-cols-2 gap-6 border-t border-[#d8e1ee] pt-8">
                     <div className="space-y-3">
-                      <div className="text-xs font-bold uppercase tracking-[0.25em] text-stone-400">Related Projects</div>
-                      {SERVICE_RELATIONS[index].projectSlugs.map((projectSlug) => {
-                        const project = t.projects.find((item) => item.slug === projectSlug);
+                      <div className="text-xs font-bold uppercase tracking-[0.25em] text-[#7384a2]">{labels.relatedProjects}</div>
+                      {group.relatedProjects.map((projectSlug) => {
+                        const project = displayedProjects.find((item) => item.slug === projectSlug);
                         if (!project) return null;
 
                         return (
@@ -1868,7 +2409,7 @@ export default function Portfolio() {
                               e.preventDefault();
                               scrollToId(`project-${project.slug}`);
                             }}
-                            className="block text-stone-700 hover:text-[#081a3a] transition-colors"
+                            className="block text-[#42516f] hover:text-[#081a3a] transition-colors"
                           >
                             {project.title}
                           </a>
@@ -1876,19 +2417,19 @@ export default function Portfolio() {
                       })}
                     </div>
                     <div className="space-y-3">
-                      <div className="text-xs font-bold uppercase tracking-[0.25em] text-stone-400">Related Article</div>
+                      <div className="text-xs font-bold uppercase tracking-[0.25em] text-[#7384a2]">{labels.relatedArticle}</div>
                       <a
-                        href={`?article=${SERVICE_RELATIONS[index].articleSlug}#articles`}
+                        href={`?article=${group.relatedArticle}#articles`}
                         onClick={(e) => {
                           e.preventDefault();
-                          openArticle(ARTICLE_SLUGS.indexOf(SERVICE_RELATIONS[index].articleSlug));
+                          openArticle(ARTICLE_SLUGS.indexOf(group.relatedArticle));
                         }}
-                        className="block text-stone-700 hover:text-[#081a3a] transition-colors"
+                        className="block text-[#42516f] hover:text-[#081a3a] transition-colors"
                       >
-                        {t.articles[ARTICLE_SLUGS.indexOf(SERVICE_RELATIONS[index].articleSlug)].title}
+                        {t.articles[ARTICLE_SLUGS.indexOf(group.relatedArticle)].title}
                       </a>
-                      <a href="#contact" onClick={(e) => scroll(e, 'contact')} className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-stone-500 hover:text-[#081a3a] transition-colors">
-                        Discuss this service
+                      <a href="#contact" onClick={(e) => scroll(e, 'contact')} className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-[#64748f] hover:text-[#081a3a] transition-colors">
+                        {labels.discussDirection}
                         <ArrowRight size={16} />
                       </a>
                     </div>
@@ -1901,91 +2442,139 @@ export default function Portfolio() {
 
         <section id="projects" className="py-32 px-6 bg-[#081a3a] text-stone-50 selection:bg-stone-50 selection:text-[#081a3a]">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-lg md:text-xl font-bold uppercase tracking-[0.22em] mb-16 text-stone-400">{t.ui.projects}</h2>
+            <h2 className="text-lg md:text-xl font-bold uppercase tracking-[0.22em] mb-16 text-[#9fb0ca]">{t.ui.projects}</h2>
             <div className="grid md:grid-cols-2 gap-12">
-              {t.projects.map((project, index) => (
+              {displayedProjects.map((project, index) => {
+                const caseData = projectCases[project.slug];
+                return (
                 <div key={index} id={`project-${project.slug}`} className="group scroll-mt-28">
-                  <div className="aspect-[16/10] bg-stone-800 mb-8 overflow-hidden relative shadow-2xl">
-                    <button
-                      type="button"
-                      className="absolute inset-0"
-                      onClick={() => setLightboxImage({ src: project.images[projectSlides[index] ?? 0], title: project.title })}
-                      aria-label={project.title}
-                    >
-                      <img
-                        src={project.images[projectSlides[index] ?? 0]}
-                        alt={getProjectImageAlt(project, projectSlides[index] ?? 0)}
-                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                      />
-                    </button>
-                    {project.images.length > 1 && (
+                  <div className="aspect-[16/10] bg-[#10244b] mb-8 overflow-hidden relative shadow-2xl">
+                    {project.images.length > 0 ? (
                       <>
                         <button
                           type="button"
-                          className="absolute left-4 top-1/2 -translate-y-1/2 h-11 w-11 rounded-full border border-white/25 bg-[rgba(8,26,58,0.6)] text-white backdrop-blur hover:bg-stone-50 hover:text-[#081a3a] transition-colors"
-                          onClick={() => setProjectSlide(index, ((projectSlides[index] ?? 0) - 1 + project.images.length) % project.images.length)}
-                          aria-label="Previous image"
+                          className="absolute inset-0"
+                          onClick={() => setLightboxImage({ src: project.images[projectSlides[index] ?? 0], title: project.title })}
+                          aria-label={project.title}
                         >
-                          <ChevronLeft className="mx-auto" size={18} />
+                          <img
+                            src={project.images[projectSlides[index] ?? 0]}
+                            alt={getProjectImageAlt(project, projectSlides[index] ?? 0)}
+                            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                          />
                         </button>
-                        <button
-                          type="button"
-                          className="absolute right-4 top-1/2 -translate-y-1/2 h-11 w-11 rounded-full border border-white/25 bg-[rgba(8,26,58,0.6)] text-white backdrop-blur hover:bg-stone-50 hover:text-[#081a3a] transition-colors"
-                          onClick={() => setProjectSlide(index, ((projectSlides[index] ?? 0) + 1) % project.images.length)}
-                          aria-label="Next image"
-                        >
-                          <ChevronRight className="mx-auto" size={18} />
-                        </button>
-                        <div className="absolute left-6 bottom-5 flex items-center gap-2">
-                          {project.images.map((_, imageIndex) => (
+                        {project.images.length > 1 && (
+                          <>
                             <button
-                              key={imageIndex}
                               type="button"
-                              onClick={() => setProjectSlide(index, imageIndex)}
-                              className={`h-2 rounded-full transition-all ${imageIndex === (projectSlides[index] ?? 0) ? 'w-8 bg-white' : 'w-2 bg-white/45 hover:bg-white/70'}`}
-                              aria-label={`Go to image ${imageIndex + 1}`}
-                            />
-                          ))}
+                              className="absolute left-4 top-1/2 -translate-y-1/2 h-11 w-11 rounded-full border border-white/25 bg-[rgba(8,26,58,0.6)] text-white backdrop-blur hover:bg-stone-50 hover:text-[#081a3a] transition-colors"
+                              onClick={() => setProjectSlide(index, ((projectSlides[index] ?? 0) - 1 + project.images.length) % project.images.length)}
+                              aria-label="Previous image"
+                            >
+                              <ChevronLeft className="mx-auto" size={18} />
+                            </button>
+                            <button
+                              type="button"
+                              className="absolute right-4 top-1/2 -translate-y-1/2 h-11 w-11 rounded-full border border-white/25 bg-[rgba(8,26,58,0.6)] text-white backdrop-blur hover:bg-stone-50 hover:text-[#081a3a] transition-colors"
+                              onClick={() => setProjectSlide(index, ((projectSlides[index] ?? 0) + 1) % project.images.length)}
+                              aria-label="Next image"
+                            >
+                              <ChevronRight className="mx-auto" size={18} />
+                            </button>
+                            <div className="absolute left-6 bottom-5 flex items-center gap-2">
+                              {project.images.map((_, imageIndex) => (
+                                <button
+                                  key={imageIndex}
+                                  type="button"
+                                  onClick={() => setProjectSlide(index, imageIndex)}
+                                  className={`h-2 rounded-full transition-all ${imageIndex === (projectSlides[index] ?? 0) ? 'w-8 bg-white' : 'w-2 bg-white/45 hover:bg-white/70'}`}
+                                  aria-label={`Go to image ${imageIndex + 1}`}
+                                />
+                              ))}
+                            </div>
+                          </>
+                        )}
+                      </>
+                    ) : (
+                      <>
+                        <div className="absolute inset-0 bg-gradient-to-br from-[#122a56] via-[#10244b] to-[#081a3a]" />
+                        <div className="absolute inset-0 flex flex-col items-center justify-center px-10 text-center">
+                          <div className="text-xs font-bold uppercase tracking-[0.3em] text-[#9fb0ca] mb-4">{project.category}</div>
+                          <div className="text-3xl font-light mb-4">{project.title}</div>
+                          <div className="text-[#c3cee0] max-w-md">{labels.projectPlaceholder}</div>
                         </div>
                       </>
                     )}
                   </div>
                   <div className="space-y-4">
                     {project.url ? (
-                      <a href={project.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-3xl font-light hover:text-stone-300 transition-colors">
+                      <a href={project.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-3xl font-light hover:text-[#c3cee0] transition-colors">
                         {project.title}
                         <ExternalLink size={18} />
                       </a>
                     ) : (
                       <h3 className="text-3xl font-light">{project.title}</h3>
                     )}
-                    <div className="text-xs font-bold uppercase tracking-[0.3em] text-stone-500">{project.category}</div>
-                    <p className="text-stone-300 font-light leading-relaxed">{project.description}</p>
-                    <div className="text-stone-500 italic font-light">{project.summary}</div>
+                    <div className="text-xs font-bold uppercase tracking-[0.3em] text-[#93a5c1]">{project.category}</div>
+                    <div className="space-y-3 text-[#d4dcec] font-light leading-relaxed">
+                      <p><span className="text-[#9fb0ca] font-medium">{labels.goal}:</span> {caseData.goal}</p>
+                      <p><span className="text-[#9fb0ca] font-medium">{labels.role}:</span> {caseData.role}</p>
+                      <p><span className="text-[#9fb0ca] font-medium">{labels.did}:</span> {caseData.did}</p>
+                      <p><span className="text-[#9fb0ca] font-medium">{labels.outcome}:</span> {caseData.outcome}</p>
+                    </div>
                   </div>
+                </div>
+              )})}
+            </div>
+          </div>
+        </section>
+
+        <section id="visualization-work" className="py-32 px-6 max-w-6xl mx-auto border-t border-[#d8e1ee]">
+          <h2 className="text-lg md:text-xl font-bold uppercase tracking-[0.22em] mb-16 text-[#7384a2]">{labels.visualWork}</h2>
+          <div className="grid lg:grid-cols-[1.1fr,0.9fr] gap-12">
+            <div className="space-y-6">
+              <p className="text-[#546581] font-light leading-relaxed max-w-3xl">{visualizationBlock.intro}</p>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="border border-[#d8e1ee] bg-[#f3f7fc] p-8 min-h-[220px] flex flex-col justify-between">
+                  <div className="text-xs font-bold uppercase tracking-[0.25em] text-[#7384a2]">{visualizationBlock.labels.before}</div>
+                  <p className="text-[#40506f] font-light leading-relaxed">{visualizationBlock.before}</p>
+                  <div className="text-sm text-[#7d8eac]">{visualizationBlock.labels.placeholder}</div>
+                </div>
+                <div className="border border-[#d8e1ee] bg-white p-8 min-h-[220px] flex flex-col justify-between shadow-sm">
+                  <div className="text-xs font-bold uppercase tracking-[0.25em] text-[#7384a2]">{visualizationBlock.labels.after}</div>
+                  <p className="text-[#40506f] font-light leading-relaxed">{visualizationBlock.after}</p>
+                  <div className="text-sm text-[#7d8eac]">{visualizationBlock.labels.placeholder}</div>
+                </div>
+              </div>
+            </div>
+            <div className="border border-[#d8e1ee] bg-white p-8 shadow-sm space-y-5">
+              {visualizationBlock.details.map(([label, text]) => (
+                <div key={label}>
+                  <div className="text-xs font-bold uppercase tracking-[0.25em] text-[#7384a2] mb-2">{label}</div>
+                  <p className="text-[#546581] font-light leading-relaxed">{text}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        <section id="process" className="py-32 px-6 max-w-6xl mx-auto border-t border-stone-200">
-          <h2 className="text-lg md:text-xl font-bold uppercase tracking-[0.22em] mb-16 text-stone-400">{t.ui.process}</h2>
+        <section id="process" className="py-32 px-6 max-w-6xl mx-auto border-t border-[#d8e1ee]">
+          <h2 className="text-lg md:text-xl font-bold uppercase tracking-[0.22em] mb-16 text-[#7384a2]">{t.ui.process}</h2>
           <div className="grid md:grid-cols-4 gap-12">
             {t.process.map((step, index) => (
               <div key={index} className="relative pt-10 pl-2 pr-4">
-                <div className="text-5xl font-medium text-stone-300 absolute -top-4 -left-2 z-0">{step[0]}</div>
+                <div className="text-5xl font-medium text-[#7d8eac] absolute -top-4 -left-2 z-0">{step[0]}</div>
                 <div className="relative z-10 space-y-4">
                   <h3 className="text-xl font-medium leading-snug">{step[1]}</h3>
-                  <p className="text-stone-500 font-light leading-relaxed">{step[2]}</p>
+                  <p className="text-[#546581] font-light leading-relaxed">{step[2]}</p>
                 </div>
               </div>
             ))}
           </div>
         </section>
 
-        <section id="articles" className="py-32 px-6 max-w-6xl mx-auto border-t border-stone-200">
-          <h2 className="text-lg md:text-xl font-bold uppercase tracking-[0.22em] mb-16 text-stone-400">{t.ui.articles}</h2>
+        <section id="articles" className="py-32 px-6 max-w-6xl mx-auto border-t border-[#d8e1ee]">
+          <h2 className="text-lg md:text-xl font-bold uppercase tracking-[0.22em] mb-16 text-[#7384a2]">{t.ui.articles}</h2>
 
           {activeArticle === null ? (
             <div className="grid gap-8">
@@ -1993,7 +2582,7 @@ export default function Portfolio() {
                 <a
                   key={index}
                   href={`?article=${ARTICLE_SLUGS[index]}#articles`}
-                  className="border border-stone-200 px-6 py-8 md:px-12 md:py-12 hover:bg-stone-100 transition-colors group cursor-pointer text-left block"
+                  className="border border-[#d8e1ee] px-6 py-8 md:px-12 md:py-12 hover:bg-[#f3f7fc] transition-colors group cursor-pointer text-left block"
                   onClick={(e) => {
                     e.preventDefault();
                     openArticle(index);
@@ -2002,11 +2591,11 @@ export default function Portfolio() {
                   <div className="flex flex-col gap-6 md:gap-7">
                     <div className="flex flex-wrap items-center gap-x-4 gap-y-3">
                       <span className="text-xs font-bold uppercase tracking-widest bg-[#081a3a] text-stone-50 px-3 py-1">{article.category}</span>
-                      <span className="text-sm text-stone-400 font-medium tracking-wider">{article.date} — {article.readTime}</span>
+                      <span className="text-sm text-[#7384a2] font-medium tracking-wider">{article.date} — {article.readTime}</span>
                     </div>
                     <h3 className="text-3xl md:text-4xl font-light leading-tight group-hover:translate-x-2 transition-transform duration-500">{article.title}</h3>
-                    <p className="text-stone-500 font-light max-w-2xl leading-relaxed">{article.excerpt}</p>
-                    <div className="flex items-center gap-2 font-medium text-sm group-hover:text-stone-400 transition-colors uppercase tracking-widest">
+                    <p className="text-[#546581] font-light max-w-2xl leading-relaxed">{article.excerpt}</p>
+                    <div className="flex items-center gap-2 font-medium text-sm group-hover:text-[#7384a2] transition-colors uppercase tracking-widest">
                       {t.ui.readArticle}
                       <Plus size={16} className="transition-transform duration-500 group-hover:rotate-90" />
                     </div>
@@ -2015,13 +2604,13 @@ export default function Portfolio() {
               ))}
             </div>
           ) : (
-            <article className="border border-stone-200 bg-white px-6 py-8 md:px-12 md:py-12 shadow-sm">
+            <article className="border border-[#d8e1ee] bg-white px-6 py-8 md:px-12 md:py-12 shadow-sm">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-10">
-                <button onClick={closeArticle} className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-stone-500 hover:text-[#081a3a] transition-colors">
+                <button onClick={closeArticle} className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-[#64748f] hover:text-[#081a3a] transition-colors">
                   <ArrowLeft size={16} />
                   {t.ui.back}
                 </button>
-                <button onClick={closeArticle} className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-stone-500 hover:text-[#081a3a] transition-colors">
+                <button onClick={closeArticle} className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-[#64748f] hover:text-[#081a3a] transition-colors">
                   {t.ui.close}
                   <X size={18} />
                 </button>
@@ -2029,28 +2618,24 @@ export default function Portfolio() {
 
               <div className="flex flex-wrap items-center gap-x-4 gap-y-3 mb-6">
                 <span className="text-xs font-bold uppercase tracking-widest bg-[#081a3a] text-stone-50 px-3 py-1">{t.articles[activeArticle].category}</span>
-                <span className="text-sm text-stone-400 font-medium tracking-wider">{t.articles[activeArticle].date} — {t.articles[activeArticle].readTime}</span>
+                <span className="text-sm text-[#7384a2] font-medium tracking-wider">{t.articles[activeArticle].date} — {t.articles[activeArticle].readTime}</span>
               </div>
 
               <h3 className="text-4xl md:text-5xl font-light leading-tight tracking-tight mb-6">{t.articles[activeArticle].title}</h3>
-              <p className="text-xl text-stone-500 font-light leading-relaxed max-w-3xl mb-12">{t.articles[activeArticle].excerpt}</p>
+              <p className="text-xl text-[#546581] font-light leading-relaxed max-w-3xl mb-12">{t.articles[activeArticle].excerpt}</p>
               <div className="w-12 h-px bg-[#081a3a] mb-10" />
               {renderRichContent(t.articles[activeArticle].content)}
-              <div className="mt-12 pt-8 border-t border-stone-200 grid md:grid-cols-2 gap-8">
+              <div className="mt-12 pt-8 border-t border-[#d8e1ee] grid md:grid-cols-2 gap-8">
                 <div className="space-y-3">
-                  <div className="text-xs font-bold uppercase tracking-[0.25em] text-stone-400">Related Service</div>
+                  <div className="text-xs font-bold uppercase tracking-[0.25em] text-[#7384a2]">{labels.relatedService}</div>
                   <a
-                    href={`?service=${ARTICLE_RELATIONS[activeArticle].serviceSlug}#services`}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      jumpToService(SERVICE_SLUGS.indexOf(ARTICLE_RELATIONS[activeArticle].serviceSlug));
-                    }}
-                    className="block text-[#081a3a] hover:text-stone-600 transition-colors"
+                    href={serviceGroups[SERVICE_SLUGS.indexOf(ARTICLE_RELATIONS[activeArticle].serviceSlug)].pagePath}
+                    className="block text-[#081a3a] hover:text-[#556480] transition-colors"
                   >
-                    {t.services[SERVICE_SLUGS.indexOf(ARTICLE_RELATIONS[activeArticle].serviceSlug)][0]}
+                    {serviceGroups[SERVICE_SLUGS.indexOf(ARTICLE_RELATIONS[activeArticle].serviceSlug)].title}
                   </a>
                   {ARTICLE_RELATIONS[activeArticle].projectSlugs.map((projectSlug) => {
-                    const project = t.projects.find((item) => item.slug === projectSlug);
+                    const project = displayedProjects.find((item) => item.slug === projectSlug);
                     if (!project) return null;
 
                     return (
@@ -2062,7 +2647,7 @@ export default function Portfolio() {
                           setActiveArticle(null);
                           requestAnimationFrame(() => scrollToId(`project-${project.slug}`));
                         }}
-                        className="block text-stone-600 hover:text-[#081a3a] transition-colors"
+                        className="block text-[#5d6d88] hover:text-[#081a3a] transition-colors"
                       >
                         {project.title}
                       </a>
@@ -2070,12 +2655,12 @@ export default function Portfolio() {
                   })}
                 </div>
                 <div className="space-y-3">
-                  <div className="text-xs font-bold uppercase tracking-[0.25em] text-stone-400">Next Step</div>
-                  <p className="text-stone-600 font-light leading-relaxed">
-                    If this topic matches your project, use the related service above or jump straight into a contact conversation.
+                  <div className="text-xs font-bold uppercase tracking-[0.25em] text-[#7384a2]">{labels.nextStep}</div>
+                  <p className="text-[#5d6d88] font-light leading-relaxed">
+                    {labels.articleCta}
                   </p>
-                  <a href="#contact" onClick={(e) => scroll(e, 'contact')} className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-stone-500 hover:text-[#081a3a] transition-colors">
-                    Start a project conversation
+                  <a href="#contact" onClick={(e) => scroll(e, 'contact')} className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-[#64748f] hover:text-[#081a3a] transition-colors">
+                    {labels.articleStart}
                     <ArrowRight size={16} />
                   </a>
                 </div>
@@ -2086,29 +2671,29 @@ export default function Portfolio() {
 
         <section id="contact" className="py-48 px-6 bg-[#081a3a] text-stone-50 text-center selection:bg-stone-50 selection:text-[#081a3a]">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-lg md:text-xl font-bold uppercase tracking-[0.22em] mb-12 text-stone-400">{t.ui.ready}</h2>
+            <h2 className="text-lg md:text-xl font-bold uppercase tracking-[0.22em] mb-12 text-[#9fb0ca]">{t.ui.ready}</h2>
             <p className="text-4xl md:text-6xl font-light tracking-tight leading-tight mb-16">{t.ui.contactLead}</p>
             <div className="flex flex-col md:flex-row justify-center items-center gap-12 md:gap-24">
               <a href="mailto:itmadge@gmail.com" className="group">
-                <div className="flex items-center gap-4 text-2xl font-light hover:text-stone-400 transition-colors">
+                <div className="flex items-center gap-4 text-2xl font-light hover:text-[#c3cee0] transition-colors">
                   <Mail size={32} strokeWidth={1} />
                   itmadge@gmail.com
                 </div>
-                <div className="h-px bg-stone-700 mt-2 group-hover:scale-x-110 transition-transform origin-center" />
+                <div className="h-px bg-[#60718e] mt-2 group-hover:scale-x-110 transition-transform origin-center" />
               </a>
               <a href="https://www.linkedin.com/in/margarita-smy/" target="_blank" rel="noopener noreferrer" className="group">
-                <div className="flex items-center gap-4 text-2xl font-light hover:text-stone-400 transition-colors">
+                <div className="flex items-center gap-4 text-2xl font-light hover:text-[#c3cee0] transition-colors">
                   <Linkedin size={32} strokeWidth={1} />
                   LinkedIn
                 </div>
-                <div className="h-px bg-stone-700 mt-2 group-hover:scale-x-110 transition-transform origin-center" />
+                <div className="h-px bg-[#60718e] mt-2 group-hover:scale-x-110 transition-transform origin-center" />
               </a>
             </div>
           </div>
         </section>
       </main>
 
-      <footer className="py-24 px-6 border-t border-stone-200 bg-[#081a3a] text-stone-500">
+      <footer className="py-24 px-6 border-t border-[#20345a] bg-[#081a3a] text-[#8fa1be]">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
           <div className="text-sm font-medium tracking-widest">{t.ui.footerCopy}</div>
           <div className="flex flex-wrap justify-center gap-8 md:gap-12 text-sm font-medium tracking-widest uppercase">
