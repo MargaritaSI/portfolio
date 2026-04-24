@@ -193,9 +193,9 @@ const ARTICLE_SLUGS = [
 ] as const;
 
 const ARTICLE_RELATIONS = [
-  { serviceSlug: 'content-seo-optimization', projectSlugs: ['seo-optimization-proposal', 'qa-testing-blog'] },
+  { serviceSlug: 'content-seo-optimization', projectSlugs: ['qa-testing-blog'] },
   { serviceSlug: 'ux-website-design', projectSlugs: ['netherlands-harmony-guide', 'walk-the-dog'] },
-  { serviceSlug: 'content-seo-optimization', projectSlugs: ['seo-optimization-proposal', 'qa-testing-blog'] }
+  { serviceSlug: 'content-seo-optimization', projectSlugs: ['qa-testing-blog'] }
 ] as const;
 
 const SECTION_TEXT = {
@@ -207,6 +207,8 @@ const SECTION_TEXT = {
     relatedProjects: 'Related Projects',
     relatedArticle: 'Related Article',
     relatedService: 'Related Service',
+    descriptiveCases: 'Descriptive Cases',
+    more: 'More...',
     discussDirection: 'Discuss this direction',
     nextStep: 'Next Step',
     articleCta: 'If this topic matches your project, use the related service above or jump straight into a contact conversation.',
@@ -226,6 +228,8 @@ const SECTION_TEXT = {
     relatedProjects: 'Связанные проекты',
     relatedArticle: 'Связанная статья',
     relatedService: 'Связанная услуга',
+    descriptiveCases: 'Описательные кейсы',
+    more: 'Подробнее...',
     discussDirection: 'Обсудить это направление',
     nextStep: 'Следующий шаг',
     articleCta: 'Если эта тема близка вашему проекту, перейдите к связанной услуге выше или сразу напишите мне.',
@@ -245,6 +249,8 @@ const SECTION_TEXT = {
     relatedProjects: 'Gerelateerde projecten',
     relatedArticle: 'Gerelateerd artikel',
     relatedService: 'Gerelateerde service',
+    descriptiveCases: 'Beschrijvende cases',
+    more: 'Meer...',
     discussDirection: 'Deze richting bespreken',
     nextStep: 'Volgende stap',
     articleCta: 'Als dit onderwerp bij je project past, gebruik dan de gerelateerde service hierboven of neem direct contact op.',
@@ -276,7 +282,7 @@ const PRIMARY_SERVICE_GROUPS: Record<'en' | 'ru' | 'nl', PrimaryServiceGroup[]> 
       positioning: 'Structured product flows, conversational systems, and lightweight automation for services that need less friction and clearer support.',
       subserviceIndices: [1, 4, 5],
       supporting: ['Product thinking and flow mapping', 'Workflow support and structured logic', 'Research-led discovery', 'Complex workflow and digital solution support'],
-      relatedProjects: ['restaurant-support-automation', 'smart-massage', 'focus-meetings-platform', 'daily-practices', 'achievemater'],
+      relatedProjects: ['smart-massage', 'focus-meetings-platform', 'daily-practices', 'achievemater'],
       relatedArticle: 'ux-trends-2026',
       pagePath: './services/digital-product-automation.html'
     },
@@ -286,7 +292,7 @@ const PRIMARY_SERVICE_GROUPS: Record<'en' | 'ru' | 'nl', PrimaryServiceGroup[]> 
       positioning: 'Content structure, QA thinking, SEO observations, and practical optimization recommendations that make digital work easier to scan and improve.',
       subserviceIndices: [2, 3],
       supporting: ['QA and content review', 'SEO observations and prioritization', 'Optimization recommendations', 'Testing and measurement support'],
-      relatedProjects: ['qa-testing-blog', 'seo-optimization-proposal'],
+      relatedProjects: ['qa-testing-blog'],
       relatedArticle: 'seo-for-small-business',
       pagePath: './services/content-seo-optimization.html'
     }
@@ -308,7 +314,7 @@ const PRIMARY_SERVICE_GROUPS: Record<'en' | 'ru' | 'nl', PrimaryServiceGroup[]> 
       positioning: 'Структурированные продуктовые сценарии, conversational systems и лёгкая автоматизация для сервисов, которым нужен более понятный пользовательский путь.',
       subserviceIndices: [1, 4, 5],
       supporting: ['Product thinking и flow mapping', 'Workflow support и логика сценариев', 'Research-driven discovery', 'Поддержка сложных цифровых процессов'],
-      relatedProjects: ['restaurant-support-automation', 'smart-massage', 'focus-meetings-platform', 'daily-practices', 'achievemater'],
+      relatedProjects: ['smart-massage', 'focus-meetings-platform', 'daily-practices', 'achievemater'],
       relatedArticle: 'ux-trends-2026',
       pagePath: './services/digital-product-automation.html'
     },
@@ -318,7 +324,7 @@ const PRIMARY_SERVICE_GROUPS: Record<'en' | 'ru' | 'nl', PrimaryServiceGroup[]> 
       positioning: 'Контентная структура, QA-подход, SEO-наблюдения и практические рекомендации по улучшению, которые делают сайт яснее и полезнее.',
       subserviceIndices: [2, 3],
       supporting: ['QA и контент-ревью', 'SEO-наблюдения и приоритизация', 'Рекомендации по оптимизации', 'Поддержка тестирования и метрик'],
-      relatedProjects: ['qa-testing-blog', 'seo-optimization-proposal'],
+      relatedProjects: ['qa-testing-blog'],
       relatedArticle: 'seo-for-small-business',
       pagePath: './services/content-seo-optimization.html'
     }
@@ -340,7 +346,7 @@ const PRIMARY_SERVICE_GROUPS: Record<'en' | 'ru' | 'nl', PrimaryServiceGroup[]> 
       positioning: 'Gestructureerde productflows, conversationele systemen en lichte automatisering voor diensten die minder frictie en duidelijkere support nodig hebben.',
       subserviceIndices: [1, 4, 5],
       supporting: ['Product thinking en flow mapping', 'Workflow support en gestructureerde logica', 'Research-led discovery', 'Ondersteuning voor complexere digitale workflows'],
-      relatedProjects: ['restaurant-support-automation', 'smart-massage', 'focus-meetings-platform', 'daily-practices', 'achievemater'],
+      relatedProjects: ['smart-massage', 'focus-meetings-platform', 'daily-practices', 'achievemater'],
       relatedArticle: 'ux-trends-2026',
       pagePath: './services/digital-product-automation.html'
     },
@@ -350,7 +356,7 @@ const PRIMARY_SERVICE_GROUPS: Record<'en' | 'ru' | 'nl', PrimaryServiceGroup[]> 
       positioning: 'Contentstructuur, QA-denken, SEO-observaties en praktische optimalisatievoorstellen die digitale inhoud duidelijker en bruikbaarder maken.',
       subserviceIndices: [2, 3],
       supporting: ['QA en content review', 'SEO-observaties en prioritering', 'Optimalisatievoorstellen', 'Ondersteuning voor testen en metingen'],
-      relatedProjects: ['qa-testing-blog', 'seo-optimization-proposal'],
+      relatedProjects: ['qa-testing-blog'],
       relatedArticle: 'seo-for-small-business',
       pagePath: './services/content-seo-optimization.html'
     }
@@ -412,6 +418,38 @@ const EXTRA_PROJECTS: Record<'en' | 'ru' | 'nl', Project[]> = {
       images: []
     }
   ]
+};
+
+const DESCRIPTIVE_CASES_BY_GROUP = {
+  'digital-product-automation': ['restaurant-support-automation'],
+  'content-seo-optimization': ['seo-optimization-proposal']
+} as const;
+
+const VISUALIZATION_PROJECT: Record<'en' | 'ru' | 'nl', Project> = {
+  en: {
+    slug: 'visualization-work',
+    title: 'Visualization Work',
+    category: '3D & Spatial Visuals',
+    description: 'A lightweight browser-based visualization case focused on making a rough interior concept easier to discuss through a clearer before / after presentation.',
+    summary: 'Prepared as a standard project block for before / after carousel assets',
+    images: []
+  },
+  ru: {
+    slug: 'visualization-work',
+    title: 'Visualization Work',
+    category: '3D и визуализация пространства',
+    description: 'Кейс лёгкой browser-based визуализации, где грубая пространственная схема была превращена в более понятную before / after подачу.',
+    summary: 'Подготовлен как обычный проектный блок для будущих before / after изображений',
+    images: []
+  },
+  nl: {
+    slug: 'visualization-work',
+    title: 'Visualization Work',
+    category: '3D & ruimtelijke visuals',
+    description: 'Een lichte browser-based visualisatiecase waarbij een ruwe ruimtelijke opzet werd omgezet in een duidelijkere before / after presentatie.',
+    summary: 'Voorbereid als regulier projectblok voor toekomstige before / after carousel-assets',
+    images: []
+  }
 };
 
 const PROJECT_CASES: Record<'en' | 'ru' | 'nl', Record<string, ProjectCase>> = {
@@ -2148,9 +2186,8 @@ export default function Portfolio() {
   const t = data[language];
   const labels = SECTION_TEXT[language];
   const serviceGroups = PRIMARY_SERVICE_GROUPS[language];
-  const displayedProjects = [...t.projects, ...EXTRA_PROJECTS[language]];
-  const projectCases = PROJECT_CASES[language];
-  const visualizationBlock = VISUALIZATION_WORK[language];
+  const displayedProjects = [...t.projects, VISUALIZATION_PROJECT[language]];
+  const descriptiveCases = EXTRA_PROJECTS[language];
   const defaultOgImage = `${SITE_URL}/og-cover.jpg`;
 
   useEffect(() => {
@@ -2331,38 +2368,6 @@ export default function Portfolio() {
 
         <section id="services" className="py-32 px-6 max-w-6xl mx-auto border-t border-[#d8e1ee]">
           <h2 className="text-lg md:text-xl font-bold uppercase tracking-[0.22em] mb-16 text-[#7384a2]">{t.ui.services}</h2>
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
-            {serviceGroups.map((group, index) => (
-              <article key={group.slug} className="border border-[#d8e1ee] bg-white p-8 flex flex-col gap-5">
-                <div className="space-y-3">
-                  <div className="text-xs font-bold uppercase tracking-[0.25em] text-[#7384a2]">{labels.primaryDirections}</div>
-                  <h3 className="text-3xl font-light">{group.title}</h3>
-                  <p className="text-[#546581] font-light leading-relaxed">{group.positioning}</p>
-                </div>
-                <div className="space-y-3">
-                  <div className="text-xs font-bold uppercase tracking-[0.25em] text-[#7384a2]">{labels.supportingCapabilities}</div>
-                  <ul className="space-y-2">
-                    {group.supporting.map((item) => (
-                      <li key={item} className="flex items-start gap-3 text-[#5d6d88] font-light leading-relaxed">
-                        <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[#8b99b2]" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="flex flex-wrap gap-4 pt-2">
-                  <button onClick={() => openService(index)} className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-[#64748f] hover:text-[#081a3a] transition-colors">
-                    {labels.whatIHelpWith}
-                    <ChevronDown size={16} className={`${expandedService === index ? 'rotate-180' : ''} transition-transform`} />
-                  </button>
-                  <a href={group.pagePath} className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-[#64748f] hover:text-[#081a3a] transition-colors">
-                    {labels.servicePage}
-                    <ExternalLink size={16} />
-                  </a>
-                </div>
-              </article>
-            ))}
-          </div>
           <div className="grid border-t border-[#d8e1ee]">
             {serviceGroups.map((group, index) => (
               <div key={index} className="border-b border-[#d8e1ee] group">
@@ -2394,6 +2399,26 @@ export default function Portfolio() {
                       </div>
                     ))}
                   </div>
+                  {DESCRIPTIVE_CASES_BY_GROUP[group.slug as keyof typeof DESCRIPTIVE_CASES_BY_GROUP] && (
+                    <div className="mt-8 border-t border-[#d8e1ee] pt-8">
+                      <div className="text-xs font-bold uppercase tracking-[0.25em] text-[#7384a2] mb-4">{labels.descriptiveCases}</div>
+                      <div className="grid md:grid-cols-2 gap-6">
+                        {DESCRIPTIVE_CASES_BY_GROUP[group.slug as keyof typeof DESCRIPTIVE_CASES_BY_GROUP].map((caseSlug) => {
+                          const descriptiveCase = descriptiveCases.find((item) => item.slug === caseSlug);
+                          if (!descriptiveCase) return null;
+
+                          return (
+                            <article key={descriptiveCase.slug} className="border border-[#d8e1ee] bg-[#f3f7fc] p-6 space-y-3">
+                              <div className="text-xs font-bold uppercase tracking-[0.3em] text-[#7384a2]">{descriptiveCase.category}</div>
+                              <h4 className="text-xl font-medium text-[#081a3a]">{descriptiveCase.title}</h4>
+                              <p className="text-[#546581] font-light leading-relaxed">{descriptiveCase.description}</p>
+                              <p className="text-sm text-[#6b7c99] font-light leading-relaxed">{descriptiveCase.summary}</p>
+                            </article>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
                   <div className="mt-8 grid md:grid-cols-2 gap-6 border-t border-[#d8e1ee] pt-8">
                     <div className="space-y-3">
                       <div className="text-xs font-bold uppercase tracking-[0.25em] text-[#7384a2]">{labels.relatedProjects}</div>
@@ -2428,6 +2453,10 @@ export default function Portfolio() {
                       >
                         {t.articles[ARTICLE_SLUGS.indexOf(group.relatedArticle)].title}
                       </a>
+                      <a href={group.pagePath} className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-[#64748f] hover:text-[#081a3a] transition-colors">
+                        {labels.more}
+                        <ExternalLink size={16} />
+                      </a>
                       <a href="#contact" onClick={(e) => scroll(e, 'contact')} className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-[#64748f] hover:text-[#081a3a] transition-colors">
                         {labels.discussDirection}
                         <ArrowRight size={16} />
@@ -2445,7 +2474,6 @@ export default function Portfolio() {
             <h2 className="text-lg md:text-xl font-bold uppercase tracking-[0.22em] mb-16 text-[#9fb0ca]">{t.ui.projects}</h2>
             <div className="grid md:grid-cols-2 gap-12">
               {displayedProjects.map((project, index) => {
-                const caseData = projectCases[project.slug];
                 return (
                 <div key={index} id={`project-${project.slug}`} className="group scroll-mt-28">
                   <div className="aspect-[16/10] bg-[#10244b] mb-8 overflow-hidden relative shadow-2xl">
@@ -2517,43 +2545,12 @@ export default function Portfolio() {
                     )}
                     <div className="text-xs font-bold uppercase tracking-[0.3em] text-[#93a5c1]">{project.category}</div>
                     <div className="space-y-3 text-[#d4dcec] font-light leading-relaxed">
-                      <p><span className="text-[#9fb0ca] font-medium">{labels.goal}:</span> {caseData.goal}</p>
-                      <p><span className="text-[#9fb0ca] font-medium">{labels.role}:</span> {caseData.role}</p>
-                      <p><span className="text-[#9fb0ca] font-medium">{labels.did}:</span> {caseData.did}</p>
-                      <p><span className="text-[#9fb0ca] font-medium">{labels.outcome}:</span> {caseData.outcome}</p>
+                      <p>{project.description}</p>
+                      <p className="text-[#9fb0ca]">{project.summary}</p>
                     </div>
                   </div>
                 </div>
               )})}
-            </div>
-          </div>
-        </section>
-
-        <section id="visualization-work" className="py-32 px-6 max-w-6xl mx-auto border-t border-[#d8e1ee]">
-          <h2 className="text-lg md:text-xl font-bold uppercase tracking-[0.22em] mb-16 text-[#7384a2]">{labels.visualWork}</h2>
-          <div className="grid lg:grid-cols-[1.1fr,0.9fr] gap-12">
-            <div className="space-y-6">
-              <p className="text-[#546581] font-light leading-relaxed max-w-3xl">{visualizationBlock.intro}</p>
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="border border-[#d8e1ee] bg-[#f3f7fc] p-8 min-h-[220px] flex flex-col justify-between">
-                  <div className="text-xs font-bold uppercase tracking-[0.25em] text-[#7384a2]">{visualizationBlock.labels.before}</div>
-                  <p className="text-[#40506f] font-light leading-relaxed">{visualizationBlock.before}</p>
-                  <div className="text-sm text-[#7d8eac]">{visualizationBlock.labels.placeholder}</div>
-                </div>
-                <div className="border border-[#d8e1ee] bg-white p-8 min-h-[220px] flex flex-col justify-between shadow-sm">
-                  <div className="text-xs font-bold uppercase tracking-[0.25em] text-[#7384a2]">{visualizationBlock.labels.after}</div>
-                  <p className="text-[#40506f] font-light leading-relaxed">{visualizationBlock.after}</p>
-                  <div className="text-sm text-[#7d8eac]">{visualizationBlock.labels.placeholder}</div>
-                </div>
-              </div>
-            </div>
-            <div className="border border-[#d8e1ee] bg-white p-8 shadow-sm space-y-5">
-              {visualizationBlock.details.map(([label, text]) => (
-                <div key={label}>
-                  <div className="text-xs font-bold uppercase tracking-[0.25em] text-[#7384a2] mb-2">{label}</div>
-                  <p className="text-[#546581] font-light leading-relaxed">{text}</p>
-                </div>
-              ))}
             </div>
           </div>
         </section>
