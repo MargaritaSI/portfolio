@@ -452,6 +452,13 @@ const VISUALIZATION_PROJECT: Record<'en' | 'ru' | 'nl', Project> = {
   }
 };
 
+const PROJECT_PRIORITY = [
+  'smart-massage',
+  'achievemater',
+  'netherlands-harmony-guide',
+  'daily-practices'
+] as const;
+
 const PROJECT_CASES: Record<'en' | 'ru' | 'nl', Record<string, ProjectCase>> = {
   en: {
     'netherlands-harmony-guide': {
@@ -994,7 +1001,7 @@ with intelligence`,
     projects: [
       {
         slug: 'netherlands-harmony-guide',
-        title: 'Netherlands Harmony Guide',
+        title: 'Netherlands Guide',
         category: 'UI/UX & Content',
         description: 'A visual guide website about the Netherlands with a calm editorial structure, clear navigation, and immersive location storytelling.',
         summary: 'Travel guide concept with atmospheric content presentation',
@@ -2148,6 +2155,8 @@ export default function Portfolio() {
   const [language, setLanguage] = useState<'en' | 'ru' | 'nl'>('en');
   const [projectSlides, setProjectSlides] = useState<Record<number, number>>({});
   const [lightboxImage, setLightboxImage] = useState<{ src: string; title: string } | null>(null);
+  const [expandedProjects, setExpandedProjects] = useState<Record<string, boolean>>({});
+  const [showAllProjects, setShowAllProjects] = useState(false);
 
   const scroll = (e: React.MouseEvent, id: string) => {
     e.preventDefault();
@@ -2183,11 +2192,23 @@ export default function Portfolio() {
     setProjectSlides((current) => ({ ...current, [projectIndex]: nextIndex }));
   };
 
+  const toggleProjectDetails = (slug: string) => {
+    setExpandedProjects((current) => ({ ...current, [slug]: !current[slug] }));
+  };
+
   const t = data[language];
   const labels = SECTION_TEXT[language];
   const serviceGroups = PRIMARY_SERVICE_GROUPS[language];
-  const displayedProjects = [...t.projects, VISUALIZATION_PROJECT[language]];
-  const descriptiveCases = EXTRA_PROJECTS[language];
+  const displayedProjects = [...t.projects, VISUALIZATION_PROJECT[language]].sort((a, b) => {
+    const aIndex = PROJECT_PRIORITY.indexOf(a.slug as (typeof PROJECT_PRIORITY)[number]);
+    const bIndex = PROJECT_PRIORITY.indexOf(b.slug as (typeof PROJECT_PRIORITY)[number]);
+    const safeA = aIndex === -1 ? PROJECT_PRIORITY.length : aIndex;
+    const safeB = bIndex === -1 ? PROJECT_PRIORITY.length : bIndex;
+
+    if (safeA !== safeB) return safeA - safeB;
+    return 0;
+  });
+  const visibleProjects = showAllProjects ? displayedProjects : displayedProjects.slice(0, 4);
   const defaultOgImage = `${SITE_URL}/og-cover.jpg`;
 
   useEffect(() => {
@@ -2384,47 +2405,20 @@ export default function Portfolio() {
                     <ChevronDown size={32} strokeWidth={1} />
                   </div>
                 </button>
-                <div className={`overflow-hidden transition-all duration-700 ease-in-out ${expandedService === index ? 'max-h-[1100px] pb-12 px-4' : 'max-h-0'}`}>
+                <div className={`overflow-hidden transition-all duration-700 ease-in-out ${expandedService === index ? 'max-h-[720px] pb-12 px-4' : 'max-h-0'}`}>
                   <div className="grid md:grid-cols-2 gap-10">
                     {group.subserviceIndices.map((serviceIndex) => (
-                      <div key={t.services[serviceIndex][0]} className="space-y-4">
+                      <div key={t.services[serviceIndex][0]} className="space-y-3">
                         <div>
                           <h4 className="text-xl font-medium text-[#081a3a] mb-2">{t.services[serviceIndex][0]}</h4>
                           <p className="text-[#546581] font-light leading-relaxed">{t.services[serviceIndex][1]}</p>
                         </div>
-                        <div className="space-y-3">
-                          {t.services[serviceIndex][2].map((detail) => (
-                            <div key={detail} className="flex items-start gap-3 text-[#5d6d88] font-light leading-relaxed">
-                              <div className="w-1.5 h-1.5 bg-[#8b99b2] rounded-full mt-2.5" />
-                              {detail}
-                            </div>
-                          ))}
-                        </div>
                       </div>
                     ))}
                   </div>
-                  {DESCRIPTIVE_CASES_BY_GROUP[group.slug as keyof typeof DESCRIPTIVE_CASES_BY_GROUP] && (
-                    <div className="mt-8 border-t border-[#d8e1ee] pt-8">
-                      <div className="grid md:grid-cols-2 gap-6">
-                        {DESCRIPTIVE_CASES_BY_GROUP[group.slug as keyof typeof DESCRIPTIVE_CASES_BY_GROUP].map((caseSlug) => {
-                          const descriptiveCase = descriptiveCases.find((item) => item.slug === caseSlug);
-                          if (!descriptiveCase) return null;
-
-                          return (
-                            <article key={descriptiveCase.slug} className="border border-[#d8e1ee] bg-[#f3f7fc] p-6 space-y-3">
-                              <div className="text-xs font-bold uppercase tracking-[0.3em] text-[#7384a2]">{descriptiveCase.category}</div>
-                              <h4 className="text-xl font-medium text-[#081a3a]">{descriptiveCase.title}</h4>
-                              <p className="text-[#546581] font-light leading-relaxed">{descriptiveCase.description}</p>
-                              <p className="text-sm text-[#6b7c99] font-light leading-relaxed">{descriptiveCase.summary}</p>
-                            </article>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  )}
-                  <div className="mt-8 border-t border-[#d8e1ee] pt-8">
+                  <div className="mt-8">
                     <div className="space-y-3">
-                      <a href={group.pagePath} className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-[#64748f] hover:text-[#081a3a] transition-colors">
+                      <a href={group.pagePath} className="inline-flex items-center gap-2 bg-[#081a3a] text-stone-50 px-7 py-3 text-base hover:bg-stone-50 hover:text-[#081a3a] border-2 border-[#081a3a] transition-all duration-300 shadow-lg">
                         {labels.more}
                         <ExternalLink size={16} />
                       </a>
@@ -2440,7 +2434,7 @@ export default function Portfolio() {
           <div className="max-w-6xl mx-auto">
             <h2 className="text-lg md:text-xl font-bold uppercase tracking-[0.22em] mb-16 text-[#9fb0ca]">{t.ui.projects}</h2>
             <div className="grid md:grid-cols-2 gap-12">
-              {displayedProjects.map((project, index) => {
+              {visibleProjects.map((project, index) => {
                 return (
                 <div key={index} id={`project-${project.slug}`} className="group scroll-mt-28">
                   <div className="aspect-[16/10] bg-[#10244b] mb-8 overflow-hidden relative shadow-2xl">
@@ -2502,23 +2496,50 @@ export default function Portfolio() {
                     )}
                   </div>
                   <div className="space-y-4">
-                    {project.url ? (
-                      <a href={project.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-3xl font-light hover:text-[#c3cee0] transition-colors">
-                        {project.title}
-                        <ExternalLink size={18} />
-                      </a>
-                    ) : (
-                      <h3 className="text-3xl font-light">{project.title}</h3>
-                    )}
-                    <div className="text-xs font-bold uppercase tracking-[0.3em] text-[#93a5c1]">{project.category}</div>
-                    <div className="space-y-3 text-[#d4dcec] font-light leading-relaxed">
-                      <p>{project.description}</p>
-                      <p className="text-[#9fb0ca]">{project.summary}</p>
+                    <div className="flex items-start justify-between gap-6">
+                      <div className="space-y-3">
+                        {project.url ? (
+                          <a href={project.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-3xl font-light hover:text-[#c3cee0] transition-colors">
+                            {project.title}
+                            <ExternalLink size={18} />
+                          </a>
+                        ) : (
+                          <h3 className="text-3xl font-light">{project.title}</h3>
+                        )}
+                        <div className="text-xs font-bold uppercase tracking-[0.3em] text-[#93a5c1]">{project.category}</div>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => toggleProjectDetails(project.slug)}
+                        className="mt-1 inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-[rgba(8,26,58,0.55)] text-white hover:bg-stone-50 hover:text-[#081a3a] transition-colors"
+                        aria-expanded={expandedProjects[project.slug] ?? false}
+                        aria-label={`Toggle details for ${project.title}`}
+                      >
+                        <ChevronDown size={22} className={`${expandedProjects[project.slug] ? 'rotate-180' : ''} transition-transform duration-300`} />
+                      </button>
+                    </div>
+                    <div className={`overflow-hidden transition-all duration-500 ease-in-out ${expandedProjects[project.slug] ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'}`}>
+                      <div className="space-y-3 pt-1 text-[#d4dcec] font-light leading-relaxed">
+                        <p>{project.description}</p>
+                        <p className="text-[#9fb0ca]">{project.summary}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
               )})}
             </div>
+            {!showAllProjects && displayedProjects.length > 4 && (
+              <div className="mt-14 flex justify-center">
+                <button
+                  type="button"
+                  onClick={() => setShowAllProjects(true)}
+                  className="inline-flex items-center gap-2 bg-stone-50 text-[#081a3a] px-8 py-4 text-base hover:bg-[#c3cee0] border-2 border-stone-50 transition-all duration-300 shadow-lg"
+                >
+                  {labels.more}
+                  <ChevronDown size={18} />
+                </button>
+              </div>
+            )}
           </div>
         </section>
 
