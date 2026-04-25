@@ -375,10 +375,10 @@ const EXTRA_PROJECTS: Record<'en' | 'ru' | 'nl', Project[]> = {
     },
     {
       slug: 'seo-optimization-proposal',
-      title: 'SEO Analysis & Optimization Proposal',
+      title: 'SEO for Restaurant Website',
       category: 'Content, SEO & Optimization',
-      description: 'Audit-style review of structure, content clarity, and practical optimization priorities.',
-      summary: 'Clearer improvement priorities without inflated ranking claims',
+      description: 'Site structure review, content clarity review, SEO observations, practical optimization suggestions, and prioritization of improvements for a restaurant website.',
+      summary: 'Clearer content structure and practical SEO next steps without inflated ranking claims',
       images: []
     }
   ],
@@ -393,10 +393,10 @@ const EXTRA_PROJECTS: Record<'en' | 'ru' | 'nl', Project[]> = {
     },
     {
       slug: 'seo-optimization-proposal',
-      title: 'SEO Analysis & Optimization Proposal',
+      title: 'SEO для сайта ресторана',
       category: 'Content, SEO & Optimization',
-      description: 'Аудит сайта с обзором структуры, ясности контента и приоритетов улучшений.',
-      summary: 'Понятные рекомендации по улучшению без завышенных обещаний',
+      description: 'Обзор структуры сайта ресторана, ясности контента, SEO-наблюдений, практических рекомендаций и приоритизации улучшений.',
+      summary: 'Более понятная структура контента и практичные SEO-следующие шаги без завышенных обещаний',
       images: []
     }
   ],
@@ -411,10 +411,10 @@ const EXTRA_PROJECTS: Record<'en' | 'ru' | 'nl', Project[]> = {
     },
     {
       slug: 'seo-optimization-proposal',
-      title: 'SEO Analysis & Optimization Proposal',
+      title: 'SEO voor restaurantwebsite',
       category: 'Content, SEO & Optimization',
-      description: 'Auditgerichte review van sitestructuur, contentduidelijkheid en geprioriteerde optimalisaties.',
-      summary: 'Praktische verbeterprioriteiten zonder overdreven rankingclaims',
+      description: 'Review van sitestructuur, contentduidelijkheid, SEO-observaties, praktische optimalisatiesuggesties en prioritering van verbeteringen voor een restaurantwebsite.',
+      summary: 'Duidelijkere contentstructuur en praktische SEO-vervolgstappen zonder overdreven rankingclaims',
       images: []
     }
   ]
@@ -428,26 +428,26 @@ const DESCRIPTIVE_CASES_BY_GROUP = {
 const VISUALIZATION_PROJECT: Record<'en' | 'ru' | 'nl', Project> = {
   en: {
     slug: 'visualization-work',
-    title: 'Visualization Work',
-    category: '3D & Spatial Visuals',
-    description: 'A lightweight browser-based visualization case focused on making a rough interior concept easier to discuss through a clearer before / after presentation.',
-    summary: 'Prepared as a standard project block for before / after carousel assets',
+    title: 'Furniture Showroom Visualization',
+    category: '3D & Showroom Visuals',
+    description: 'A quick browser-based visualization for a furniture showroom, turning a rough layout into a clearer and more presentable concept for discussion.',
+    summary: 'Showroom concept visualization with a cleaner and easier-to-explain presentation',
     images: []
   },
   ru: {
     slug: 'visualization-work',
-    title: 'Visualization Work',
-    category: '3D и визуализация пространства',
-    description: 'Кейс лёгкой browser-based визуализации, где грубая пространственная схема была превращена в более понятную before / after подачу.',
-    summary: 'Подготовлен как обычный проектный блок для будущих before / after изображений',
+    title: 'Визуализация мебельного шоурума',
+    category: '3D и showroom-визуалы',
+    description: 'Быстрая browser-based визуализация для мебельного шоурума, где грубая схема была превращена в более понятный и презентабельный концепт для обсуждения.',
+    summary: 'Визуализация showroom-концепта с более чистой и понятной подачей',
     images: []
   },
   nl: {
     slug: 'visualization-work',
-    title: 'Visualization Work',
-    category: '3D & ruimtelijke visuals',
-    description: 'Een lichte browser-based visualisatiecase waarbij een ruwe ruimtelijke opzet werd omgezet in een duidelijkere before / after presentatie.',
-    summary: 'Voorbereid als regulier projectblok voor toekomstige before / after carousel-assets',
+    title: 'Visualisatie voor meubelshowroom',
+    category: '3D & showroomvisuals',
+    description: 'Een snelle browser-based visualisatie voor een meubelshowroom, waarbij een ruwe layout werd omgezet in een duidelijker en beter presenteerbaar concept.',
+    summary: 'Visualisatie van een showroomconcept met een schonere en duidelijkere presentatie',
     images: []
   }
 };
@@ -2288,14 +2288,18 @@ export default function Portfolio() {
     pushRoute({ service: nextExpanded !== null ? SERVICE_SLUGS[nextExpanded] : null, hash: '#services' });
     setActiveArticle(null);
     setExpandedService(nextExpanded);
-    requestAnimationFrame(() => scrollToId('services'));
+    requestAnimationFrame(() => {
+      if (nextExpanded !== null) {
+        scrollToId(`service-${SERVICE_SLUGS[nextExpanded]}`);
+      }
+    });
   };
 
   const jumpToService = (index: number) => {
     pushRoute({ service: SERVICE_SLUGS[index], hash: '#services' });
     setActiveArticle(null);
     setExpandedService(index);
-    requestAnimationFrame(() => scrollToId('services'));
+    requestAnimationFrame(() => scrollToId(`service-${SERVICE_SLUGS[index]}`));
   };
 
   const getProjectImageAlt = (project: Project, imageIndex: number) =>
@@ -2370,7 +2374,7 @@ export default function Portfolio() {
           <h2 className="text-lg md:text-xl font-bold uppercase tracking-[0.22em] mb-16 text-[#7384a2]">{t.ui.services}</h2>
           <div className="grid border-t border-[#d8e1ee]">
             {serviceGroups.map((group, index) => (
-              <div key={index} className="border-b border-[#d8e1ee] group">
+              <div key={index} id={`service-${group.slug}`} className="border-b border-[#d8e1ee] group scroll-mt-28">
                 <button onClick={() => openService(index)} className="w-full py-12 flex flex-col md:flex-row justify-between items-start md:items-center text-left hover:px-4 transition-all duration-500">
                   <div className="max-w-md mb-4 md:mb-0">
                     <h3 className="text-3xl font-light mb-2">{group.title}</h3>
@@ -2401,7 +2405,6 @@ export default function Portfolio() {
                   </div>
                   {DESCRIPTIVE_CASES_BY_GROUP[group.slug as keyof typeof DESCRIPTIVE_CASES_BY_GROUP] && (
                     <div className="mt-8 border-t border-[#d8e1ee] pt-8">
-                      <div className="text-xs font-bold uppercase tracking-[0.25em] text-[#7384a2] mb-4">{labels.descriptiveCases}</div>
                       <div className="grid md:grid-cols-2 gap-6">
                         {DESCRIPTIVE_CASES_BY_GROUP[group.slug as keyof typeof DESCRIPTIVE_CASES_BY_GROUP].map((caseSlug) => {
                           const descriptiveCase = descriptiveCases.find((item) => item.slug === caseSlug);
@@ -2419,47 +2422,11 @@ export default function Portfolio() {
                       </div>
                     </div>
                   )}
-                  <div className="mt-8 grid md:grid-cols-2 gap-6 border-t border-[#d8e1ee] pt-8">
+                  <div className="mt-8 border-t border-[#d8e1ee] pt-8">
                     <div className="space-y-3">
-                      <div className="text-xs font-bold uppercase tracking-[0.25em] text-[#7384a2]">{labels.relatedProjects}</div>
-                      {group.relatedProjects.map((projectSlug) => {
-                        const project = displayedProjects.find((item) => item.slug === projectSlug);
-                        if (!project) return null;
-
-                        return (
-                          <a
-                            key={project.slug}
-                            href={`#project-${project.slug}`}
-                            onClick={(e) => {
-                              e.preventDefault();
-                              scrollToId(`project-${project.slug}`);
-                            }}
-                            className="block text-[#42516f] hover:text-[#081a3a] transition-colors"
-                          >
-                            {project.title}
-                          </a>
-                        );
-                      })}
-                    </div>
-                    <div className="space-y-3">
-                      <div className="text-xs font-bold uppercase tracking-[0.25em] text-[#7384a2]">{labels.relatedArticle}</div>
-                      <a
-                        href={`?article=${group.relatedArticle}#articles`}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          openArticle(ARTICLE_SLUGS.indexOf(group.relatedArticle));
-                        }}
-                        className="block text-[#42516f] hover:text-[#081a3a] transition-colors"
-                      >
-                        {t.articles[ARTICLE_SLUGS.indexOf(group.relatedArticle)].title}
-                      </a>
                       <a href={group.pagePath} className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-[#64748f] hover:text-[#081a3a] transition-colors">
                         {labels.more}
                         <ExternalLink size={16} />
-                      </a>
-                      <a href="#contact" onClick={(e) => scroll(e, 'contact')} className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-[#64748f] hover:text-[#081a3a] transition-colors">
-                        {labels.discussDirection}
-                        <ArrowRight size={16} />
                       </a>
                     </div>
                   </div>
