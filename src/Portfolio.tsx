@@ -25,6 +25,7 @@ import stretchingImage1 from '../STRETCHING2.jpg';
 import qaImage0 from '../qa.jpg';
 import qaImage1 from '../qa1.jpg';
 import qaImage2 from '../qa2.jpg';
+import visual3dImage0 from '../3d-visual.jpg';
 
 type RichSection = {
   title: string;
@@ -57,16 +58,8 @@ type Project = {
   title: string;
   category: string;
   description: string;
-  summary: string;
   images: string[];
   url?: string;
-};
-
-type ProjectCase = {
-  goal: string;
-  role: string;
-  did: string;
-  outcome: string;
 };
 
 type PrimaryServiceGroup = {
@@ -78,23 +71,6 @@ type PrimaryServiceGroup = {
   relatedProjects: string[];
   relatedArticle: (typeof ARTICLE_SLUGS)[number];
   pagePath: string;
-};
-
-type VisualizationBlock = {
-  title: string;
-  intro: string;
-  labels: {
-    before: string;
-    after: string;
-    placeholder: string;
-    input: string;
-    process: string;
-    output: string;
-    value: string;
-  };
-  before: string;
-  after: string;
-  details: [string, string][];
 };
 
 type LocaleData = {
@@ -175,7 +151,8 @@ const projectImages = {
   dailyPractices: [dailyPracticesImage0, dailyPracticesImage1, dailyPracticesImage2, dailyPracticesImage3],
   achievemater: [achievematerImage0, achievematerImage1, achievematerImage2, achievematerImage3],
   stretching: [stretchingImage0, stretchingImage1],
-  qa: [qaImage0, qaImage1, qaImage2]
+  qa: [qaImage0, qaImage1, qaImage2],
+  visual3d: [visual3dImage0]
 };
 
 const SITE_URL = 'https://margaritasi.github.io/portfolio';
@@ -370,7 +347,6 @@ const EXTRA_PROJECTS: Record<'en' | 'ru' | 'nl', Project[]> = {
       title: 'Restaurant Support Automation',
       category: 'Digital Product & Automation',
       description: 'Conversational reservation inquiry and guest support system for restaurants.',
-      summary: 'Clearer inquiry flow and lighter communication load',
       images: []
     },
     {
@@ -378,7 +354,6 @@ const EXTRA_PROJECTS: Record<'en' | 'ru' | 'nl', Project[]> = {
       title: 'SEO for Restaurant Website',
       category: 'Content, SEO & Optimization',
       description: 'Site structure review, content clarity review, SEO observations, practical optimization suggestions, and prioritization of improvements for a restaurant website.',
-      summary: 'Clearer content structure and practical SEO next steps without inflated ranking claims',
       images: []
     }
   ],
@@ -388,7 +363,6 @@ const EXTRA_PROJECTS: Record<'en' | 'ru' | 'nl', Project[]> = {
       title: 'Restaurant Support Automation',
       category: 'Digital Product & Automation',
       description: 'Conversational system для запросов на бронирование и поддержки гостей ресторана.',
-      summary: 'Более понятный путь запроса и меньше повторяющейся коммуникации',
       images: []
     },
     {
@@ -396,7 +370,6 @@ const EXTRA_PROJECTS: Record<'en' | 'ru' | 'nl', Project[]> = {
       title: 'SEO для сайта ресторана',
       category: 'Content, SEO & Optimization',
       description: 'Обзор структуры сайта ресторана, ясности контента, SEO-наблюдений, практических рекомендаций и приоритизации улучшений.',
-      summary: 'Более понятная структура контента и практичные SEO-следующие шаги без завышенных обещаний',
       images: []
     }
   ],
@@ -406,7 +379,6 @@ const EXTRA_PROJECTS: Record<'en' | 'ru' | 'nl', Project[]> = {
       title: 'Restaurant Support Automation',
       category: 'Digital Product & Automation',
       description: 'Conversationeel systeem voor reserveringsaanvragen en veelgestelde gastvragen in restaurants.',
-      summary: 'Duidelijker aanvraagpad en minder repetitieve communicatie',
       images: []
     },
     {
@@ -414,7 +386,6 @@ const EXTRA_PROJECTS: Record<'en' | 'ru' | 'nl', Project[]> = {
       title: 'SEO voor restaurantwebsite',
       category: 'Content, SEO & Optimization',
       description: 'Review van sitestructuur, contentduidelijkheid, SEO-observaties, praktische optimalisatiesuggesties en prioritering van verbeteringen voor een restaurantwebsite.',
-      summary: 'Duidelijkere contentstructuur en praktische SEO-vervolgstappen zonder overdreven rankingclaims',
       images: []
     }
   ]
@@ -431,24 +402,21 @@ const VISUALIZATION_PROJECT: Record<'en' | 'ru' | 'nl', Project> = {
     title: 'Furniture Showroom Visualization',
     category: '3D & Showroom Visuals',
     description: 'A quick browser-based visualization for a furniture showroom, turning a rough layout into a clearer and more presentable concept for discussion.',
-    summary: 'Showroom concept visualization with a cleaner and easier-to-explain presentation',
-    images: []
+    images: projectImages.visual3d
   },
   ru: {
     slug: 'visualization-work',
     title: 'Визуализация мебельного шоурума',
     category: '3D и showroom-визуалы',
     description: 'Быстрая browser-based визуализация для мебельного шоурума, где грубая схема была превращена в более понятный и презентабельный концепт для обсуждения.',
-    summary: 'Визуализация showroom-концепта с более чистой и понятной подачей',
-    images: []
+    images: projectImages.visual3d
   },
   nl: {
     slug: 'visualization-work',
     title: 'Visualisatie voor meubelshowroom',
     category: '3D & showroomvisuals',
     description: 'Een snelle browser-based visualisatie voor een meubelshowroom, waarbij een ruwe layout werd omgezet in een duidelijker en beter presenteerbaar concept.',
-    summary: 'Visualisatie van een showroomconcept met een schonere en duidelijkere presentatie',
-    images: []
+    images: projectImages.visual3d
   }
 };
 
@@ -458,261 +426,6 @@ const PROJECT_PRIORITY = [
   'netherlands-harmony-guide',
   'daily-practices'
 ] as const;
-
-const PROJECT_CASES: Record<'en' | 'ru' | 'nl', Record<string, ProjectCase>> = {
-  en: {
-    'netherlands-harmony-guide': {
-      goal: 'Create a calmer, easier-to-scan guide format for location-based content about the Netherlands.',
-      role: 'UX and website design, structure planning, content organization.',
-      did: 'Organized pages around clearer hierarchy, readable sections, and a softer editorial rhythm for browsing.',
-      outcome: 'Improved content organization and made the guide easier to explore.'
-    },
-    'walk-the-dog': {
-      goal: 'Clarify a local dog walking service offer and make the site easier to scan before contact.',
-      role: 'UX and website design, service communication, structure refinement.',
-      did: 'Simplified the service offer, grouped trust signals, and made the booking path easier to understand.',
-      outcome: 'Made service communication easier to scan and improved booking flow clarity.'
-    },
-    'restaurant-support-automation': {
-      goal: 'Create a conversational system to support restaurant reservation requests and common customer questions.',
-      role: 'Product structure, conversation logic, UX flow, content organization.',
-      did: 'Mapped user flows for booking requests, FAQ handling, and menu guidance; structured key conversation branches; shaped a simpler support journey.',
-      outcome: 'Created a clearer reservation inquiry flow and reduced repetitive communication patterns.'
-    },
-    'smart-massage': {
-      goal: 'Create a clearer client support flow for appointment requests, service overview, and pre-contact questions.',
-      role: 'Product structure, service UX, automation logic, content organization.',
-      did: 'Structured appointment request steps, common question handling, and treatment information into a calmer support path.',
-      outcome: 'Made service information easier to understand before contact and clarified communication flow.'
-    },
-    'focus-meetings-platform': {
-      goal: 'Create an MVP structure for validation around organizing meetings and activities with more supportive planning flows.',
-      role: 'Product UX, interaction structure, MVP definition.',
-      did: 'Mapped planning scenarios, clarified feature hierarchy, and shaped a simpler structure for early product testing.',
-      outcome: 'Created MVP structure for validation and clarified the planning experience.'
-    },
-    'daily-practices': {
-      goal: 'Build a structured concept for daily wellbeing practices and supportive self-reflection.',
-      role: 'Product UX, flow design, content structure.',
-      did: 'Defined a calmer routine framework, organized practice paths, and shaped a more coherent self-guided experience.',
-      outcome: 'Created a more supportive structure for daily use and emotional balance.'
-    },
-    achievemater: {
-      goal: 'Shape a group work environment where people can stay focused on different goals with shared momentum.',
-      role: 'Product structure, UX flow, collaboration framing.',
-      did: 'Clarified the session structure, grouped user goals, and made the collaborative work model easier to understand.',
-      outcome: 'Made the group productivity concept easier to explain and easier to validate.'
-    },
-    'stretching-workout': {
-      goal: 'Present stretching and workout coaching in a cleaner, easier-to-follow service structure.',
-      role: 'Website UX, service framing, content clarity.',
-      did: 'Reworked service hierarchy, simplified training communication, and shaped a more readable path to contact.',
-      outcome: 'Clarified service communication and made the offer easier to scan.'
-    },
-    'qa-testing-blog': {
-      goal: 'Organize useful QA materials into a more structured and approachable knowledge space.',
-      role: 'Content structure, QA perspective, information design.',
-      did: 'Grouped useful materials, shaped more readable entry points, and clarified how content supports day-to-day learning.',
-      outcome: 'Improved content organization and made useful materials easier to find.'
-    },
-    'seo-optimization-proposal': {
-      goal: 'Review site structure, content clarity, and SEO basics to identify practical optimization priorities.',
-      role: 'SEO analysis, content review, prioritization.',
-      did: 'Reviewed structure, page communication, SEO observations, and grouped improvements into clearer next steps.',
-      outcome: 'Created a practical optimization proposal with clearer priorities for improvement.'
-    }
-  },
-  ru: {
-    'netherlands-harmony-guide': {
-      goal: 'Собрать более спокойный и легче сканируемый формат сайта-гида о Нидерландах.',
-      role: 'UX и website design, структурирование контента, архитектура страниц.',
-      did: 'Выстроила более понятную иерархию, редакционный ритм и структуру разделов для спокойного просмотра.',
-      outcome: 'Улучшила организацию контента и сделала гид проще для изучения.'
-    },
-    'walk-the-dog': {
-      goal: 'Сделать локальную услугу по выгулу собак понятнее и удобнее для просмотра до обращения.',
-      role: 'UX и website design, сервисная коммуникация, структурирование.',
-      did: 'Упростила оффер, сгруппировала trust-сигналы и сделала путь к заявке понятнее.',
-      outcome: 'Сделала предложение легче для сканирования и улучшила ясность booking flow.'
-    },
-    'restaurant-support-automation': {
-      goal: 'Создать conversational system для запросов на бронирование и частых вопросов гостей ресторана.',
-      role: 'Product structure, conversation logic, UX flow, content organization.',
-      did: 'Разобрала user flows для reservation requests, FAQ и menu guidance, выстроила ключевые ветки диалога и упростила support journey.',
-      outcome: 'Сформировала более понятный inquiry flow и снизила повторяющиеся паттерны коммуникации.'
-    },
-    'smart-massage': {
-      goal: 'Сделать более понятный support flow для записи, обзора услуг и частых клиентских вопросов.',
-      role: 'Product structure, service UX, automation logic, content organization.',
-      did: 'Выстроила шаги appointment requests, блок common questions и treatment information в более спокойный путь для клиента.',
-      outcome: 'Сделала service information понятнее до контакта и улучшила ясность коммуникации.'
-    },
-    'focus-meetings-platform': {
-      goal: 'Собрать MVP-структуру для проверки идеи организации встреч и активностей с более поддерживающими planning flows.',
-      role: 'Product UX, interaction structure, MVP definition.',
-      did: 'Разложила planning scenarios, уточнила иерархию функций и собрала более ясную структуру для ранней валидации.',
-      outcome: 'Создала MVP structure for validation и сделала planning experience понятнее.'
-    },
-    'daily-practices': {
-      goal: 'Построить структурированный концепт для ежедневных wellbeing-практик и поддерживающей рефлексии.',
-      role: 'Product UX, flow design, content structure.',
-      did: 'Определила более спокойный каркас рутин, организовала practice paths и собрала более цельный self-guided experience.',
-      outcome: 'Создала более поддерживающую структуру для ежедневного использования и эмоционального баланса.'
-    },
-    achievemater: {
-      goal: 'Сформировать групповое рабочее пространство, где люди могут двигаться к разным целям в общем ритме.',
-      role: 'Product structure, UX flow, collaboration framing.',
-      did: 'Уточнила структуру сессий, сгруппировала сценарии целей и сделала модель совместной работы понятнее.',
-      outcome: 'Сделала концепт групповой продуктивности понятнее и удобнее для валидации.'
-    },
-    'stretching-workout': {
-      goal: 'Представить стретчинг и тренировки в более чистой и понятной структуре услуг.',
-      role: 'Website UX, service framing, content clarity.',
-      did: 'Пересобрала иерархию услуг, упростила коммуникацию о тренировках и сделала путь к контакту понятнее.',
-      outcome: 'Уточнила сервисную коммуникацию и сделала оффер проще для сканирования.'
-    },
-    'qa-testing-blog': {
-      goal: 'Организовать полезные QA-материалы в более понятное и удобное knowledge space.',
-      role: 'Content structure, QA perspective, information design.',
-      did: 'Сгруппировала материалы, сделала точки входа читабельнее и уточнила, как контент помогает в повседневном обучении.',
-      outcome: 'Улучшила организацию контента и сделала материалы проще для поиска.'
-    },
-    'seo-optimization-proposal': {
-      goal: 'Проверить структуру сайта, ясность контента и SEO-базу, чтобы определить практические приоритеты улучшений.',
-      role: 'SEO analysis, content review, prioritization.',
-      did: 'Провела обзор структуры, коммуникации страниц и SEO-наблюдений, затем сгруппировала улучшения по приоритету.',
-      outcome: 'Собрала практическое optimization proposal с более ясными приоритетами.'
-    }
-  },
-  nl: {
-    'netherlands-harmony-guide': {
-      goal: 'Een rustiger en beter scanbaar gidsformat maken voor locatiegerichte content over Nederland.',
-      role: 'UX en website design, structuurplanning, contentorganisatie.',
-      did: 'Een duidelijkere hiërarchie, leesbare secties en een kalmere editorial flow voor browsegedrag opgezet.',
-      outcome: 'De contentorganisatie verbeterd en de gids makkelijker gemaakt om te verkennen.'
-    },
-    'walk-the-dog': {
-      goal: 'Een lokale hondenuitlaatservice duidelijker maken en makkelijker scanbaar vóór contact.',
-      role: 'UX en website design, servicecommunicatie, structuurverbetering.',
-      did: 'Het aanbod vereenvoudigd, trust-signals gegroepeerd en het boekingspad duidelijker gemaakt.',
-      outcome: 'De servicecommunicatie verduidelijkt en de booking flow beter scanbaar gemaakt.'
-    },
-    'restaurant-support-automation': {
-      goal: 'Een conversationeel systeem opzetten voor reserveringsaanvragen en veelgestelde restaurantvragen.',
-      role: 'Productstructuur, conversation logic, UX flow, contentorganisatie.',
-      did: 'User flows voor booking requests, FAQ-afhandeling en menubegeleiding uitgewerkt; belangrijke gesprekstakken gestructureerd; een eenvoudiger support journey gevormd.',
-      outcome: 'Een duidelijker reserveringsaanvraag-pad gecreëerd en repetitieve communicatie verminderd.'
-    },
-    'smart-massage': {
-      goal: 'Een duidelijker support flow maken voor afspraakverzoeken, service-overzicht en veelgestelde cliëntvragen.',
-      role: 'Productstructuur, service UX, automation logic, contentorganisatie.',
-      did: 'Afspraakverzoeken, vraagafhandeling en treatment information in een rustiger supportpad gestructureerd.',
-      outcome: 'Service-informatie vóór contact verduidelijkt en de communicatiestroom beter gestructureerd.'
-    },
-    'focus-meetings-platform': {
-      goal: 'Een MVP-structuur maken om een afspraken- en activiteitenconcept met ondersteunende planning flows te valideren.',
-      role: 'Product UX, interactiestructuur, MVP-definitie.',
-      did: 'Planningsscenario’s uitgewerkt, feature-hiërarchie verduidelijkt en een eenvoudiger structuur voor vroege validatie gevormd.',
-      outcome: 'Een MVP-structuur voor validatie gecreëerd en de planningservaring verduidelijkt.'
-    },
-    'daily-practices': {
-      goal: 'Een gestructureerd concept bouwen voor dagelijkse wellbeing-praktijken en ondersteunende reflectie.',
-      role: 'Product UX, flow design, contentstructuur.',
-      did: 'Een rustiger routinekader uitgewerkt, practice paths georganiseerd en een coherenter self-guided experience opgebouwd.',
-      outcome: 'Een ondersteunendere structuur gemaakt voor dagelijks gebruik en emotionele balans.'
-    },
-    achievemater: {
-      goal: 'Een groepswerkruimte vormgeven waar mensen aan verschillende doelen kunnen werken met gedeeld momentum.',
-      role: 'Productstructuur, UX flow, collaboration framing.',
-      did: 'De sessiestructuur verduidelijkt, doeltypes gegroepeerd en het samenwerkingsmodel begrijpelijker gemaakt.',
-      outcome: 'Het groepsproductiviteitsconcept duidelijker en beter valideerbaar gemaakt.'
-    },
-    'stretching-workout': {
-      goal: 'Stretching- en workoutcoaching in een schonere en beter scanbare servicestructuur presenteren.',
-      role: 'Website UX, service framing, contentduidelijkheid.',
-      did: 'De dienstenhiërarchie herwerkt, trainingscommunicatie vereenvoudigd en het pad naar contact helderder gemaakt.',
-      outcome: 'De servicecommunicatie verduidelijkt en het aanbod makkelijker scanbaar gemaakt.'
-    },
-    'qa-testing-blog': {
-      goal: 'Nuttige QA-materialen ordenen in een toegankelijkere en overzichtelijkere kennisruimte.',
-      role: 'Contentstructuur, QA-perspectief, informatieontwerp.',
-      did: 'Materialen gegroepeerd, duidelijkere instappunten gemaakt en verduidelijkt hoe de content dagelijks leren ondersteunt.',
-      outcome: 'De contentorganisatie verbeterd en nuttige materialen makkelijker vindbaar gemaakt.'
-    },
-    'seo-optimization-proposal': {
-      goal: 'Sitestructuur, contentduidelijkheid en SEO-basis reviewen om praktische verbeterprioriteiten te bepalen.',
-      role: 'SEO-analyse, contentreview, prioritering.',
-      did: 'Structuur, paginahelderheid en SEO-observaties bekeken en verbeterpunten in duidelijke stappen gegroepeerd.',
-      outcome: 'Een praktisch optimalisatievoorstel met duidelijkere verbeterprioriteiten gemaakt.'
-    }
-  }
-};
-
-const VISUALIZATION_WORK: Record<'en' | 'ru' | 'nl', VisualizationBlock> = {
-  en: {
-    title: 'Visualization Work',
-    intro: 'A lightweight browser-based visualization case focused on making a rough interior concept easier to discuss through a clearer before / after presentation.',
-    labels: {
-      before: 'Before',
-      after: 'After',
-      placeholder: 'Prepared for before / after visuals',
-      input: 'Input',
-      process: 'Process',
-      output: 'Output',
-      value: 'Value'
-    },
-    before: 'Simple furniture arrangement and rough spatial setup with limited visual hierarchy.',
-    after: 'A cleaner, more appealing visualization that communicates the space more clearly without heavy specialist software.',
-    details: [
-      ['Input', 'A basic room layout or primitive interior setup used as a quick starting point.'],
-      ['Process', 'Refined the composition, presentation rhythm, and visual emphasis inside a lightweight visualizer.'],
-      ['Output', 'Created a clearer and more presentable before / after comparison for discussion.'],
-      ['Value', 'Helped communicate an interior or spatial concept faster and with less ambiguity.']
-    ]
-  },
-  ru: {
-    title: 'Visualization Work',
-    intro: 'Кейс лёгкой browser-based визуализации, где грубая пространственная схема была превращена в более понятную before / after подачу.',
-    labels: {
-      before: 'До',
-      after: 'После',
-      placeholder: 'Блок подготовлен для before / after визуалов',
-      input: 'Исходные данные',
-      process: 'Процесс',
-      output: 'Результат',
-      value: 'Ценность'
-    },
-    before: 'Простая расстановка мебели и грубая пространственная схема с минимальной визуальной иерархией.',
-    after: 'Более чистая и выразительная визуализация, которая понятнее передаёт идею пространства без тяжёлого специализированного софта.',
-    details: [
-      ['Исходные данные', 'Базовая схема комнаты или примитивный spatial setup как быстрый старт.'],
-      ['Процесс', 'Уточнила композицию, ритм подачи и визуальные акценты в лёгком визуализаторе.'],
-      ['Результат', 'Собрала более понятную и презентабельную before / after подачу для обсуждения.'],
-      ['Ценность', 'Помогла быстрее и яснее коммуницировать интерьерную или пространственную идею.']
-    ]
-  },
-  nl: {
-    title: 'Visualization Work',
-    intro: 'Een lichte browser-based visualisatiecase waarbij een ruwe ruimtelijke opzet werd omgezet in een duidelijkere before / after presentatie.',
-    labels: {
-      before: 'Voor',
-      after: 'Na',
-      placeholder: 'Voorbereid voor before / after visuals',
-      input: 'Input',
-      process: 'Proces',
-      output: 'Output',
-      value: 'Waarde'
-    },
-    before: 'Een eenvoudige meubelopstelling en ruwe ruimtelijke setup met beperkte visuele hiërarchie.',
-    after: 'Een schonere en aantrekkelijkere visualisatie die het ruimteconcept duidelijker laat zien zonder zware specialistische software.',
-    details: [
-      ['Input', 'Een basale kamerindeling of primitieve ruimtelijke setup als snelle startbasis.'],
-      ['Proces', 'Compositie, presentatieritme en visuele nadruk verfijnd in een lichte visualizer.'],
-      ['Output', 'Een duidelijkere en beter presenteerbare before / after vergelijking gemaakt.'],
-      ['Waarde', 'Maakte het sneller en duidelijker om een interieur- of ruimteconcept te communiceren.']
-    ]
-  }
-};
 
 const ensureMetaTag = (selector: string, attributes: Record<string, string>) => {
   if (typeof document === 'undefined') return;
@@ -1004,7 +717,6 @@ with intelligence`,
         title: 'Netherlands Guide',
         category: 'UI/UX & Content',
         description: 'A visual guide website about the Netherlands with a calm editorial structure, clear navigation, and immersive location storytelling.',
-        summary: 'Travel guide concept with atmospheric content presentation',
         images: projectImages.dutch
       },
       {
@@ -1012,7 +724,6 @@ with intelligence`,
         title: 'Walk the Dog',
         category: 'Pet Care & Local Service',
         description: 'A compact service website for dog walking with clear offer blocks, trust-focused messaging, and a friendly local brand feel.',
-        summary: 'Service landing page focused on clarity and bookings',
         images: projectImages.dog,
         url: 'https://wukkishim.wixsite.com/walkthedog'
       },
@@ -1021,7 +732,6 @@ with intelligence`,
         title: 'Smart Massage',
         category: 'Wellness & Booking',
         description: 'A massage studio website with gentle visual rhythm, service highlights, and a stronger path from discovery to appointment booking.',
-        summary: 'Wellness website designed for calm browsing and conversion',
         images: projectImages.massage,
         url: 'https://wukkishim.wixstudio.com/smartmassage'
       },
@@ -1030,7 +740,6 @@ with intelligence`,
         title: 'Focus Meetings Platform',
         category: 'UI/UX & Product',
         description: 'MVP design for organizing meetings with activities system for users who benefit from more focused and supportive planning flows.',
-        summary: 'Product concept with structured meeting planning experience',
         images: projectImages.adhd,
         url: 'https://adhd-harmony-guide.lovable.app'
       },
@@ -1039,7 +748,6 @@ with intelligence`,
         title: 'Daily Practices',
         category: 'Mental Health & Habit Support',
         description: 'A mental health product concept centered on gentle daily rituals, structured reflection, and supportive self-regulation flows.',
-        summary: 'Wellbeing experience built around calm routines and emotional balance',
         images: projectImages.dailyPractices,
         url: 'https://body-mind-harmony-guide.lovable.app'
       },
@@ -1048,7 +756,6 @@ with intelligence`,
         title: 'Achievemater',
         category: 'Community & Productivity',
         description: 'A collaborative group workspace where people can work side by side toward different goals with structure, accountability, and shared momentum.',
-        summary: 'Group productivity concept for focus, support, and progress',
         images: projectImages.achievemater,
         url: 'https://wukkishim.wixstudio.com/achievemater'
       },
@@ -1057,7 +764,6 @@ with intelligence`,
         title: 'Stretching & Workout',
         category: 'Fitness & Coaching',
         description: 'A training website for stretching and workout coaching with a clear service structure, approachable guidance, and a stronger conversion path.',
-        summary: 'Coach website focused on movement practice and sign-ups',
         images: projectImages.stretching,
         url: 'https://wukkishim.wixstudio.com/ithealthyback'
       },
@@ -1066,7 +772,6 @@ with intelligence`,
         title: 'QA Testing Blog',
         category: 'Content & Knowledge',
         description: 'A QA blog with curated testing materials, practical notes, and resources that feel genuinely useful for learning and day-to-day work.',
-        summary: 'Editorial knowledge hub for testing insights and resources',
         images: projectImages.qa
       }
     ],
@@ -1467,7 +1172,6 @@ with intelligence`,
         title: 'Гид по Нидерландам',
         category: 'UI/UX и контент',
         description: 'Визуальный сайт-гид о Нидерландах со спокойной редакционной структурой, понятной навигацией и атмосферной подачей локаций.',
-        summary: 'Концепт travel-guide с выразительной подачей контента',
         images: projectImages.dutch
       },
       {
@@ -1475,7 +1179,6 @@ with intelligence`,
         title: 'Walk the Dog',
         category: 'Pet Care и локальный сервис',
         description: 'Компактный сайт услуги по выгулу собак с понятными блоками предложения, сообщениями про доверие и дружелюбным локальным характером.',
-        summary: 'Лендинг сервиса с фокусом на ясность и заявки',
         images: projectImages.dog,
         url: 'https://wukkishim.wixsite.com/walkthedog'
       },
@@ -1484,7 +1187,6 @@ with intelligence`,
         title: 'Smart Massage',
         category: 'Wellness и запись',
         description: 'Сайт массажной студии с мягким визуальным ритмом, акцентом на услугах и более понятным переходом от знакомства к записи.',
-        summary: 'Wellness-сайт для спокойного просмотра и конверсии',
         images: projectImages.massage,
         url: 'https://wukkishim.wixstudio.com/smartmassage'
       },
@@ -1493,7 +1195,6 @@ with intelligence`,
         title: 'Focus Meetings Platform',
         category: 'UI/UX и продукт',
         description: 'MVP-дизайн платформы для организации встреч с системой активностей для пользователей, которым важны более сфокусированные и поддерживающие сценарии планирования.',
-        summary: 'Продуктовый концепт со структурированным опытом планирования встреч',
         images: projectImages.adhd,
         url: 'https://adhd-harmony-guide.lovable.app'
       },
@@ -1502,7 +1203,6 @@ with intelligence`,
         title: 'Daily Practices',
         category: 'Mental Health и привычки',
         description: 'Концепт ментал-хелс продукта, построенный вокруг мягких ежедневных практик, структурированной рефлексии и поддерживающих сценариев саморегуляции.',
-        summary: 'Wellbeing-опыт вокруг спокойных рутин и эмоционального баланса',
         images: projectImages.dailyPractices,
         url: 'https://body-mind-harmony-guide.lovable.app'
       },
@@ -1511,7 +1211,6 @@ with intelligence`,
         title: 'Achievemater',
         category: 'Комьюнити и продуктивность',
         description: 'Совместное групповое пространство, где люди могут работать рядом над разными целями с опорой на структуру, accountability и общий ритм.',
-        summary: 'Концепт групповой продуктивности для фокуса, поддержки и прогресса',
         images: projectImages.achievemater,
         url: 'https://wukkishim.wixstudio.com/achievemater'
       },
@@ -1520,7 +1219,6 @@ with intelligence`,
         title: 'Stretching & Workout',
         category: 'Фитнес и коучинг',
         description: 'Сайт для тренировок по стретчингу и воркауту с понятной структурой услуг, дружелюбной подачей и более ясным путём к записи.',
-        summary: 'Сайт тренера с фокусом на практику движения и заявки',
         images: projectImages.stretching,
         url: 'https://wukkishim.wixstudio.com/ithealthyback'
       },
@@ -1529,7 +1227,6 @@ with intelligence`,
         title: 'QA Testing Blog',
         category: 'Контент и знания',
         description: 'QA-блог с полезными и интересными материалами по тестированию, практическими заметками и подборками ресурсов для работы и обучения.',
-        summary: 'Редакционный хаб со знаниями и материалами по тестированию',
         images: projectImages.qa
       }
     ],
@@ -1930,7 +1627,6 @@ met intelligentie`,
         title: 'Nederland Gids',
         category: 'UI/UX & Content',
         description: 'Een visuele gidswebsite over Nederland met een rustige editorial structuur, heldere navigatie en sfeervolle presentatie van locaties.',
-        summary: 'Travel-guide concept met atmosferische contentpresentatie',
         images: projectImages.dutch
       },
       {
@@ -1938,7 +1634,6 @@ met intelligentie`,
         title: 'Walk the Dog',
         category: 'Pet Care & Lokale service',
         description: 'Een compacte website voor hondenuitlaatservice met heldere aanbodblokken, vertrouwenwekkende copy en een vriendelijke lokale uitstraling.',
-        summary: 'Service landing page met focus op duidelijkheid en boekingen',
         images: projectImages.dog,
         url: 'https://wukkishim.wixsite.com/walkthedog'
       },
@@ -1947,7 +1642,6 @@ met intelligentie`,
         title: 'Smart Massage',
         category: 'Wellness & Boekingen',
         description: 'Een website voor een massagestudio met een zachte visuele cadans, sterke serviceblokken en een duidelijker pad naar een afspraak.',
-        summary: 'Wellness-website ontworpen voor rust en conversie',
         images: projectImages.massage,
         url: 'https://wukkishim.wixstudio.com/smartmassage'
       },
@@ -1956,7 +1650,6 @@ met intelligentie`,
         title: 'Focus Meetings Platform',
         category: 'UI/UX & Product',
         description: 'MVP-ontwerp voor het organiseren van afspraken met een activiteitensysteem voor gebruikers die baat hebben bij meer focus en ondersteunende planningsflows.',
-        summary: 'Productconcept met gestructureerde meeting planning',
         images: projectImages.adhd,
         url: 'https://adhd-harmony-guide.lovable.app'
       },
@@ -1965,7 +1658,6 @@ met intelligentie`,
         title: 'Daily Practices',
         category: 'Mental Health & Gewoontevorming',
         description: 'Een mental-health productconcept rond zachte dagelijkse rituelen, gestructureerde reflectie en ondersteunende flows voor zelfregulatie.',
-        summary: 'Wellbeing-ervaring gebouwd rond rustige routines en emotionele balans',
         images: projectImages.dailyPractices,
         url: 'https://body-mind-harmony-guide.lovable.app'
       },
@@ -1974,7 +1666,6 @@ met intelligentie`,
         title: 'Achievemater',
         category: 'Community & Productiviteit',
         description: 'Een gezamenlijke groepsruimte waar mensen naast elkaar aan verschillende doelen kunnen werken met structuur, accountability en gedeelde energie.',
-        summary: 'Groepsproductiviteitsconcept voor focus, steun en voortgang',
         images: projectImages.achievemater,
         url: 'https://wukkishim.wixstudio.com/achievemater'
       },
@@ -1983,7 +1674,6 @@ met intelligentie`,
         title: 'Stretching & Workout',
         category: 'Fitness & Coaching',
         description: 'Een trainingswebsite voor stretching- en workoutcoaching met een heldere dienstenstructuur, toegankelijke begeleiding en een sterker pad naar aanmelding.',
-        summary: 'Coachwebsite gericht op bewegingstraining en conversie',
         images: projectImages.stretching,
         url: 'https://wukkishim.wixstudio.com/ithealthyback'
       },
@@ -1992,7 +1682,6 @@ met intelligentie`,
         title: 'QA Testing Blog',
         category: 'Content & Kennis',
         description: 'Een QA-blog met nuttige testmaterialen, praktische notities en bronnen die echt bruikbaar zijn voor leren en dagelijks werk.',
-        summary: 'Redactionele kennisplek voor testinginzichten en resources',
         images: projectImages.qa
       }
     ],
@@ -2137,6 +1826,10 @@ met intelligentie`,
 };
 
 export default function Portfolio() {
+  const [currentView, setCurrentView] = useState<'home' | 'articles'>(() => {
+    if (typeof window === 'undefined') return 'home';
+    return new URLSearchParams(window.location.search).get('view') === 'articles' ? 'articles' : 'home';
+  });
   const [expandedService, setExpandedService] = useState<number | null>(() => {
     if (typeof window === 'undefined') return null;
 
@@ -2157,6 +1850,7 @@ export default function Portfolio() {
   const [lightboxImage, setLightboxImage] = useState<{ src: string; title: string } | null>(null);
   const [expandedProjects, setExpandedProjects] = useState<Record<string, boolean>>({});
   const [showAllProjects, setShowAllProjects] = useState(false);
+  const [pendingProjectSlug, setPendingProjectSlug] = useState<string | null>(null);
 
   const scroll = (e: React.MouseEvent, id: string) => {
     e.preventDefault();
@@ -2169,18 +1863,38 @@ export default function Portfolio() {
     if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - 80, behavior: 'smooth' });
   };
 
-  const pushRoute = (params: { article?: string | null; service?: string | null; hash?: string }) => {
+  const navigateToHomeSection = (id: string) => {
+    pushRoute({ view: 'home', hash: `#${id}` });
+    setCurrentView('home');
+    setActiveArticle(null);
+    requestAnimationFrame(() => scrollToId(id));
+  };
+
+  const pushRoute = (params: { article?: string | null; service?: string | null; project?: string | null; view?: 'home' | 'articles'; hash?: string }) => {
     const nextParams = new URLSearchParams(window.location.search);
+
+    if (params.view === 'articles') {
+      nextParams.set('view', 'articles');
+    } else if (params.view === 'home') {
+      nextParams.delete('view');
+    }
 
     if (params.article) {
       nextParams.set('article', params.article);
       nextParams.delete('service');
+      nextParams.delete('project');
     } else if (params.service) {
       nextParams.set('service', params.service);
       nextParams.delete('article');
+      nextParams.delete('project');
+    } else if (params.project) {
+      nextParams.set('project', params.project);
+      nextParams.delete('article');
+      nextParams.delete('service');
     } else {
       nextParams.delete('article');
       nextParams.delete('service');
+      nextParams.delete('project');
     }
 
     const query = nextParams.toString();
@@ -2193,7 +1907,13 @@ export default function Portfolio() {
   };
 
   const toggleProjectDetails = (slug: string) => {
-    setExpandedProjects((current) => ({ ...current, [slug]: !current[slug] }));
+    setCurrentView('home');
+    setExpandedProjects((current) => {
+      const nextExpanded = { ...current, [slug]: !current[slug] };
+      const isOpen = nextExpanded[slug];
+      pushRoute({ project: isOpen ? slug : null, view: 'home', hash: isOpen ? `#project-${slug}` : '#projects' });
+      return nextExpanded;
+    });
   };
 
   const t = data[language];
@@ -2216,11 +1936,19 @@ export default function Portfolio() {
       const params = new URLSearchParams(window.location.search);
       const articleSlug = params.get('article');
       const serviceSlug = params.get('service');
+      const projectSlug = params.get('project');
+      const nextView = params.get('view') === 'articles' || articleSlug ? 'articles' : 'home';
       const articleIndex = articleSlug ? ARTICLE_SLUGS.indexOf(articleSlug as (typeof ARTICLE_SLUGS)[number]) : -1;
       const serviceIndex = serviceSlug ? SERVICE_SLUGS.indexOf(serviceSlug as (typeof SERVICE_SLUGS)[number]) : -1;
 
+      setCurrentView(nextView);
       setActiveArticle(articleIndex >= 0 ? articleIndex : null);
       setExpandedService(serviceIndex >= 0 ? serviceIndex : null);
+      if (projectSlug) {
+        setShowAllProjects(true);
+        setExpandedProjects({ [projectSlug]: true });
+        setPendingProjectSlug(projectSlug);
+      }
     };
 
     readRouteState();
@@ -2235,25 +1963,48 @@ export default function Portfolio() {
   }, [language]);
 
   useEffect(() => {
+    if (!pendingProjectSlug || currentView !== 'home') return;
+
+    requestAnimationFrame(() => {
+      scrollToId(`project-${pendingProjectSlug}`);
+      setPendingProjectSlug(null);
+    });
+  }, [pendingProjectSlug, currentView, showAllProjects]);
+
+  useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const articleSlug = activeArticle !== null ? ARTICLE_SLUGS[activeArticle] : null;
     const serviceSlug = activeArticle === null && expandedService !== null ? SERVICE_SLUGS[expandedService] : null;
+    const projectSlug = Object.entries(expandedProjects).find(([, isOpen]) => isOpen)?.[0] ?? null;
 
     if (articleSlug) {
       params.set('article', articleSlug);
       params.delete('service');
+      params.delete('project');
     } else if (serviceSlug) {
       params.set('service', serviceSlug);
       params.delete('article');
+      params.delete('project');
+    } else if (projectSlug) {
+      params.set('project', projectSlug);
+      params.delete('article');
+      params.delete('service');
     } else {
       params.delete('article');
       params.delete('service');
+      params.delete('project');
+    }
+
+    if (currentView === 'articles' || articleSlug) {
+      params.set('view', 'articles');
+    } else {
+      params.delete('view');
     }
 
     const query = params.toString();
     const nextUrl = `${window.location.pathname}${query ? `?${query}` : ''}${window.location.hash}`;
     window.history.replaceState({}, '', nextUrl);
-  }, [activeArticle, expandedService]);
+  }, [activeArticle, expandedService, expandedProjects, currentView]);
 
   useEffect(() => {
     const article = activeArticle !== null ? t.articles[activeArticle] : null;
@@ -2292,21 +2043,24 @@ export default function Portfolio() {
   }, [activeArticle, expandedService, language]);
 
   const openArticle = (index: number) => {
-    pushRoute({ article: ARTICLE_SLUGS[index], hash: '#articles' });
+    pushRoute({ article: ARTICLE_SLUGS[index], view: 'articles', hash: '#articles' });
+    setCurrentView('articles');
     setExpandedService(null);
     setActiveArticle(index);
     requestAnimationFrame(() => scrollToId('articles'));
   };
 
   const closeArticle = () => {
-    pushRoute({ hash: '#articles' });
+    pushRoute({ view: 'articles', hash: '#articles' });
+    setCurrentView('articles');
     setActiveArticle(null);
     requestAnimationFrame(() => scrollToId('articles'));
   };
 
   const openService = (index: number) => {
     const nextExpanded = expandedService === index ? null : index;
-    pushRoute({ service: nextExpanded !== null ? SERVICE_SLUGS[nextExpanded] : null, hash: '#services' });
+    pushRoute({ service: nextExpanded !== null ? SERVICE_SLUGS[nextExpanded] : null, view: 'home', hash: '#services' });
+    setCurrentView('home');
     setActiveArticle(null);
     setExpandedService(nextExpanded);
     requestAnimationFrame(() => {
@@ -2317,14 +2071,15 @@ export default function Portfolio() {
   };
 
   const jumpToService = (index: number) => {
-    pushRoute({ service: SERVICE_SLUGS[index], hash: '#services' });
+    pushRoute({ service: SERVICE_SLUGS[index], view: 'home', hash: '#services' });
+    setCurrentView('home');
     setActiveArticle(null);
     setExpandedService(index);
     requestAnimationFrame(() => scrollToId(`service-${SERVICE_SLUGS[index]}`));
   };
 
   const getProjectImageAlt = (project: Project, imageIndex: number) =>
-    `${project.title} screenshot ${imageIndex + 1}, showing ${project.summary.toLowerCase()}.`;
+    `${project.title} screenshot ${imageIndex + 1}, showing ${project.description.toLowerCase()}.`;
 
   return (
     <div className="min-h-screen bg-stone-50 text-[#081a3a] font-sans selection:bg-[#081a3a] selection:text-stone-50">
@@ -2364,11 +2119,23 @@ export default function Portfolio() {
         <nav className="max-w-6xl mx-auto px-6 py-6 flex justify-between items-center gap-6">
           <div className="text-xl font-medium tracking-tight">It healthy coder.</div>
           <div className="hidden md:flex items-center gap-12">
-            {t.nav.map((item, i) => (
-              <a key={i} href={`#${['services', 'projects', 'process', 'articles', 'contact'][i]}`} onClick={(e) => scroll(e, ['services', 'projects', 'process', 'articles', 'contact'][i])} className="text-sm font-medium hover:text-[#7686a4] transition lowercase tracking-wider">
-                {item}
-              </a>
-            ))}
+            <a href="#services" onClick={(e) => { e.preventDefault(); navigateToHomeSection('services'); }} className="text-sm font-medium hover:text-[#7686a4] transition lowercase tracking-wider">{t.nav[0]}</a>
+            <a href="#projects" onClick={(e) => { e.preventDefault(); navigateToHomeSection('projects'); }} className="text-sm font-medium hover:text-[#7686a4] transition lowercase tracking-wider">{t.nav[1]}</a>
+            <a href="#process" onClick={(e) => { e.preventDefault(); navigateToHomeSection('process'); }} className="text-sm font-medium hover:text-[#7686a4] transition lowercase tracking-wider">{t.nav[2]}</a>
+            <a
+              href="?view=articles#articles"
+              onClick={(e) => {
+                e.preventDefault();
+                pushRoute({ view: 'articles', hash: '#articles' });
+                setCurrentView('articles');
+                setActiveArticle(null);
+                requestAnimationFrame(() => scrollToId('articles'));
+              }}
+              className="text-sm font-medium hover:text-[#7686a4] transition lowercase tracking-wider"
+            >
+              {t.nav[3]}
+            </a>
+            <a href="#contact" onClick={(e) => { e.preventDefault(); navigateToHomeSection('contact'); }} className="text-sm font-medium hover:text-[#7686a4] transition lowercase tracking-wider">{t.nav[4]}</a>
           </div>
           <div className="flex bg-[#eef3f9] p-1 rounded-full">
             <button onClick={() => setLanguage('en')} className={`px-3 py-1 rounded-full text-sm transition-all ${language === 'en' ? 'bg-[#081a3a] text-white shadow-lg' : 'text-[#5f6f8c] hover:text-[#081a3a]'}`}>EN</button>
@@ -2379,6 +2146,8 @@ export default function Portfolio() {
       </header>
 
       <main>
+        {currentView === 'home' && (
+        <>
         <section className="pt-48 pb-32 px-6 max-w-6xl mx-auto min-h-screen flex flex-col justify-center">
           <h1 className="text-6xl md:text-8xl font-light tracking-tighter leading-[0.9] mb-12 whitespace-pre-wrap">{t.hero[0]}</h1>
           <div className="grid md:grid-cols-2 gap-12 items-end">
@@ -2490,7 +2259,7 @@ export default function Portfolio() {
                         <div className="absolute inset-0 flex flex-col items-center justify-center px-10 text-center">
                           <div className="text-xs font-bold uppercase tracking-[0.3em] text-[#9fb0ca] mb-4">{project.category}</div>
                           <div className="text-3xl font-light mb-4">{project.title}</div>
-                          <div className="text-[#c3cee0] max-w-md">{labels.projectPlaceholder}</div>
+                          <div className="text-[#c3cee0] max-w-md">{project.description}</div>
                         </div>
                       </>
                     )}
@@ -2519,9 +2288,8 @@ export default function Portfolio() {
                       </button>
                     </div>
                     <div className={`overflow-hidden transition-all duration-500 ease-in-out ${expandedProjects[project.slug] ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'}`}>
-                      <div className="space-y-3 pt-1 text-[#d4dcec] font-light leading-relaxed">
+                      <div className="pt-1 text-[#d4dcec] font-light leading-relaxed">
                         <p>{project.description}</p>
-                        <p className="text-[#9fb0ca]">{project.summary}</p>
                       </div>
                     </div>
                   </div>
@@ -2557,7 +2325,10 @@ export default function Portfolio() {
             ))}
           </div>
         </section>
+        </>
+        )}
 
+        {currentView === 'articles' && (
         <section id="articles" className="py-32 px-6 max-w-6xl mx-auto border-t border-[#d8e1ee]">
           <h2 className="text-lg md:text-xl font-bold uppercase tracking-[0.22em] mb-16 text-[#7384a2]">{t.ui.articles}</h2>
 
@@ -2576,7 +2347,6 @@ export default function Portfolio() {
                   <div className="flex flex-col gap-6 md:gap-7">
                     <div className="flex flex-wrap items-center gap-x-4 gap-y-3">
                       <span className="text-xs font-bold uppercase tracking-widest bg-[#081a3a] text-stone-50 px-3 py-1">{article.category}</span>
-                      <span className="text-sm text-[#7384a2] font-medium tracking-wider">{article.date} — {article.readTime}</span>
                     </div>
                     <h3 className="text-3xl md:text-4xl font-light leading-tight group-hover:translate-x-2 transition-transform duration-500">{article.title}</h3>
                     <p className="text-[#546581] font-light max-w-2xl leading-relaxed">{article.excerpt}</p>
@@ -2603,14 +2373,13 @@ export default function Portfolio() {
 
               <div className="flex flex-wrap items-center gap-x-4 gap-y-3 mb-6">
                 <span className="text-xs font-bold uppercase tracking-widest bg-[#081a3a] text-stone-50 px-3 py-1">{t.articles[activeArticle].category}</span>
-                <span className="text-sm text-[#7384a2] font-medium tracking-wider">{t.articles[activeArticle].date} — {t.articles[activeArticle].readTime}</span>
               </div>
 
               <h3 className="text-4xl md:text-5xl font-light leading-tight tracking-tight mb-6">{t.articles[activeArticle].title}</h3>
               <p className="text-xl text-[#546581] font-light leading-relaxed max-w-3xl mb-12">{t.articles[activeArticle].excerpt}</p>
               <div className="w-12 h-px bg-[#081a3a] mb-10" />
               {renderRichContent(t.articles[activeArticle].content)}
-              <div className="mt-12 pt-8 border-t border-[#d8e1ee] grid md:grid-cols-2 gap-8">
+              <div className="mt-12 pt-8 border-t border-[#d8e1ee]">
                 <div className="space-y-3">
                   <div className="text-xs font-bold uppercase tracking-[0.25em] text-[#7384a2]">{labels.relatedService}</div>
                   <a
@@ -2626,9 +2395,13 @@ export default function Portfolio() {
                     return (
                       <a
                         key={project.slug}
-                        href={`#project-${project.slug}`}
+                        href={`?project=${project.slug}#project-${project.slug}`}
                         onClick={(e) => {
                           e.preventDefault();
+                          pushRoute({ project: project.slug, view: 'home', hash: `#project-${project.slug}` });
+                          setCurrentView('home');
+                          setShowAllProjects(true);
+                          setExpandedProjects({ [project.slug]: true });
                           setActiveArticle(null);
                           requestAnimationFrame(() => scrollToId(`project-${project.slug}`));
                         }}
@@ -2639,20 +2412,11 @@ export default function Portfolio() {
                     );
                   })}
                 </div>
-                <div className="space-y-3">
-                  <div className="text-xs font-bold uppercase tracking-[0.25em] text-[#7384a2]">{labels.nextStep}</div>
-                  <p className="text-[#5d6d88] font-light leading-relaxed">
-                    {labels.articleCta}
-                  </p>
-                  <a href="#contact" onClick={(e) => scroll(e, 'contact')} className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-[#64748f] hover:text-[#081a3a] transition-colors">
-                    {labels.articleStart}
-                    <ArrowRight size={16} />
-                  </a>
-                </div>
               </div>
             </article>
           )}
         </section>
+        )}
 
         <section id="contact" className="py-48 px-6 bg-[#081a3a] text-stone-50 text-center selection:bg-stone-50 selection:text-[#081a3a]">
           <div className="max-w-4xl mx-auto">
@@ -2682,6 +2446,19 @@ export default function Portfolio() {
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
           <div className="text-sm font-medium tracking-widest">{t.ui.footerCopy}</div>
           <div className="flex flex-wrap justify-center gap-8 md:gap-12 text-sm font-medium tracking-widest uppercase">
+            <a
+              href="?view=articles#articles"
+              onClick={(e) => {
+                e.preventDefault();
+                pushRoute({ view: 'articles', hash: '#articles' });
+                setCurrentView('articles');
+                setActiveArticle(null);
+                requestAnimationFrame(() => scrollToId('articles'));
+              }}
+              className="hover:text-stone-50 transition-colors cursor-pointer"
+            >
+              {t.nav[3]}
+            </a>
             <button onClick={() => setShowLegalModal('privacy')} className="hover:text-stone-50 transition-colors cursor-pointer">{t.footer.privacy}</button>
             <button onClick={() => setShowLegalModal('cookies')} className="hover:text-stone-50 transition-colors cursor-pointer">{t.footer.cookies}</button>
             <button onClick={() => setShowLegalModal('terms')} className="hover:text-stone-50 transition-colors cursor-pointer">{t.footer.terms}</button>
