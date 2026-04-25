@@ -48,7 +48,6 @@ h1 {
 }
 
 .section {
-  border-top: 1px solid #d8e1ee;
   padding-top: 40px;
   margin-top: 40px;
 }
@@ -121,9 +120,8 @@ li::before {
 .row-item {
   display: block;
   padding: 18px 0;
-  border-bottom: 1px solid #d8e1ee;
   text-decoration: none;
-  transition: color 0.25s ease, border-color 0.25s ease;
+  transition: color 0.25s ease;
 }
 
 .row-link strong,
@@ -144,10 +142,10 @@ li::before {
 
 .row-link:hover {
   color: #081a3a;
-  border-color: #7384a2;
 }
 
 .row-link:hover strong,
+.row-link:hover span,
 .top-link:hover {
   color: #44526e;
 }
