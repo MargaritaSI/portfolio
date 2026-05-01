@@ -25,7 +25,8 @@ import stretchingImage1 from '../STRETCHING2.jpg';
 import qaImage0 from '../qa.jpg';
 import qaImage1 from '../qa1.jpg';
 import qaImage2 from '../qa2.jpg';
-import visual3dImage0 from '../3d-visual.jpg';
+import visual3dImage0 from '../3d-visual-1.jpg';
+import visual3dImage1 from '../3d-visual.jpg';
 
 type RichSection = {
   title: string;
@@ -152,7 +153,7 @@ const projectImages = {
   achievemater: [achievematerImage0, achievematerImage1, achievematerImage2, achievematerImage3],
   stretching: [stretchingImage0, stretchingImage1],
   qa: [qaImage0, qaImage1, qaImage2],
-  visual3d: [visual3dImage0]
+  visual3d: [visual3dImage0, visual3dImage1]
 };
 
 const SITE_URL = 'https://margaritasi.github.io/portfolio';
@@ -399,23 +400,23 @@ const DESCRIPTIVE_CASES_BY_GROUP = {
 const VISUALIZATION_PROJECT: Record<'en' | 'ru' | 'nl', Project> = {
   en: {
     slug: 'visualization-work',
-    title: 'Furniture Showroom Visualization',
-    category: '3D & Showroom Visuals',
-    description: 'A quick browser-based visualization for a furniture showroom, turning a rough layout into a clearer and more presentable concept for discussion.',
+    title: 'Interior Visualization for Furniture Showroom',
+    category: '3D & Interior Visualization',
+    description: 'Created client-focused concepts by transforming rough layouts into polished visual presentations for interior design discussions, combining spatial planning, design thinking, and AI-enhanced visualization workflows.',
     images: projectImages.visual3d
   },
   ru: {
     slug: 'visualization-work',
-    title: 'Визуализация мебельного шоурума',
-    category: '3D и showroom-визуалы',
-    description: 'Быстрая browser-based визуализация для мебельного шоурума, где грубая схема была превращена в более понятный и презентабельный концепт для обсуждения.',
+    title: 'Интерьерная визуализация для мебельного шоурума',
+    category: '3D и интерьерная визуализация',
+    description: 'Созданы client-focused концепты: грубые планировки были превращены в более polished визуальные презентации для обсуждения интерьерных решений, с сочетанием spatial planning, design thinking и AI-enhanced visualization workflows.',
     images: projectImages.visual3d
   },
   nl: {
     slug: 'visualization-work',
-    title: 'Visualisatie voor meubelshowroom',
-    category: '3D & showroomvisuals',
-    description: 'Een snelle browser-based visualisatie voor een meubelshowroom, waarbij een ruwe layout werd omgezet in een duidelijker en beter presenteerbaar concept.',
+    title: 'Interieurvisualisatie voor meubelshowroom',
+    category: '3D & interieurvisualisatie',
+    description: 'Cliëntgerichte concepten ontwikkeld door ruwe layouts om te zetten in verfijnde visuele presentaties voor interieurgesprekken, met een combinatie van ruimtelijke planning, design thinking en AI-enhanced visualization workflows.',
     images: projectImages.visual3d
   }
 };
