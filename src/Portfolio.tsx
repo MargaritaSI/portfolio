@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { X, ArrowRight, Mail, Linkedin, ChevronDown, Plus, ArrowLeft, ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
-import adhdImage0 from '../adhd.jpg';
-import adhdImage1 from '../adhd1.jpg';
-import adhdImage2 from '../adhd2.jpg';
-import adhdImage3 from '../adhd3.jpg';
+import adhImage0 from '../adh0.jpg';
+import adhImage1 from '../adh1.jpg';
+import adhImage2 from '../adh2.jpg';
+import adhImage3 from '../adh3.jpg';
+import adhImage4 from '../adh4.jpg';
 import dogImage0 from '../dog.jpg';
 import dogImage1 from '../dog1.jpg';
-import dutchImage0 from '../dutch1.jpg';
-import dutchImage1 from '../dutch2.jpg';
-import dutchImage2 from '../dutch3.jpg';
+import dutchImage0 from '../dutch1-optimized.jpg';
+import dutchImage1 from '../dutch2-optimized.jpg';
+import dutchImage2 from '../dutch3-optimized.jpg';
 import massageImage0 from '../massage1.jpg';
 import massageImage1 from '../massage2.jpg';
 import massageImage2 from '../massage3.jpg';
@@ -27,6 +28,8 @@ import qaImage1 from '../qa1.jpg';
 import qaImage2 from '../qa2.jpg';
 import visual3dImage0 from '../3d-visual-1.jpg';
 import visual3dImage1 from '../3d-visual.jpg';
+import visual3dImage2 from '../3d-visual-3.jpg';
+import botImage0 from '../bot.jpg';
 
 type RichSection = {
   title: string;
@@ -148,12 +151,13 @@ const projectImages = {
   dutch: [dutchImage0, dutchImage1, dutchImage2],
   dog: [dogImage0, dogImage1],
   massage: [massageImage0, massageImage1, massageImage2],
-  adhd: [adhdImage0, adhdImage1, adhdImage2, adhdImage3],
+  adhd: [adhImage0, adhImage1, adhImage2, adhImage3, adhImage4],
   dailyPractices: [dailyPracticesImage0, dailyPracticesImage1, dailyPracticesImage2, dailyPracticesImage3],
   achievemater: [achievematerImage0, achievematerImage1, achievematerImage2, achievematerImage3],
   stretching: [stretchingImage0, stretchingImage1],
   qa: [qaImage0, qaImage1, qaImage2],
-  visual3d: [visual3dImage0, visual3dImage1]
+  visual3d: [visual3dImage0, visual3dImage1, visual3dImage2],
+  bot: [botImage0]
 };
 
 const SITE_URL = 'https://margaritasi.github.io/portfolio';
@@ -421,11 +425,37 @@ const VISUALIZATION_PROJECT: Record<'en' | 'ru' | 'nl', Project> = {
   }
 };
 
+const MESSENGER_AUTOMATION_PROJECT: Record<'en' | 'ru' | 'nl', Project> = {
+  en: {
+    slug: 'messenger-automation-bot',
+    title: 'Messenger Booking & Support Bot',
+    category: 'Automation & Messenger Bot',
+    description: 'Automation for small business workflows in messenger: a bot that answers common questions and helps book a slot for massage studios and restaurants.',
+    images: projectImages.bot
+  },
+  ru: {
+    slug: 'messenger-automation-bot',
+    title: 'Бот для записи и ответов в мессенджере',
+    category: 'Автоматизация и messenger-бот',
+    description: 'Автоматизация частных процессов в мессенджере для маленького бизнеса: бот отвечает на частые вопросы и помогает забронировать слот для салона массажа и ресторана.',
+    images: projectImages.bot
+  },
+  nl: {
+    slug: 'messenger-automation-bot',
+    title: 'Messenger-bot voor boekingen en support',
+    category: 'Automatisering & messenger-bot',
+    description: 'Automatisering van kleine bedrijfsprocessen in messenger: een bot die veelgestelde vragen beantwoordt en helpt een slot te boeken voor massagesalons en restaurants.',
+    images: projectImages.bot
+  }
+};
+
 const PROJECT_PRIORITY = [
   'smart-massage',
   'achievemater',
   'netherlands-harmony-guide',
-  'daily-practices'
+  'daily-practices',
+  'messenger-automation-bot',
+  'visualization-work'
 ] as const;
 
 const ensureMetaTag = (selector: string, attributes: Record<string, string>) => {
@@ -1920,7 +1950,7 @@ export default function Portfolio() {
   const t = data[language];
   const labels = SECTION_TEXT[language];
   const serviceGroups = PRIMARY_SERVICE_GROUPS[language];
-  const displayedProjects = [...t.projects, VISUALIZATION_PROJECT[language]].sort((a, b) => {
+  const displayedProjects = [...t.projects, MESSENGER_AUTOMATION_PROJECT[language], VISUALIZATION_PROJECT[language]].sort((a, b) => {
     const aIndex = PROJECT_PRIORITY.indexOf(a.slug as (typeof PROJECT_PRIORITY)[number]);
     const bIndex = PROJECT_PRIORITY.indexOf(b.slug as (typeof PROJECT_PRIORITY)[number]);
     const safeA = aIndex === -1 ? PROJECT_PRIORITY.length : aIndex;
