@@ -30,8 +30,8 @@ import visual3dImage0 from '../3d-visual-1.jpg';
 import visual3dImage1 from '../3d-visual.jpg';
 import visual3dImage2 from '../3d-visual-3.jpg';
 import botImage0 from '../bot.jpg';
-import heroFeature from '../hero-feature.png';
-import stepsBackground from '../steps-bg-a.png';
+import heroFeature from '../hero-feature.jpg';
+import stepsBackground from '../steps-bg-a.jpg';
 
 type RichSection = {
   title: string;
