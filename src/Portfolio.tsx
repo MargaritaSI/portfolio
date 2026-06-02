@@ -2182,12 +2182,12 @@ export default function Portfolio() {
         {currentView === 'home' && (
         <>
         <section className="relative overflow-hidden pt-40 pb-32 px-6 min-h-screen flex items-center">
-          {/* Large feature illustration, frameless — spans the hero and dissolves into the page */}
-          <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-0 hidden lg:flex items-center justify-center w-1/2">
+          {/* Feature illustration: a soft background behind the text on small screens, beside it on desktop */}
+          <div aria-hidden="true" className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-40 sm:opacity-50 lg:opacity-100 lg:left-1/2">
             <img
               src={heroFeature}
               alt=""
-              className="h-[82%] w-auto max-w-full object-contain mix-blend-multiply"
+              className="h-[58%] sm:h-[68%] lg:h-[82%] w-auto max-w-full object-contain mix-blend-multiply"
               style={{
                 filter: 'saturate(1) contrast(1.05)',
                 WebkitMaskImage:
@@ -2207,24 +2207,6 @@ export default function Portfolio() {
               <a href="#contact" onClick={(e) => scroll(e, 'contact')} className="inline-flex items-center gap-2 bg-[#081a3a] text-stone-50 px-12 py-5 text-lg hover:bg-stone-50 hover:text-[#081a3a] border-2 border-[#081a3a] transition-all duration-300 group shadow-xl">
                 {t.hero[2]} <ArrowRight className="group-hover:translate-x-1 transition-transform" />
               </a>
-            </div>
-
-            {/* Mobile / tablet: illustration below the text */}
-            <div className="mt-14 lg:hidden flex justify-center">
-              <img
-                src={heroFeature}
-                alt="Botanical illustration"
-                className="h-72 sm:h-96 w-auto object-contain mix-blend-multiply"
-                style={{
-                  filter: 'saturate(1) contrast(1.05)',
-                  WebkitMaskImage:
-                    'radial-gradient(74% 76% at 50% 44%, #000 54%, transparent 92%), linear-gradient(to right, transparent 0%, #000 16%, #000 84%, transparent 100%), linear-gradient(to bottom, #000 0%, #000 68%, transparent 97%)',
-                  maskImage:
-                    'radial-gradient(74% 76% at 50% 44%, #000 54%, transparent 92%), linear-gradient(to right, transparent 0%, #000 16%, #000 84%, transparent 100%), linear-gradient(to bottom, #000 0%, #000 68%, transparent 97%)',
-                  WebkitMaskComposite: 'source-in',
-                  maskComposite: 'intersect'
-                }}
-              />
             </div>
           </div>
         </section>
