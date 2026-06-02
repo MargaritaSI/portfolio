@@ -25,11 +25,116 @@
     <link rel="canonical" href="https://margaritasi.github.io/portfolio/" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/favicon.png" />
+    <link rel="alternate" type="text/markdown" title="llms.txt" href="/portfolio/llms.txt" />
     <title>UX Design, Digital Product Automation & SEO | It healthy coder</title>
+
+    <!-- Structured data for AI agents and search engines -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "ProfessionalService",
+          "@id": "https://margaritasi.github.io/portfolio/#business",
+          "name": "It healthy coder",
+          "description": "Freelance digital studio offering UX & website design, digital product & automation, and content, SEO & optimization. Based in Amsterdam, working remotely worldwide.",
+          "url": "https://margaritasi.github.io/portfolio/",
+          "email": "itmadge@gmail.com",
+          "image": "https://margaritasi.github.io/portfolio/og-cover.jpg",
+          "areaServed": "Worldwide",
+          "availableLanguage": ["en", "ru", "nl"],
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Amsterdam",
+            "addressCountry": "NL"
+          },
+          "knowsAbout": [
+            "UX design", "Website design", "Information architecture", "Prototyping",
+            "Digital product design", "Workflow automation", "Chatbots", "AI solutions",
+            "SEO", "Content strategy", "QA testing", "Conversion optimization", "3D interior visualization"
+          ],
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Services",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "UX & Website Design",
+                  "url": "https://margaritasi.github.io/portfolio/services/ux-website-design.html",
+                  "description": "Websites, landing pages, and interface systems shaped for clarity, credibility, and easier decision-making: audience and competitor research, information architecture, wireframes and MVP structure, design systems, prototyping, and A/B testing."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Digital Product & Automation",
+                  "url": "https://margaritasi.github.io/portfolio/services/digital-product-automation.html",
+                  "description": "Structured product flows, conversational systems, and lightweight automation: product thinking and flow mapping, research-led discovery, workflow automation, AI-assisted solutions, and complex digital workflow support."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Content, SEO & Optimization",
+                  "url": "https://margaritasi.github.io/portfolio/services/content-seo-optimization.html",
+                  "description": "Content structure, QA thinking, SEO observations, and practical optimization recommendations: functional and regression testing, UX audits, SEO strategy and prioritization, metrics setup and analysis, and content that converts."
+                }
+              }
+            ]
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://margaritasi.github.io/portfolio/#website",
+          "url": "https://margaritasi.github.io/portfolio/",
+          "name": "It healthy coder",
+          "inLanguage": ["en", "ru", "nl"],
+          "publisher": { "@id": "https://margaritasi.github.io/portfolio/#business" }
+        }
+      ]
+    }
+    </script>
+
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      <main>
+        <h1>It healthy coder — UX Design, Digital Product Automation &amp; SEO</h1>
+        <p>
+          Freelance digital studio based in Amsterdam, working remotely worldwide. Available in
+          English, Russian, and Dutch. Contact: <a href="mailto:itmadge@gmail.com">itmadge@gmail.com</a>.
+          A structured summary for AI agents is available at
+          <a href="/portfolio/llms.txt">llms.txt</a>.
+        </p>
+        <h2>Services</h2>
+        <ul>
+          <li>
+            <a href="/portfolio/services/ux-website-design.html"><strong>UX &amp; Website Design</strong></a>
+            — Websites, landing pages, and interface systems shaped for clarity and easier
+            decision-making: audience and competitor research, information architecture, wireframes
+            and MVP structure, design systems, prototyping, and A/B testing.
+          </li>
+          <li>
+            <a href="/portfolio/services/digital-product-automation.html"><strong>Digital Product &amp; Automation</strong></a>
+            — Structured product flows, conversational systems (chatbots), and lightweight
+            automation: product thinking and flow mapping, research-led discovery, workflow
+            automation, AI-assisted solutions, and complex digital workflow support.
+          </li>
+          <li>
+            <a href="/portfolio/services/content-seo-optimization.html"><strong>Content, SEO &amp; Optimization</strong></a>
+            — Content structure, QA thinking, SEO observations, and practical optimization:
+            functional and regression testing, UX audits, SEO strategy and prioritization, metrics
+            setup and analysis, and content that converts.
+          </li>
+        </ul>
+      </main>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

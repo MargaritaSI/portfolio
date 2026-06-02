@@ -1,4 +1,33 @@
+# Welcome — humans, search engines, and AI agents are all allowed.
 User-agent: *
+Allow: /
+
+# AI agents: a concise, structured summary of services lives in llms.txt
+# https://margaritasi.github.io/portfolio/llms.txt
+
+# Explicitly allow common AI crawlers and assistants
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
 Allow: /
 
 Sitemap: https://margaritasi.github.io/portfolio/sitemap.xml

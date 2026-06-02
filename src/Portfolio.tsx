@@ -30,6 +30,8 @@ import visual3dImage0 from '../3d-visual-1.jpg';
 import visual3dImage1 from '../3d-visual.jpg';
 import visual3dImage2 from '../3d-visual-3.jpg';
 import botImage0 from '../bot.jpg';
+import heroFeature from '../hero-feature.png';
+import stepsBackground from '../steps-bg-a.png';
 
 type RichSection = {
   title: string;
@@ -2179,14 +2181,50 @@ export default function Portfolio() {
       <main>
         {currentView === 'home' && (
         <>
-        <section className="pt-48 pb-32 px-6 max-w-6xl mx-auto min-h-screen flex flex-col justify-center">
-          <h1 className="text-6xl md:text-8xl font-light tracking-tighter leading-[0.9] mb-12 whitespace-pre-wrap">{t.hero[0]}</h1>
-          <div className="grid md:grid-cols-2 gap-12 items-end">
-            <p className="text-xl md:text-2xl text-[#546581] font-light leading-relaxed max-w-lg">{t.hero[1]}</p>
-            <div className="flex justify-start md:justify-end">
+        <section className="relative overflow-hidden pt-40 pb-32 px-6 min-h-screen flex items-center">
+          {/* Large feature illustration, frameless — spans the hero and dissolves into the page */}
+          <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-0 hidden lg:flex items-center justify-center w-1/2">
+            <img
+              src={heroFeature}
+              alt=""
+              className="h-[82%] w-auto max-w-full object-contain mix-blend-multiply"
+              style={{
+                filter: 'saturate(1) contrast(1.05)',
+                WebkitMaskImage:
+                  'radial-gradient(74% 76% at 50% 44%, #000 54%, transparent 92%), linear-gradient(to right, transparent 0%, #000 16%, #000 84%, transparent 100%), linear-gradient(to bottom, #000 0%, #000 68%, transparent 97%)',
+                maskImage:
+                  'radial-gradient(74% 76% at 50% 44%, #000 54%, transparent 92%), linear-gradient(to right, transparent 0%, #000 16%, #000 84%, transparent 100%), linear-gradient(to bottom, #000 0%, #000 68%, transparent 97%)',
+                WebkitMaskComposite: 'source-in',
+                maskComposite: 'intersect'
+              }}
+            />
+          </div>
+
+          <div className="relative z-10 w-full max-w-6xl mx-auto">
+            <div className="max-w-xl lg:max-w-2xl">
+              <h1 className="text-5xl md:text-7xl font-light tracking-tighter leading-[0.92] mb-10 whitespace-pre-wrap">{t.hero[0]}</h1>
+              <p className="text-xl md:text-2xl text-[#546581] font-light leading-relaxed max-w-lg mb-12">{t.hero[1]}</p>
               <a href="#contact" onClick={(e) => scroll(e, 'contact')} className="inline-flex items-center gap-2 bg-[#081a3a] text-stone-50 px-12 py-5 text-lg hover:bg-stone-50 hover:text-[#081a3a] border-2 border-[#081a3a] transition-all duration-300 group shadow-xl">
                 {t.hero[2]} <ArrowRight className="group-hover:translate-x-1 transition-transform" />
               </a>
+            </div>
+
+            {/* Mobile / tablet: illustration below the text */}
+            <div className="mt-14 lg:hidden flex justify-center">
+              <img
+                src={heroFeature}
+                alt="Botanical illustration"
+                className="h-72 sm:h-96 w-auto object-contain mix-blend-multiply"
+                style={{
+                  filter: 'saturate(1) contrast(1.05)',
+                  WebkitMaskImage:
+                    'radial-gradient(74% 76% at 50% 44%, #000 54%, transparent 92%), linear-gradient(to right, transparent 0%, #000 16%, #000 84%, transparent 100%), linear-gradient(to bottom, #000 0%, #000 68%, transparent 97%)',
+                  maskImage:
+                    'radial-gradient(74% 76% at 50% 44%, #000 54%, transparent 92%), linear-gradient(to right, transparent 0%, #000 16%, #000 84%, transparent 100%), linear-gradient(to bottom, #000 0%, #000 68%, transparent 97%)',
+                  WebkitMaskComposite: 'source-in',
+                  maskComposite: 'intersect'
+                }}
+              />
             </div>
           </div>
         </section>
@@ -2342,7 +2380,13 @@ export default function Portfolio() {
           </div>
         </section>
 
-        <section id="process" className="py-32 px-6 max-w-6xl mx-auto border-t border-[#d8e1ee]">
+        <section id="process" className="relative overflow-hidden py-32 px-6 border-t border-[#d8e1ee]">
+          {/* Faint botanical wash behind the steps */}
+          <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+            <img src={stepsBackground} alt="" className="absolute inset-0 h-full w-full object-cover opacity-50" />
+            <div className="absolute inset-0 bg-gradient-to-b from-stone-50 via-stone-50/25 to-stone-50" />
+          </div>
+          <div className="relative max-w-6xl mx-auto">
           <h2 className="text-lg md:text-xl font-bold uppercase tracking-[0.22em] mb-16 text-[#7384a2]">{t.ui.process}</h2>
           <div className="grid md:grid-cols-4 gap-12">
             {t.process.map((step, index) => (
@@ -2354,6 +2398,7 @@ export default function Portfolio() {
                 </div>
               </div>
             ))}
+          </div>
           </div>
         </section>
         </>
@@ -2473,8 +2518,20 @@ export default function Portfolio() {
         </section>
       </main>
 
-      <footer className="py-24 px-6 border-t border-[#20345a] bg-[#081a3a] text-[#8fa1be]">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
+      <footer className="relative overflow-hidden py-24 px-6 border-t border-[#20345a] bg-[#081a3a] text-[#8fa1be]">
+        {/* Botanical wash, blended into the dark footer (no white block) */}
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+          <img
+            src={stepsBackground}
+            alt=""
+            className="absolute inset-0 h-full w-full object-cover opacity-60 mix-blend-soft-light"
+            style={{
+              WebkitMaskImage: 'radial-gradient(120% 140% at 50% 50%, #000 50%, transparent 92%)',
+              maskImage: 'radial-gradient(120% 140% at 50% 50%, #000 50%, transparent 92%)'
+            }}
+          />
+        </div>
+        <div className="relative max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
           <div className="text-sm font-medium tracking-widest">{t.ui.footerCopy}</div>
           <div className="flex flex-wrap justify-center gap-8 md:gap-12 text-sm font-medium tracking-widest uppercase">
             <a
