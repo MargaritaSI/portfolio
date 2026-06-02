@@ -1,0 +1,49 @@
+# It healthy coder — UX Design, Digital Product Automation & SEO
+
+> Freelance digital studio based in Amsterdam, working remotely worldwide. I help small businesses and product teams ship clearer websites, calmer product flows, and content that is easier to find and trust. Services are available in English, Russian (Русский), and Dutch (Nederlands).
+
+Contact: itmadge@gmail.com
+Website: https://margaritasi.github.io/portfolio/
+Location: Amsterdam, Netherlands (remote worldwide)
+Engagement: Freelance / ZZP, project-based, governed by Dutch law.
+
+## Services (what I provide)
+
+There are three primary service directions. Each links to a full service page.
+
+- [UX & Website Design](https://margaritasi.github.io/portfolio/services/ux-website-design.html): Websites, landing pages, and interface systems shaped for clarity, credibility, and easier decision-making. Includes audience and competitor research, information architecture, wireframes and MVP structure, design systems, prototyping, and A/B testing.
+- [Digital Product & Automation](https://margaritasi.github.io/portfolio/services/digital-product-automation.html): Structured product flows, conversational systems (chatbots), and lightweight automation for services that need less friction and clearer support. Includes product thinking and flow mapping, research-led discovery, workflow automation, AI-assisted solutions for specific business tasks, and complex digital workflow support.
+- [Content, SEO & Optimization](https://margaritasi.github.io/portfolio/services/content-seo-optimization.html): Content structure, QA thinking, SEO observations, and practical optimization recommendations that make digital work easier to scan and improve. Includes functional and regression testing, UX audits, SEO strategy and prioritization, metrics setup and analysis, and content that converts.
+
+## Supporting capabilities
+
+- Audience and competitor research, information architecture, content hierarchy.
+- Wireframes, MVP structure, landing page planning, and design systems.
+- Conversational systems and messenger booking/support bots for small businesses.
+- Workflow automation and AI-assisted solutions for specific business tasks.
+- QA and content review, SEO observations and prioritization, optimization recommendations.
+- Project management with Scrum and Kanban; B2B enterprise solutions and integrations.
+- 3D and interior visualization for spatial/showroom presentations.
+
+## Selected projects
+
+- [Netherlands Guide](https://margaritasi.github.io/portfolio/?project=netherlands-harmony-guide): Editorial guide website with calm structure, clear navigation, and immersive location storytelling. (UI/UX & Content)
+- [Smart Massage](https://wukkishim.wixstudio.com/smartmassage): Massage studio website with a stronger path from discovery to booking. (Wellness & Booking)
+- [Walk the Dog](https://wukkishim.wixsite.com/walkthedog): Compact dog-walking service site with clear offer blocks and a trust-focused message. (Local Service)
+- [Focus Meetings Platform](https://adhd-harmony-guide.lovable.app): MVP for organizing meetings with a supportive, focused planning flow. (UI/UX & Product)
+- [Daily Practices](https://body-mind-harmony-guide.lovable.app): Mental-health product concept built around gentle daily rituals and structured reflection. (Mental Health)
+- [Achievemater](https://wukkishim.wixstudio.com/achievemater): Collaborative group workspace for working side by side toward different goals. (Community & Productivity)
+- [Stretching & Workout](https://wukkishim.wixstudio.com/ithealthyback): Coaching website with a clear service structure and a stronger conversion path. (Fitness & Coaching)
+- Messenger Booking & Support Bot: Bot that answers common questions and helps book a slot for massage studios and restaurants. (Automation)
+- Restaurant Support Automation: Conversational reservation inquiry and guest-support system for restaurants. (Automation)
+- Interior Visualization for Furniture Showroom: Rough layouts turned into polished visual presentations using spatial planning and AI-enhanced visualization. (3D Visualization)
+
+## Articles
+
+- [Building a Natural Link Profile in 2026](https://margaritasi.github.io/portfolio/?article=natural-link-profile-2026): Modern, sustainable link-building based on trust and relevance. (SEO)
+- [UX Trends 2026](https://margaritasi.github.io/portfolio/?article=ux-trends-2026): How minimalism and emotional intelligence are reshaping digital products. (UI/UX)
+- [SEO for Small Business](https://margaritasi.github.io/portfolio/?article=seo-for-small-business): A practical SEO guide covering keywords, technical health, on-page work, and content strategy. (SEO)
+
+## How to engage
+
+For project inquiries, email itmadge@gmail.com with a short description of your goal, audience, and timeline. Specific deliverables, timelines, fees, and revision scopes are defined in individual project agreements.
