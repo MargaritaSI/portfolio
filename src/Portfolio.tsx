@@ -21,6 +21,10 @@ import achievematerImage0 from '../achive mate.jpg';
 import achievematerImage1 from '../achive mate2.jpg';
 import achievematerImage2 from '../achive mate3.jpg';
 import achievematerImage3 from '../achive mate4.jpg';
+import dailymateImage0 from '../dailymate1.jpg';
+import dailymateImage1 from '../dailymate2.jpg';
+import dailymateImage2 from '../dailymate3.jpg';
+import dailymateImage3 from '../dailymate4.jpg';
 import stretchingImage0 from '../STRETCHING1.jpg';
 import stretchingImage1 from '../STRETCHING2.jpg';
 import qaImage0 from '../qa.jpg';
@@ -156,6 +160,7 @@ const projectImages = {
   adhd: [adhImage0, adhImage1, adhImage2, adhImage3, adhImage4],
   dailyPractices: [dailyPracticesImage0, dailyPracticesImage1, dailyPracticesImage2, dailyPracticesImage3],
   achievemater: [achievematerImage0, achievematerImage1, achievematerImage2, achievematerImage3],
+  dailymate: [dailymateImage0, dailymateImage1, dailymateImage2, dailymateImage3],
   stretching: [stretchingImage0, stretchingImage1],
   qa: [qaImage0, qaImage1, qaImage2],
   visual3d: [visual3dImage0, visual3dImage1, visual3dImage2],
@@ -266,7 +271,7 @@ const PRIMARY_SERVICE_GROUPS: Record<'en' | 'ru' | 'nl', PrimaryServiceGroup[]> 
       positioning: 'Structured product flows, conversational systems, and lightweight automation for services that need less friction and clearer support.',
       subserviceIndices: [1, 4, 5],
       supporting: ['Product thinking and flow mapping', 'Workflow support and structured logic', 'Research-led discovery', 'Complex workflow and digital solution support'],
-      relatedProjects: ['smart-massage', 'focus-meetings-platform', 'daily-practices', 'achievemater'],
+      relatedProjects: ['dailymate', 'smart-massage', 'focus-meetings-platform', 'daily-practices', 'achievemater'],
       relatedArticle: 'ux-trends-2026',
       pagePath: './services/digital-product-automation.html'
     },
@@ -298,7 +303,7 @@ const PRIMARY_SERVICE_GROUPS: Record<'en' | 'ru' | 'nl', PrimaryServiceGroup[]> 
       positioning: 'Структурированные продуктовые сценарии, conversational systems и лёгкая автоматизация для сервисов, которым нужен более понятный пользовательский путь.',
       subserviceIndices: [1, 4, 5],
       supporting: ['Product thinking и flow mapping', 'Workflow support и логика сценариев', 'Research-driven discovery', 'Поддержка сложных цифровых процессов'],
-      relatedProjects: ['smart-massage', 'focus-meetings-platform', 'daily-practices', 'achievemater'],
+      relatedProjects: ['dailymate', 'smart-massage', 'focus-meetings-platform', 'daily-practices', 'achievemater'],
       relatedArticle: 'ux-trends-2026',
       pagePath: './services/digital-product-automation.html'
     },
@@ -330,7 +335,7 @@ const PRIMARY_SERVICE_GROUPS: Record<'en' | 'ru' | 'nl', PrimaryServiceGroup[]> 
       positioning: 'Gestructureerde productflows, conversationele systemen en lichte automatisering voor diensten die minder frictie en duidelijkere support nodig hebben.',
       subserviceIndices: [1, 4, 5],
       supporting: ['Product thinking en flow mapping', 'Workflow support en gestructureerde logica', 'Research-led discovery', 'Ondersteuning voor complexere digitale workflows'],
-      relatedProjects: ['smart-massage', 'focus-meetings-platform', 'daily-practices', 'achievemater'],
+      relatedProjects: ['dailymate', 'smart-massage', 'focus-meetings-platform', 'daily-practices', 'achievemater'],
       relatedArticle: 'ux-trends-2026',
       pagePath: './services/digital-product-automation.html'
     },
@@ -452,6 +457,7 @@ const MESSENGER_AUTOMATION_PROJECT: Record<'en' | 'ru' | 'nl', Project> = {
 };
 
 const PROJECT_PRIORITY = [
+  'dailymate',
   'smart-massage',
   'achievemater',
   'netherlands-harmony-guide',
@@ -745,6 +751,14 @@ with intelligence`,
       ['Enterprise Solutions (B2B)', 'Digital transformation and scalable solutions', ['Digital transformation strategy and roadmap', 'Enterprise platforms and system integrations', 'Business process automation', 'AI implementation for operations optimization']]
     ],
     projects: [
+      {
+        slug: 'dailymate',
+        title: 'DailyMate',
+        category: 'iOS App & Productivity',
+        description: 'A visual iOS planner, live on the App Store, that keeps every task, goal, and reward in sight — with habits, a focus timer, countdowns, and a cozy pet room that makes starting feel lighter.',
+        images: projectImages.dailymate,
+        url: 'https://apps.apple.com/app/dailymate-tasks-habits/id6781577660'
+      },
       {
         slug: 'netherlands-harmony-guide',
         title: 'Netherlands Guide',
@@ -1201,6 +1215,14 @@ with intelligence`,
     ],
     projects: [
       {
+        slug: 'dailymate',
+        title: 'DailyMate',
+        category: 'iOS-приложение и продуктивность',
+        description: 'Визуальный iOS-планировщик, опубликованный в App Store: задачи, цели и награды всегда на виду, а привычки, фокус-таймер, обратный отсчёт и уютная комната питомца помогают легче начинать.',
+        images: projectImages.dailymate,
+        url: 'https://apps.apple.com/ru/app/id6781577660'
+      },
+      {
         slug: 'netherlands-harmony-guide',
         title: 'Гид по Нидерландам',
         category: 'UI/UX и контент',
@@ -1655,6 +1677,14 @@ met intelligentie`,
       ['Enterprise-oplossingen (B2B)', 'Digitale transformatie en schaalbare oplossingen', ['Strategie voor digitale transformatie en roadmap', 'Enterprise-platformen en systeemintegraties', 'Automatisering van bedrijfsprocessen', 'AI-implementatie voor operationele optimalisatie']]
     ],
     projects: [
+      {
+        slug: 'dailymate',
+        title: 'DailyMate',
+        category: 'iOS-app & productiviteit',
+        description: 'Een visuele iOS-planner, live in de App Store, die elke taak, elk doel en elke beloning zichtbaar houdt — met gewoontes, een focustimer, countdowns en een gezellige huisdierkamer die beginnen lichter maakt.',
+        images: projectImages.dailymate,
+        url: 'https://apps.apple.com/nl/app/id6781577660'
+      },
       {
         slug: 'netherlands-harmony-guide',
         title: 'Nederland Gids',

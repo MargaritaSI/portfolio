@@ -27,6 +27,7 @@ There are three primary service directions. Each links to a full service page.
 
 ## Selected projects
 
+- [DailyMate](https://apps.apple.com/app/dailymate-tasks-habits/id6781577660): Visual iOS planner, live on the App Store, that keeps every task, goal, and reward in sight, with habits, a focus timer, and countdowns. (iOS App & Productivity)
 - [Netherlands Guide](https://margaritasi.github.io/portfolio/?project=netherlands-harmony-guide): Editorial guide website with calm structure, clear navigation, and immersive location storytelling. (UI/UX & Content)
 - [Smart Massage](https://wukkishim.wixstudio.com/smartmassage): Massage studio website with a stronger path from discovery to booking. (Wellness & Booking)
 - [Walk the Dog](https://wukkishim.wixsite.com/walkthedog): Compact dog-walking service site with clear offer blocks and a trust-focused message. (Local Service)
